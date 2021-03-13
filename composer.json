@@ -1,0 +1,6 @@
+{
+    "name": "ibu/carmarket",
+    "description": "Site for selling cars",
+    "license": "Apache2",
+    "require": {}
+}
