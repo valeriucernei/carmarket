@@ -6,5 +6,6 @@ class AdsDao extends BaseDao{
     parent::__construct("ads");
 
   }
+
 }
 ?>

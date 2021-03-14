@@ -1,7 +1,13 @@
 <?php
-
 require_once dirname(__FILE__)."/../config.php";
 
+/**
+* The main class for interaction with Data Base.
+*
+* All other DAO classes should inherit this class.
+*
+* @author Valeriu Cernei
+*/
 class BaseDao {
   protected $connection;
 
@@ -15,7 +21,6 @@ class BaseDao {
     } catch(PDOException $e) {
       throw $e;
     }
-
   }
 
 
@@ -114,6 +119,12 @@ class BaseDao {
    */
   public function update($id, $entity){
     $this->execute_update($this->table, $id, $entity);
+  }
+
+
+
+  public function get_all(){
+    return $this->query("SELECT * FROM ".$this->table)
   }
 
 
