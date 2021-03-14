@@ -17,6 +17,13 @@ class BaseDao {
 
   }
 
+
+  /**
+ * Insert function into database
+ * @param  $table  Table name
+ * @param  $entity User Data
+ * @return $entity        Return user Data with ID
+ */
   public function insert($table, $entity){
     $query = "INSERT INTO ${table}"."(";
     foreach($entity as $name => $value){
@@ -36,7 +43,7 @@ class BaseDao {
     return $entity;
   }
 
-/**
+  /**
  * Update query in database
  * @param  string $table     Table name
  * @param   $id        Search index (user ID, email...)
@@ -56,12 +63,24 @@ class BaseDao {
     $stmt->execute($entity);
   }
 
+  /**
+ * Return array with all data regardling query
+ * @param  $query  SQL Query
+ * @param   $params Parameters inside a Query
+ * @return [type]         Return array with all data regardling query
+ */
   public function query($query, $params){
     $stmt = $this->connection->prepare($query);
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  /**
+ * Return unique array regardling query
+ * @param  [type] $query  SQL Query
+ * @param  [type] $params Parameters inside a Query
+ * @return [type]         Return unique array regardling query
+ */
   public function query_unique($query, $params){
     $results = $this->query($query, $params);
     return reset($results);
