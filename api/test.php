@@ -7,7 +7,18 @@
 
   $user_dao = new UserDao();
 
-  $user = $user_dao->get_user_by_id("2");
+  //$user = $user_dao->get_user_by_id("2");
+  //$
+  $user1 = [
+    'username' => "test3",
+    'fname' => "ftest3",
+    'lname' => "ltest3",
+    'pass' => "123321",
+    'email' => "pizdostradanka228@mail.com",
+    'phone' => "+72848294"
+];
+
+$user = $user_dao->add_user($user1);
 
   print_r($user);
 
