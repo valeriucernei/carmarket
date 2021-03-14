@@ -12,7 +12,7 @@ class BaseDao {
       $this->connection = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME.";port=".Config::DB_PORT, Config::DB_USERNAME, Config::DB_PASSWORD);
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch(PDOException $e) {
-      echo "Connection failed: " . $e->getMessage();
+      throw $e;
     }
 
   }
@@ -25,13 +25,15 @@ class BaseDao {
 
   }
 
-  public function query(){
-    //SELECT * FROM users WHERE id = 7;
-
+  public function query($query, $params){
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function query_uniqe(){
-
+  public function query_unique($query, $params){
+    $results = $this->query($query, $params);
+    return reset($results);
   }
 
 
