@@ -19,6 +19,7 @@ class BaseDao {
   }
 
 
+
   /**
  * Insert function into database
  * @param  $table  Table name
@@ -44,6 +45,8 @@ class BaseDao {
     return $entity;
   }
 
+
+
   /**
  * Update query in database
  * @param  string $table     Table name
@@ -64,6 +67,8 @@ class BaseDao {
     $stmt->execute($entity);
   }
 
+
+
   /**
  * Return array with all data regardling query
  * @param  $query  SQL Query
@@ -76,6 +81,8 @@ class BaseDao {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+
+
   /**
  * Return unique array regardling query
  * @param  [type] $query  SQL Query
@@ -87,18 +94,38 @@ class BaseDao {
     return reset($results);
   }
 
+
+
+  /**
+   * Add Data into Data Base in class table
+   * @param  $entity Array of data
+   * @return [type]      Return entry ID
+   */
   public function add($entity){
     return $this->insert($this->table, $entity);
   }
 
+
+
+  /**
+   * Update existing data  in class table
+   * @param   $id     ID for indexation (Ad ID, user ID...)
+   * @param   $entity Array of data
+   */
   public function update($id, $entity){
     $this->execute_update($this->table, $id, $entity);
   }
 
+
+  /**
+   * [get_by_id description]
+   * @param  [type] $id [description]
+   * @return [type]     [description]
+   */
   public function get_by_id($id){
     return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);
   }
 
-  
+
 }
 ?>
