@@ -17,8 +17,23 @@ class BaseDao {
 
   }
 
-  public function insert(){
+  public function insert($table, $entity){
+    $query = "INSERT INTO ${table}"."(";
+    foreach($entity as $name => $value){
+      $query .= $name.", ";
+    }
+    $query = substr($query, 0, -2);
+    $query .= ") VALUES (";
+    foreach($entity as $name => $value){
+      $query .= ":".$name.", ";
+    }
+    $query = substr($query, 0, -2);
+    $query .= ")";
 
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute($entity);
+    $entity['id'] = $this->connection->lastInsertId();
+    return $entity;
   }
 
 /**
