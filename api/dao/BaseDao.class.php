@@ -21,8 +21,24 @@ class BaseDao {
 
   }
 
-  public function update(){
-
+/**
+ * Update query in database
+ * @param  string $table     Table name
+ * @param   $id        Search index (user ID, email...)
+ * @param   $entity    User data
+ * @param  string $id_column Optional: Column name (default= 'id')
+ * @example update("users", $email, $user, "email");
+ */
+  public function update($table, $id, $entity, $id_column = "id"){
+    $query = "UPDATE ${table} SET ";
+    foreach($entity as $name => $value){
+      $query .= $name." = :".$name.", ";
+    }
+    $query = substr($query, 0, -2);
+    $query .= " WHERE ${id_column} = :id";
+    $stmt = $this->connection->prepare($query);
+    $entity['id'] = $id;
+    $stmt->execute($entity);
   }
 
   public function query($query, $params){

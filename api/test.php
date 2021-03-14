@@ -20,10 +20,10 @@
     'admin' => 1
 ];
 
-$user69 = ['admin' => 5];
+$user69 = ['email' => 'pizda@mail.ru'];
 
 
-$user = $user_dao->update_user(5, $user69);
+$user = $user_dao->update_user_by_email("test@mail.ru", $user69);
 
 print_r($user);
 
