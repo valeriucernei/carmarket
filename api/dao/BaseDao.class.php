@@ -7,7 +7,8 @@ class BaseDao {
 
   private $table;
 
-  public function __construct(){
+  public function __construct($table){
+    $this->table = $table;
     try {
       $this->connection = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME.";port=".Config::DB_PORT, Config::DB_USERNAME, Config::DB_PASSWORD);
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -24,7 +25,7 @@ class BaseDao {
  * @param  $entity User Data
  * @return $entity        Return user Data with ID
  */
-  public function insert($table, $entity){
+  protected function insert($table, $entity){
     $query = "INSERT INTO ${table}"."(";
     foreach($entity as $name => $value){
       $query .= $name.", ";
@@ -51,7 +52,7 @@ class BaseDao {
  * @param  string $id_column Optional: Column name (default= 'id')
  * @example update("users", $email, $user, "email");
  */
-  public function update($table, $id, $entity, $id_column = "id"){
+  protected function execute_update($table, $id, $entity, $id_column = "id"){
     $query = "UPDATE ${table} SET ";
     foreach($entity as $name => $value){
       $query .= $name." = :".$name.", ";
@@ -69,7 +70,7 @@ class BaseDao {
  * @param   $params Parameters inside a Query
  * @return [type]         Return array with all data regardling query
  */
-  public function query($query, $params){
+  protected function query($query, $params){
     $stmt = $this->connection->prepare($query);
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -81,11 +82,23 @@ class BaseDao {
  * @param  [type] $params Parameters inside a Query
  * @return [type]         Return unique array regardling query
  */
-  public function query_unique($query, $params){
+  protected function query_unique($query, $params){
     $results = $this->query($query, $params);
     return reset($results);
   }
 
+  public function add($entity){
+    return $this->insert($this->table, $entity);
+  }
 
+  public function update($id, $entity){
+    $this->execute_update($this->table, $id, $entity);
+  }
+
+  public function get_by_id($id){
+    return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);
+  }
+
+  
 }
 ?>

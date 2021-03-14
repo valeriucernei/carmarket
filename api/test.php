@@ -19,14 +19,19 @@
     'phone' => "+727654435"
 ];*/
 
-
-$ad = [
+/*
+$ads_dao->add([
   'user_id' => '2',
   'title' => 'Buggati in kuzov de BMW. Motor sprinter!',
   'description' => 'AXA Imobil vă propune spre vânzare teren agricol, amplasat în orașul Durlești'
-];
+]);*/
 
-$ad_id = $ads_dao->add_ad($ad);
+$ads_dao->update(3, [
+  'user_id' => '8',
+  'title' => 'Bhuinea',
+  'description' => 'huinea desc'
+]);
+
 
 //$user = $user_dao->add_user($user1);
 
@@ -38,7 +43,7 @@ $ad_id = $ads_dao->add_ad($ad);
 
 //$user = $user_dao->update_user_by_email("test@mail.ru", $user69);
 
-print_r($ad_id);
+print_r($ads_dao);
 
 
 ?>
