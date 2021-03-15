@@ -124,7 +124,7 @@ class BaseDao {
 
 
   public function get_all(){
-    return $this->query("SELECT * FROM ".$this->table)
+    return $this->query("SELECT * FROM ".$this->table, []);
   }
 
 

@@ -2,5 +2,7 @@
     "name": "ibu/carmarket",
     "description": "Site for selling cars",
     "license": "Apache2",
-    "require": {}
+    "require": {
+        "mikecao/flight": "^1.3"
+    }
 }
