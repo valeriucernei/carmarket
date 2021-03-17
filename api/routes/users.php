@@ -17,7 +17,7 @@
    * @var int User ID
    */
   Flight::route('GET /users/@id', function($id){
-      flight::json(Flight::userdao()->get_by_id($id));
+      flight::json(Flight::userservice()->get_by_id($id));
   });
 
 
@@ -27,7 +27,8 @@
    * @var [type]
    */
   Flight::route('POST /users', function(){
-      Flight::json(Flight::userdao()->add(Flight::request()->data->getData()));
+      $data = Flight::request()->data->getData();
+      Flight::json(Flight::userservice()->add($data));
   });
 
 
@@ -37,10 +38,9 @@
    * @var int User ID
    */
   Flight::route('PUT /users/@id', function($id){
-      flight::json(Flight::userdao()->get_by_id($id));
+      $data = Flight::request()->data->getData();
 
-      Flight::userdao()->update($id, Flight::request()->data->getData());
-      Flight::json(Flight::request()->data->getData());
+      Flight::json(Flight::userservice()->update($id, $data));
   });
 
 ?>
