@@ -6,8 +6,13 @@
       $offset = Flight::query('offset', 0);
       $limit = Flight::query('limit', 10);
 
-      Flight::json(Flight::userdao()->get_all($offset, $limit));
+      $search = Flight::query('search');
 
+      if($search){
+        Flight::json(Flight::userdao()->get_users($search, $offset, $limit));
+      }else{
+        Flight::json(Flight::userdao()->get_all($offset, $limit));
+      }
   });
 
 

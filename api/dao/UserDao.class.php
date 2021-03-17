@@ -14,6 +14,11 @@ class UserDao extends BaseDao{
     $this->update("users", $email, $user, "email");
   }
 
+  public function get_users($search, $offset, $limit){
+    return $this->query("SELECT * FROM users
+                        WHERE LOWER(username) LIKE CONCAT('%', :name, '%')
+                        LIMIT ${limit} OFFSET ${offset}", ["name" => strtolower($search)]);
+  }
 
 }
 ?>

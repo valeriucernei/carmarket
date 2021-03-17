@@ -123,8 +123,8 @@ class BaseDao {
 
 
 
-  public function get_all(){
-    return $this->query("SELECT * FROM ".$this->table, []);
+  public function get_all($offset, $limit){
+    return $this->query("SELECT * FROM ".$this->table." LIMIT ${limit} OFFSET ${offset}", []);
   }
 
 
