@@ -1,10 +1,13 @@
 <?php
-
   /**
    * API Return all users in JSON
    */
   Flight::route('GET /users', function(){
-      flight::json(Flight::userdao()->get_all());
+      $offset = Flight::query('offset', 0);
+      $limit = Flight::query('limit', 10);
+
+      Flight::json(Flight::userdao()->get_all($offset, $limit));
+
   });
 
 
