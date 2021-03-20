@@ -26,9 +26,29 @@
    * API Add new user in Data Base, and return user ID
    * @var [type]
    */
-  Flight::route('POST /users', function(){
+  Flight::route('POST /users/add', function(){
       $data = Flight::request()->data->getData();
       Flight::json(Flight::userservice()->add($data));
+  });
+
+
+
+  /**
+   * API Register new user in Data Base, and return user ID
+   * @var [type]
+   */
+  Flight::route('POST /users/register', function(){
+      $data = Flight::request()->data->getData();
+      Flight::json(Flight::userservice()->register($data));
+  });
+
+  /**
+   * API Confirm new user in Data Base by TOKEN
+   * @var [type]
+   */
+  Flight::route('GET /users/confirm/@token', function($token){
+      Flight::userservice()->confirm($token);
+      Flight::json(["message" => "Your account has been activated."]);
   });
 
 

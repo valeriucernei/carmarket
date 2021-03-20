@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__FILE__)."/BaseDao.class.php";
+
 class UserDao extends BaseDao{
 
   public function __construct(){
@@ -18,6 +19,10 @@ class UserDao extends BaseDao{
     return $this->query("SELECT * FROM users
                         WHERE LOWER(username) LIKE CONCAT('%', :name, '%')
                         LIMIT ${limit} OFFSET ${offset}", ["name" => strtolower($search)]);
+  }
+
+  public function get_user_by_token($token){
+    return $this->query_unique("SELECT * FROM users WHERE token = :token", ["token" => $token]);
   }
 
 }
