@@ -8,11 +8,11 @@ class UserService extends BaseService{
     $this->dao = new UserDao();
   }
 
-  public function get_users($search, $offset, $limit){
+  public function get_users($search, $offset, $limit, $order){
     if($search){
-      return $this->dao->get_users($search, $offset, $limit);
+      return $this->dao->get_users($search, $offset, $limit, $order);
     }else{
-      return $this->dao->get_all($offset, $limit);
+      return $this->dao->get_all($offset, $limit, $order);
     }
   }
 
@@ -48,7 +48,7 @@ class UserService extends BaseService{
 
   public function confirm($token){
     $user = $this->dao->get_user_by_token($token);
-    if(!isset($user['id'])) throw Exception("Invalid token.");
+    if(!isset($user['id'])) throw new Exception("Invalid token.");
 
     $this->dao->update($user['id'], [
       "status" => "ACTIVE",

@@ -6,8 +6,8 @@
       $offset = Flight::query('offset', 0);
       $limit = Flight::query('limit', 10);
       $search = Flight::query('search');
-
-      Flight::json(Flight::userservice()->get_users($search, $offset, $limit));
+      $order = Flight::query('order', "-id");
+      Flight::json(Flight::userservice()->get_users($search, $offset, $limit, $order));
   });
 
 
