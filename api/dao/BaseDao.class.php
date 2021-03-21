@@ -13,6 +13,16 @@ class BaseDao {
 
   private $table;
 
+  public function parse_order($order){
+    switch(substr($order, 0, 1)){
+      case '-' : $order_direction = "ASC"; break;
+      case '+' : $order_direction = "DESC"; break;
+      default: throw new Exception("Invalid order character. Use either + or -"); break;
+    }
+    $order_column = substr($order, 1);
+    return [$order_column, $order_direction];
+  }
+
   public function __construct($table){
     $this->table = $table;
     try {
@@ -124,13 +134,9 @@ class BaseDao {
 
 
   public function get_all($offset, $limit, $order){
-    switch(substr($order, 0, 1)){
-      case '-' : $order_direction = "ASC"; break;
-      case '+' : $order_direction = "DESC"; break;
-      default: throw new Exception("Invalid order character. Use either + or -"); break;
-    }
 
-    $order_column = substr($order, 1);
+    list($order_column, $order_direction) = self::parse_order($order);
+
     return $this->query("SELECT * FROM ".$this->table." ORDER BY ${order_column} ${order_direction}
                         LIMIT ${limit} OFFSET ${offset}", []);
   }
