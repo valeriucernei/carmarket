@@ -5,9 +5,6 @@
  * @var [type]
  */
 Flight::route('POST /ads/add', function(){
-    $data = Flight::request()->data->getData();
-    Flight::json(Flight::userservice()->add($data));
+  $data = Flight::request()->data->getData();
+  Flight::json(Flight::adsservice()->add_ad($data));
 });
-
-
-?>

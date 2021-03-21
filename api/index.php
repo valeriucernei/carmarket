@@ -5,9 +5,12 @@ error_reporting(E_ALL);
 
 require_once dirname(__FILE__)."/../vendor/autoload.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";
+require_once dirname(__FILE__)."/services/AdsService.class.php";
 require_once dirname(__FILE__)."/routes/users.php";
+require_once dirname(__FILE__)."/routes/ads.php";
 
 Flight::register("userservice","UserService");
+Flight::register("adsservice","AdsService");
 
 /**
  * Utility function for reading query parameters from URL

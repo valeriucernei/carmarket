@@ -8,6 +8,8 @@ class UserService extends BaseService{
     $this->dao = new UserDao();
   }
 
+
+
   public function get_users($search, $offset, $limit, $order){
     if($search){
       return $this->dao->get_users($search, $offset, $limit, $order);
@@ -15,6 +17,7 @@ class UserService extends BaseService{
       return $this->dao->get_all($offset, $limit, $order);
     }
   }
+
 
 
   public function add($user){
@@ -25,6 +28,7 @@ class UserService extends BaseService{
   }
 
 
+
   public function register($user){
     if(!isset($user['username'])) throw new Exception("Username field is required.");
     if(!isset($user['email'])) throw new Exception("Email field is required.");
@@ -32,19 +36,16 @@ class UserService extends BaseService{
     if(!isset($user['pass'])) throw new Exception("Password field is required.");
     if(!isset($user['phone'])) throw new Exception("Phone field is required.");
 
-    try{
-      $user['pass'] = md5($user['pass']);
-      $user['token'] = md5(random_bytes(16));
-      $user = parent::add($user);
-    } catch(\Exception $e) {
-      // rollback
-      throw $e;
-    }
+    $user['pass'] = md5($user['pass']);
+    $user['token'] = md5(random_bytes(16));
+    $user = parent::add($user);
 
     //TODO email send with token
 
     return $user;
   }
+
+
 
   public function confirm($token){
     $user = $this->dao->get_user_by_token($token);
