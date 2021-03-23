@@ -12,6 +12,15 @@ require_once dirname(__FILE__)."/routes/ads.php";
 Flight::register("userservice","UserService");
 Flight::register("adsservice","AdsService");
 
+Flight::set('flight.log_errors', True);
+
+/**
+ * Error Handling for our API
+ */
+Flight::map('error', function(Exception $ex){
+    Flight::json(["message" => $ex->getMessage()], $ex->getCode());
+});
+
 /**
  * Utility function for reading query parameters from URL
  * @param name of the parameter

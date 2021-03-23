@@ -38,7 +38,15 @@ class UserService extends BaseService{
 
     $user['pass'] = md5($user['pass']);
     $user['token'] = md5(random_bytes(16));
-    $user = parent::add($user);
+    try{
+      $user = parent::add($user);
+    } catch (\Exception $e){
+      if(str_contains($e->getMessage(), 'users.username_UNIQUE'))
+        throw new Exception("Account with same username exists in data base.", 400, $e);
+      else if(str_contains($e->getMessage(), 'users.email_UNIQUE'))
+        throw new Exception("Account with same email address exists in data base.", 400, $e);
+      else throw $e;
+    }
 
     //TODO email send with token
 
