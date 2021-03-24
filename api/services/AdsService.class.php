@@ -15,12 +15,14 @@ class AdsService extends BaseService{
 
 
 
+  /**
+   * [add_ad description]
+   * @param [type] $data [description]
+   */
   public function add_ad($data){
     if(!isset($data['title'])) throw new Exception("Title field is required.");
     if(!isset($data['car_body'])) throw new Exception("Car Body field is required.");
     if(!isset($data['fabricated'])) throw new Exception("Year field is required.");
-
-
     try{
         $this->dao->beginTransaction();
         $ad = parent::add([
@@ -41,6 +43,8 @@ class AdsService extends BaseService{
         $this->dao->commit();
     } catch (\Exception $e) {
         $this->dao->rollBack();
+        if(str_contains($e->getMessage(), 'users.username_UNIQUE'))
+          throw new Exception("Account with same username exists in data base.", 400, $e);
         throw $e;
     }
     $this->atributesDao->update($atributes['id'], ["ad_id" => $ad['id']]);
