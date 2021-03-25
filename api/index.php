@@ -6,34 +6,21 @@
   require_once dirname(__FILE__)."/../vendor/autoload.php";
   require_once dirname(__FILE__)."/services/UserService.class.php";
   require_once dirname(__FILE__)."/services/AdsService.class.php";
-  require_once dirname(__FILE__)."/routes/users.php";
-  require_once dirname(__FILE__)."/routes/ads.php";
-
-  Flight::register("userservice","UserService");
-  Flight::register("adsservice","AdsService");
 
   Flight::set('flight.log_errors', True);
 
-  /**
-   * Error Handling for our API
-   */
+  /* error handling for our API */
   Flight::map('error', function(Exception $ex){
-      Flight::json(["message" => $ex->getMessage()], $ex->getCode());
+      Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->GetCode() : 500);
   });
 
-  /**
-   * Utility function for reading query parameters from URL
-   * @param name of the parameter
-   * @param default value (Default: NULL)
-   */
+  /* utility function for reading query parameters from URL */
   Flight::map('query', function($name, $default_value = NULL){
     $request = Flight::request();
-
     $query_param = @$request->query->getData()[$name];
     $query_param = $query_param ? $query_param : $default_value;
     return $query_param;
   });
-
 
   Flight::route('GET /swagger', function(){
     $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
@@ -41,6 +28,17 @@
     echo $openapi->toJson();
   });
 
+  Flight::route('GET /', function(){
+    Flight::redirect('/docs');
+  });
+
+  /* register Business Logic layer services */
+  Flight::register("userservice","UserService");
+  Flight::register("adsservice","AdsService");
+
+  /* include all routes */
+  require_once dirname(__FILE__)."/routes/users.php";
+  require_once dirname(__FILE__)."/routes/ads.php";
 
   Flight::start();
 ?>

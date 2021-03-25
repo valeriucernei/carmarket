@@ -9,7 +9,11 @@
  */
 
  /**
-  * @OA\Get(path="/users", tags={"user"},
+  * @OA\Get(path="/users", tags={"users"},
+  *     @OA\Parameter(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
+  *     @OA\Parameter(type="integer", in="query", name="limit", default=15, description="Limit the number of results"),
+  *     @OA\Parameter(type="string", in="query", name="search", description="Search string for accounts (Case insensitive search)"),
+  *     @OA\Parameter(type="string", in="query", name="order", default="-id", description="Sorting for return elements -column_name ascending, or +column_name descending"),
   *     @OA\Response(response="200", description="List accounts from database")
   * )
   */
@@ -24,7 +28,7 @@
 
 
   /**
-   * @OA\Get(path="/users/{id}", tags={"user"},
+   * @OA\Get(path="/users/{id}", tags={"users"},
    *     @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example=1, description="ID of the user"),
    *     @OA\Response(response="200", description="Fetch individual account")
    * )
@@ -35,18 +39,21 @@
 
 
 
-
-  Flight::route('POST /users/add', function(){
-      $data = Flight::request()->data->getData();
-      Flight::json(Flight::userservice()->add($data));
-  });
-
-
-
-
   /**
-   * @OA\Post(path="/users/register", tags={"user"},
-   *  @OA\Response(response="200", description="Message that user has been created.")
+   * @OA\Post(path="/users/register", tags={"users"},
+   *   @OA\RequestBody(description="Basic user account info", required=true,
+   *       @OA\MediaType(mediaType="application/json",
+   *    			@OA\Schema(
+   *    				 @OA\Property(property="username", required="true", type="string", example="Test_Username",	description="User's username" ),
+   *    				 @OA\Property(property="fname", required="true", type="string", example="First_Name",	description="User's first name" ),
+   *    				 @OA\Property(property="lname", type="string", example="Last_Name",	description="User's last name" ),
+   *    				 @OA\Property(property="pass", required="true", type="string", example="asd12345",	description="User's password" ),
+   *    				 @OA\Property(property="email", required="true", type="string", example="example@mail.com",	description="User's email address" ),
+   *    				 @OA\Property(property="phone", required="true", type="string", example="+1123123123",	description="User's phone number" )
+   *          )
+   *       )
+   *     ),
+   *  @OA\Response(response="200", description="Account that has been added into database with ID assigned.")
    * )
    */
   Flight::route('POST /users/register', function(){
@@ -57,7 +64,8 @@
 
 
   /**
-   * @OA\Get(path="/users/confirm/{token}", tags={"user"},
+   * @OA\Get(path="/users/confirm/{token}", tags={"users"},
+   *     @OA\Parameter(type="string", in="path", name="token", default=123, description="Temporary token for activating account"),
    *     @OA\Response(response="200", description="Message upon successfull activation.")
    * )
    */
@@ -68,16 +76,26 @@
 
 
 
-
   /**
-   * @OA\Put(path="/users/{id}", tags={"user"},
+   * @OA\Put(path="/users/{id}", tags={"users"},
+   *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+   *   @OA\RequestBody(description="Basic account info that is going to be updated", required=true,
+   *       @OA\MediaType(mediaType="application/json",
+   *    			@OA\Schema(
+   *    				 @OA\Property(property="username", type="string", example="Test_Username",	description="User's username" ),
+   *    				 @OA\Property(property="fname", type="string", example="Ivan",	description="User's first name" ),
+   *    				 @OA\Property(property="lname", type="string", example="Ivanov",	description="User's last name" ),
+   *    				 @OA\Property(property="pass", type="string", example="querty123",	description="User's password" ),
+   *    				 @OA\Property(property="email", type="string", example="example@mail.com",	description="User's email address" ),
+   *    				 @OA\Property(property="phone", type="string", example="+123123123",	description="User's phone address" )
+   *          )
+   *       )
+   *     ),
    *     @OA\Response(response="200", description="Update account based on id")
    * )
    */
   Flight::route('PUT /users/@id', function($id){
       $data = Flight::request()->data->getData();
-
       Flight::json(Flight::userservice()->update($id, $data));
   });
-
 ?>
