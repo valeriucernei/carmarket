@@ -7,5 +7,10 @@ class AtributesDao extends BaseDao{
     parent::__construct("atributes");
   }
 
+  public function get_atributes_id($id){
+    return $this->query_unique("SELECT id FROM atributes
+                                WHERE ad_id = :id", ["id" => $id]);
+  }
+
 }
 ?>

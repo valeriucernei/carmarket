@@ -1,5 +1,32 @@
 <?php
 
+Flight::route('GET /ads', function(){
+    $offset = Flight::query('offset', 0);
+    $limit = Flight::query('limit', 10);
+    $search = Flight::query('search');
+    $order = Flight::query('order', "-ads.id");
+    $car_body = Flight::query('car_body');
+    $fabricated_min = Flight::query('fabricated_min', 1970);
+    $fabricated_max = Flight::query('fabricated_max', date("Y"));
+    $km_min = Flight::query('km_min', 0);
+    $km_max = Flight::query('km_max', 1000000);
+    $price_min = Flight::query('price_min', 0);
+    $price_max = Flight::query('price_max', 1000000);
+    $gearbox = Flight::query('gearbox');
+    $fuel_type = Flight::query('fuel_type');
+    Flight::json(Flight::adsservice()->get_ads($search, $offset, $limit, $order,
+    $car_body, $fabricated_min, $fabricated_max, $km_min, $km_max, $price_min,
+    $price_max, $gearbox, $fuel_type));
+});
+
+
+
+Flight::route('GET /ads/@id', function($id){
+    flight::json(Flight::adsservice()->get_ad_by_id($id));
+});
+
+
+
 /**
  * @OA\Post(path="/ads/add", tags={"advertisements"},
  *   @OA\RequestBody(description="Basic Adv Info", required=true,
@@ -25,4 +52,12 @@
     $data = Flight::request()->data->getData();
     Flight::json(Flight::adsservice()->add_ad($data));
   });
+
+
+
+  Flight::route('PUT /ads/@id', function($id){
+      $data = Flight::request()->data->getData();
+      Flight::json(Flight::adsservice()->update_ad($id, $data));
+  });
+
 ?>
