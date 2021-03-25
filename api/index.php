@@ -9,10 +9,12 @@
 
   Flight::set('flight.log_errors', True);
 
-  /* error handling for our API *
+
+  /* error handling for our API */
   Flight::map('error', function(Exception $ex){
       Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->GetCode() : 500);
   });
+
 
   /* utility function for reading query parameters from URL */
   Flight::map('query', function($name, $default_value = NULL){
@@ -22,15 +24,20 @@
     return $query_param;
   });
 
+
+  /* List of available query requests in JSON format*/
   Flight::route('GET /swagger', function(){
     $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
     header('Content-Type: application/json');
     echo $openapi->toJson();
   });
 
+
+  /* Redirect from /api to /api/docs */
   Flight::route('GET /', function(){
     Flight::redirect('/docs');
   });
+
 
   /* register Business Logic layer services */
   Flight::register("userservice","UserService");
