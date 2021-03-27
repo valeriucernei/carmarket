@@ -1,4 +1,5 @@
 <?php
+  /* SWAGGER documentation */
   /**
   * @OA\Get(path="/ads", tags={"advertisements"},
   *     @OA\Parameter(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
