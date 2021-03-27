@@ -11,6 +11,6 @@ class Config {
   const SMTP_HOST = "smtp.eu.mailgun.org";
   const SMTP_PORT = "587";
   const SMTP_USER = "postmaster@car-market.live";
-  CONST SMTP_PASSWORD = "17d6629b5f725e2171b59f2806c4065c-1553bd45-19539ea1";
+  CONST SMTP_PASSWORD = "04cb39237f"."ed654"."9a2b82df0a3"."c17b0a-1553"."bd45-7c6"."490c1";
 }
 ?>
