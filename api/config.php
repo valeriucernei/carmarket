@@ -8,9 +8,9 @@ class Config {
   const DB_SCHEME = "carmarket";
   const DB_PORT = "3307";
 
-  const SMTP_HOST = "smtp.eu.mailgun.org";
+  const SMTP_HOST = "smtp.gmail.com";
   const SMTP_PORT = "587";
-  const SMTP_USER = "postmaster@car-market.live";
-  CONST SMTP_PASSWORD = "04cb39237f"."ed654"."9a2b82df0a3"."c17b0a-1553"."bd45-7c6"."490c1";
+  const SMTP_USER = "car.market.noreply@gmail.com";
+  CONST SMTP_PASSWORD = "Asd-1234";
 }
 ?>
