@@ -2,10 +2,15 @@
 
 require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
+require_once dirname(__FILE__)."/../clients/SMTPClient.class.php";
 
 class UserService extends BaseService{
+
+  private $smtpClient;
+
   public function __construct(){
     $this->dao = new UserDao();
+    $this->smtpClient = new SMTPClient();
   }
 
 
@@ -40,7 +45,7 @@ class UserService extends BaseService{
     $user['token'] = md5(random_bytes(16));
     try{
       $user = parent::add($user);
-    } catch (\Exception $e){
+    } catch (\Exception $e) {
       if(str_contains($e->getMessage(), 'users.username_UNIQUE'))
         throw new Exception("Account with same username exists in data base.", 400, $e);
       else if(str_contains($e->getMessage(), 'users.email_UNIQUE'))
@@ -48,7 +53,7 @@ class UserService extends BaseService{
       else throw $e;
     }
 
-    //TODO email send with token
+    $this->smtpClient->send_register_user_token($user);
 
     return $user;
   }

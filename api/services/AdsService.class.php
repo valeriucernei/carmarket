@@ -1,11 +1,12 @@
 <?php
-
 require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/AdsDao.class.php";
 require_once dirname(__FILE__)."/../dao/AtributesDao.class.php";
 
 class AdsService extends BaseService{
+
   private $atributesDao;
+
   public function __construct(){
     $this->dao = new AdsDao();
     $this->atributesDao = new AtributesDao();
@@ -35,10 +36,6 @@ class AdsService extends BaseService{
 
 
 
-  /**
-   * [add_ad description]
-   * @param [type] $data [description]
-   */
   public function add_ad($data){
     if(!isset($data['title'])) throw new Exception("Title field is required.");
     if(!isset($data['car_body'])) throw new Exception("Car Body field is required.");
