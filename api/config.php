@@ -11,6 +11,6 @@ class Config {
   const SMTP_HOST = "smtp.gmail.com";
   const SMTP_PORT = "587";
   const SMTP_USER = "car.market.noreply@gmail.com";
-  CONST SMTP_PASSWORD = "Asd-1234";
+  CONST SMTP_PASSWORD = "";
 }
 ?>
