@@ -4,7 +4,7 @@
  * @OA\Info(title="CarMarket API", version="0.1")
  * @OA\OpenApi(
  *   @OA\Server(url="http://localhost/carmarket/api/", description="Development Environment"),
- *   @OA\Server(url="https://carmarket.com/api/", description="Production Environment")
+ *   @OA\Server(url="https://car-market.live/api/", description="Production Environment")
  * )
  */
 
