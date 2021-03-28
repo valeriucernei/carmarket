@@ -107,8 +107,8 @@
    *   @OA\RequestBody(description="User authorization route", required=true,
    *       @OA\MediaType(mediaType="application/json",
    *    			@OA\Schema(
-   *    				 @OA\Property(property="login", required="true", type="string", example="Test_Username",	description="User's username or password" ),
-   *    				 @OA\Property(property="pass", required="true", type="string", example="asd12345",	description="User's password" ),
+   *    				 @OA\Property(property="login", required="true", type="string", example="Test_Username",	description="User's username or email" ),
+   *    				 @OA\Property(property="pass", required="true", type="string", example="asd12345",	description="User's password" )
    *          )
    *       )
    *     ),
@@ -118,6 +118,47 @@
   Flight::route('POST /users/login', function(){
       $data = Flight::request()->data->getData();
       Flight::json(Flight::userservice()->login($data));
+  });
+
+
+
+  /**
+   * @OA\Post(path="/users/forgot", tags={"users"},
+   *   @OA\RequestBody(description="User forgot password route", required=true,
+   *       @OA\MediaType(mediaType="application/json",
+   *    			@OA\Schema(
+   *    				 @OA\Property(property="email", required="true", type="string", example="email@gmail.com",	description="User's email address" )
+   *          )
+   *       )
+   *     ),
+   *  @OA\Response(response="200", description="Recovery link has been sent to your email address")
+   * )
+   */
+  Flight::route('POST /users/forgot', function(){
+      $data = Flight::request()->data->getData();
+      Flight::userservice()->forgot($data);
+      Flight::json(["message" => "Recovery link has been sent to your email address."]);
+  });
+
+
+
+  /**
+   * @OA\Post(path="/users/reset", tags={"users"},
+   *   @OA\RequestBody(description="User forgot password route", required=true,
+   *       @OA\MediaType(mediaType="application/json",
+   *    			@OA\Schema(
+   *    				 @OA\Property(property="token", required="true", type="string", example="bla-bla-bla",	description="Recovery token" ),
+   *    				 @OA\Property(property="pass", required="true", type="string", example="Asd12345",	description="New Password" )
+   *          )
+   *       )
+   *     ),
+   *  @OA\Response(response="200", description="Password has been changed.")
+   * )
+   */
+  Flight::route('POST /users/reset', function(){
+      $data = Flight::request()->data->getData();
+      Flight::userservice()->reset($data);
+      Flight::json(["message" => "Password has been changed."]);
   });
 
 ?>

@@ -21,5 +21,21 @@ class SMTPClient{
     $this->mailer->send($message);
   }
 
+  public function send_confirmed_email($user){
+    $message = (new Swift_Message('CarMarket | Confirm Registration'))
+      ->setFrom(['noreply@car-market.live' => 'CarMarket No Reply Mail'])
+      ->setTo([$user['email']])
+      ->setBody('Confirmation link: http://localhost/carmarket/api/users/confirm/'.$user['token']);
+  }
+
+  public function send_recovery_email($user){
+    $message = (new Swift_Message('CarMarket | Reset Password Link'))
+      ->setFrom(['noreply@car-market.live' => 'CarMarket No Reply Mail'])
+      ->setTo([$user['email']])
+      ->setBody('Recovery token: '.$user['token']);
+    $this->mailer->send($message);
+  }
+
+
 }
 ?>
