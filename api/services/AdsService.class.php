@@ -64,7 +64,7 @@ class AdsService extends BaseService{
         throw new Exception("Something went wrong! Ad has not been added. Please, try again.", 400, $e);
     }
     $this->atributesDao->update($atributes['id'], ["ad_id" => $ad['id']]);
-    return $ad;
+    return $this->dao->get_ad_by_id($ad['id']);
   }
 
 
