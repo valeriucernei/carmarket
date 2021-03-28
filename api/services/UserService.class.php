@@ -67,9 +67,10 @@ class UserService extends BaseService{
       "status" => "ACTIVE",
       "token" => NULL
     ]);
-
-    //TODO send email that account has been approved.
+    $this->smtpClient->send_confirmed_email($user);
   }
+
+
 
   public function login($user){
     if(parent::checkEmail($user['login'])) $db_user = $this->dao->get_user_by_email($user['login']);
@@ -77,7 +78,6 @@ class UserService extends BaseService{
     if(!isset($db_user)) throw new Exception("User doesn't exist.", 400);
     if($db_user['status'] != 'ACTIVE') throw new Exception("You account has not been yet activated, or is blocked.", 400);
     if(md5($user['pass']) != $db_user['pass']) throw new Exception("You have entered a wrong password.", 400);
-
     return $db_user;
   }
 
@@ -89,7 +89,6 @@ class UserService extends BaseService{
     if($db_user['status'] != 'ACTIVE') throw new Exception("You account has not been yet activated, or is blocked.", 400);
 
     $db_user = parent::update($db_user['id'], ['token' => md5(random_bytes(16))]);
-
     $this->smtpClient->send_recovery_email($db_user);
   }
 
