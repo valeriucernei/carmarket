@@ -58,7 +58,8 @@
    */
   Flight::route('POST /users/register', function(){
       $data = Flight::request()->data->getData();
-      Flight::json(Flight::userservice()->register($data));
+      Flight::userservice()->register($data);
+      Flight::json(['message' => "Confirmation email has been sent."]);
   });
 
 
@@ -98,4 +99,25 @@
       $data = Flight::request()->data->getData();
       Flight::json(Flight::userservice()->update($id, $data));
   });
+
+
+
+  /**
+   * @OA\Post(path="/users/login", tags={"users"},
+   *   @OA\RequestBody(description="User authorization route", required=true,
+   *       @OA\MediaType(mediaType="application/json",
+   *    			@OA\Schema(
+   *    				 @OA\Property(property="login", required="true", type="string", example="Test_Username",	description="User's username or password" ),
+   *    				 @OA\Property(property="pass", required="true", type="string", example="asd12345",	description="User's password" ),
+   *          )
+   *       )
+   *     ),
+   *  @OA\Response(response="200", description="You have been successfully logged.")
+   * )
+   */
+  Flight::route('POST /users/login', function(){
+      $data = Flight::request()->data->getData();
+      Flight::json(Flight::userservice()->login($data));
+  });
+
 ?>

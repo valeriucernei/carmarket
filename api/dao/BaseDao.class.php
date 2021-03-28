@@ -9,9 +9,23 @@ require_once dirname(__FILE__)."/../config.php";
 * @author Valeriu Cernei
 */
 class BaseDao {
-  protected $connection;
 
+  protected $connection;
   private $table;
+
+  public function __construct($table){
+    $this->table = $table;
+    try {
+      $this->connection = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME.";port=".Config::DB_PORT, Config::DB_USERNAME, Config::DB_PASSWORD);
+      $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      //$this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+    } catch(PDOException $e) {
+      throw $e;
+    }
+  }
+
+
 
   public function beginTransaction(){
       $response = $this->connection->beginTransaction();
@@ -25,6 +39,8 @@ class BaseDao {
       $response = $this->connection->rollBack();
     }
 
+
+
   public function parse_order($order){
     switch(substr($order, 0, 1)){
       case '-' : $order_direction = "ASC"; break;
@@ -33,18 +49,6 @@ class BaseDao {
     }
     $order_column = substr($order, 1);
     return [$order_column, $order_direction];
-  }
-
-  public function __construct($table){
-    $this->table = $table;
-    try {
-      $this->connection = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME.";port=".Config::DB_PORT, Config::DB_USERNAME, Config::DB_PASSWORD);
-      $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-      //$this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
-    } catch(PDOException $e) {
-      throw $e;
-    }
   }
 
 
@@ -154,6 +158,7 @@ class BaseDao {
     return $this->query("SELECT * FROM ".$this->table." ORDER BY ${order_column} ${order_direction}
                         LIMIT ${limit} OFFSET ${offset}", []);
   }
+
 
 
   /**
