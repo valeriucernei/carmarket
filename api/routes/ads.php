@@ -15,6 +15,8 @@
   *     @OA\Parameter(type="integer", in="query", name="price_max", default=1000000, description="Maximum price"),
   *     @OA\Parameter(type="integer", in="query", name="gearbox", default=null, description="Gearbox type number"),
   *     @OA\Parameter(type="integer", in="query", name="fuel_type", default=null, description="Fuel type number"),
+  *     @OA\Parameter(type="integer", in="query", name="motor_size_min", default=null, description="Minimal motor size"),
+  *     @OA\Parameter(type="integer", in="query", name="motor_size_max", default=null, description="Maximum motor size"),
   *     @OA\Response(response="200", description="Lists ads from database")
   * )
   */
@@ -32,9 +34,11 @@
     $price_max = Flight::query('price_max', 1000000);
     $gearbox = Flight::query('gearbox');
     $fuel_type = Flight::query('fuel_type');
+    $motor_size_min = Flight::query('motor_size_min');
+    $motor_size_max = Flight::query('motor_size_max');
     Flight::json(Flight::adsservice()->get_ads($search, $offset, $limit, $order,
     $car_body, $fabricated_min, $fabricated_max, $km_min, $km_max, $price_min,
-    $price_max, $gearbox, $fuel_type));
+    $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max));
   });
 
 
@@ -65,7 +69,8 @@
   *    				 @OA\Property(property="km", type="integer", example="49000",	description="Car mileage" ),
   *    				 @OA\Property(property="price", type="integer", example="112000",	description="Car's price" ),
   *    				 @OA\Property(property="gearbox", type="integer", example="2",	description="Gearbox number" ),
-  *    				 @OA\Property(property="fuel_type", type="integer", example="1",	description="Fuel Type Number" )
+  *    				 @OA\Property(property="fuel_type", type="integer", example="1",	description="Fuel Type Number" ),
+  *    				 @OA\Property(property="motor_size", type="integer", example="2400",	description="Motor size in cm" )
   *          )
   *       )
   *     ),
@@ -93,7 +98,8 @@
    *    				 @OA\Property(property="km", type="integer", example="125000",	description="Car's mileage" ),
    *    				 @OA\Property(property="price", type="integer", example="10000",	description="Car's price" ),
    *    				 @OA\Property(property="gearbox", type="integer", example="1",	description="Car's gearbox type number" ),
-   *    				 @OA\Property(property="fuel_type", type="integer", example="1",	description="Car's fuel type number" )
+   *    				 @OA\Property(property="fuel_type", type="integer", example="1",	description="Car's fuel type number" ),
+   *    				 @OA\Property(property="motor_size", type="integer", example="2400",	description="Motor size in cm" )
    *          )
    *       )
    *     ),

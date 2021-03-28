@@ -16,15 +16,15 @@ class AdsService extends BaseService{
 
   public function get_ads($search, $offset, $limit, $order, $car_body,
                           $fabricated_min, $fabricated_max, $km_min, $km_max,
-                          $price_min, $price_max, $gearbox, $fuel_type){
+                          $price_min, $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max){
     if($search){
       return $this->dao->get_ads($search, $offset, $limit, $order, $car_body,
                                 $fabricated_min, $fabricated_max, $km_min, $km_max,
-                                $price_min, $price_max, $gearbox, $fuel_type);
+                                $price_min, $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max);
     }else{
       return $this->dao->get_all_ads($offset, $limit, $order, $car_body, $fabricated_min,
                                     $fabricated_max, $km_min, $km_max, $price_min,
-                                    $price_max, $gearbox, $fuel_type);
+                                    $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max);
     }
   }
 
@@ -55,14 +55,13 @@ class AdsService extends BaseService{
             "price" => $data['price'],
             "gearbox" => $data['gearbox'],
             "fuel_type" => $data['fuel_type'],
+            "motor_size" => $data['motor_size'],
             "ad_id" => 1
         ]);
         $this->dao->commit();
     } catch (\Exception $e) {
         $this->dao->rollBack();
-        if(str_contains($e->getMessage(), 'users.username_UNIQUE'))
-          throw new Exception("Account with same username exists in data base.", 400, $e);
-        throw $e;
+        throw new Exception("Something went wrong! Ad has not been added. Please, try again.", 400, $e);
     }
     $this->atributesDao->update($atributes['id'], ["ad_id" => $ad['id']]);
     return $ad;
@@ -91,14 +90,13 @@ class AdsService extends BaseService{
             "km" => $data['km'],
             "price" => $data['price'],
             "gearbox" => $data['gearbox'],
-            "fuel_type" => $data['fuel_type']
+            "fuel_type" => $data['fuel_type'],
+            "motor_size" => $data['motor_size']
         ]);
         $this->dao->commit();
     } catch (\Exception $e) {
         $this->dao->rollBack();
-        if(str_contains($e->getMessage(), 'users.username_UNIQUE'))
-          throw new Exception("Account with same username exists in data base.", 400, $e);
-        throw $e;
+        throw new Exception("Something went wrong! Ad has not been updated. Please, try again.", 400, $e);
     }
     return $this->dao->get_ad_by_id($id);
   }

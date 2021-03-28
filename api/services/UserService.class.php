@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 require_once dirname(__FILE__)."/../clients/SMTPClient.class.php";
@@ -76,7 +75,7 @@ class UserService extends BaseService{
     if(parent::checkEmail($user['login'])) $db_user = $this->dao->get_user_by_email($user['login']);
     else $db_user = $this->dao->get_user_by_username($user['login']);
     if(!isset($db_user)) throw new Exception("User doesn't exist.", 400);
-    if($db_user['status'] != 'ACTIVE') throw new Exception("You account has not been yet activated, or is blocked.", 400);
+    if($db_user['status'] != 'ACTIVE') throw new Exception("Your account has not been yet activated, or is blocked.", 400);
     if(md5($user['pass']) != $db_user['pass']) throw new Exception("You have entered a wrong password.", 400);
     return $db_user;
   }
@@ -102,7 +101,6 @@ class UserService extends BaseService{
       "token" => null
     ]);
   }
-
 
 }
 ?>

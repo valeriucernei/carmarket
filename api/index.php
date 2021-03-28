@@ -6,6 +6,7 @@
   require_once dirname(__FILE__)."/../vendor/autoload.php";
   require_once dirname(__FILE__)."/services/UserService.class.php";
   require_once dirname(__FILE__)."/services/AdsService.class.php";
+  require_once dirname(__FILE__)."/services/CarsService.class.php";
 
   Flight::set('flight.log_errors', True);
 
@@ -42,10 +43,12 @@
   /* register Business Logic layer services */
   Flight::register("userservice","UserService");
   Flight::register("adsservice","AdsService");
+    Flight::register("carsservice","CarsService");
 
   /* include all routes */
   require_once dirname(__FILE__)."/routes/users.php";
   require_once dirname(__FILE__)."/routes/ads.php";
+  require_once dirname(__FILE__)."/routes/cars.php";
 
   Flight::start();
 ?>

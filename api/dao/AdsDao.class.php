@@ -7,8 +7,11 @@ class AdsDao extends BaseDao{
 
   }
 
+
+
   public function get_all_ads($offset, $limit, $order, $car_body, $fabricated_min,
-                          $fabricated_max, $km_min, $km_max, $price_min, $price_max, $gearbox, $fuel_type){
+                          $fabricated_max, $km_min, $km_max, $price_min, $price_max,
+                          $gearbox, $fuel_type, $motor_size_min, $motor_size_max){
     list($order_column, $order_direction) = self::parse_order($order);
     $query = "SELECT * FROM ads, atributes WHERE atributes.ad_id = ads.id";
     if($car_body > 0) $query .= " AND car_body = ${car_body}";
@@ -20,6 +23,8 @@ class AdsDao extends BaseDao{
     $query .= " AND price <= :price_max";
     if($gearbox > 0) $query .= " AND gearbox = ${gearbox}";
     if($fuel_type > 0) $query .= " AND fuel_type = ${fuel_type}";
+    $query .= " AND motor_size >= :motor_size_min";
+    $query .= " AND motor_size <= :motor_size_max";
     $query .= " ORDER BY ${order_column} ${order_direction} LIMIT ${limit} OFFSET ${offset}";
     return $this->query($query, [
       "fabricated_min" => $fabricated_min,
@@ -27,19 +32,26 @@ class AdsDao extends BaseDao{
       "km_min" => $km_min,
       "km_max" => $km_max,
       "price_min" => $price_min,
-      "price_max" => $price_max
+      "price_max" => $price_max,
+      "motor_size_min" => $motor_size_min,
+      "motor_size_max" => $motor_size_max
     ]);
   }
 
+
+
   public function get_ad_by_id($id){
     return $this->query_unique("SELECT ads.*, car_body, fabricated, km, price,
-                                      gearbox, fuel_type FROM ads, atributes
+                                      gearbox, fuel_type, motor_size FROM ads, atributes
                                 WHERE atributes.ad_id = ads.id
                                 AND ads.id = :id", ["id" => $id]);
   }
 
+
+
   public function get_ads($search, $offset, $limit, $order, $car_body, $fabricated_min,
-                          $fabricated_max, $km_min, $km_max, $price_min, $price_max, $gearbox, $fuel_type){
+                          $fabricated_max, $km_min, $km_max, $price_min, $price_max,
+                          $gearbox, $fuel_type , $motor_size_min, $motor_size_max){
     list($order_column, $order_direction) = parent::parse_order($order);
     $query = "SELECT * FROM ads, atributes WHERE atributes.ad_id = ads.id
               AND LOWER(title) LIKE CONCAT('%', :title, '%')";
@@ -50,6 +62,8 @@ class AdsDao extends BaseDao{
     $query .= " AND km <= :km_max";
     $query .= " AND price >= :price_min";
     $query .= " AND price <= :price_max";
+    $query .= " AND motor_size >= :motor_size_min";
+    $query .= " AND motor_size <= :motor_size_max";
     if($gearbox > 0) $query .= " AND gearbox = ${gearbox}";
     if($fuel_type > 0) $query .= " AND fuel_type = ${fuel_type}";
     $query .= " ORDER BY ${order_column} ${order_direction} LIMIT ${limit} OFFSET ${offset}";
@@ -60,11 +74,10 @@ class AdsDao extends BaseDao{
       "km_min" => $km_min,
       "km_max" => $km_max,
       "price_min" => $price_min,
-      "price_max" => $price_max
+      "price_max" => $price_max,
+      "motor_size_min" => $motor_size_min,
+      "motor_size_max" => $motor_size_max
     ]);
-
-
-
   }
 
 }
