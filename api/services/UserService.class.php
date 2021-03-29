@@ -34,14 +34,16 @@ class UserService extends BaseService{
 
 
   public function register($user){
-    if(!isset($user['username'])) throw new Exception("Username field is required.");
-    if(!isset($user['email'])) throw new Exception("Email field is required.");
-    if(!isset($user['fname'])) throw new Exception("First Name field is required.");
-    if(!isset($user['pass'])) throw new Exception("Password field is required.");
-    if(!isset($user['phone'])) throw new Exception("Phone field is required.");
+    if(!isset($user['username'])) throw new Exception("Username field is required.", 400);
+    if(preg_match('/[^A-Za-z0-9]/', $user['username'])) throw new Exception("Username must have only A-z characters and 0-9 numbers.", 400);
+    if(!isset($user['email'])) throw new Exception("Email field is required.", 400);
+    if(!isset($user['fname'])) throw new Exception("First Name field is required.", 400);
+    if(!isset($user['pass'])) throw new Exception("Password field is required.", 400);
+    if(!isset($user['phone'])) throw new Exception("Phone field is required.", 400);
 
     $user['pass'] = md5($user['pass']);
     $user['token'] = md5(random_bytes(16));
+
     try{
       $user = parent::add($user);
     } catch (\Exception $e) {
@@ -86,8 +88,14 @@ class UserService extends BaseService{
     $db_user = $this->dao->get_user_by_email($user['email']);
     if(!isset($db_user)) throw new Exception("User doesn't exist.", 400);
     if($db_user['status'] != 'ACTIVE') throw new Exception("You account has not been yet activated, or is blocked.", 400);
+    $time = strtotime(date(config::DATA_FORMAT)) - strtotime($db_user['token_created_at']);
+    if( $time < 300 )
+      throw new Exception("A new token can be generated in ".(300-$time)." seconds!", 400);
 
-    $db_user = parent::update($db_user['id'], ['token' => md5(random_bytes(16))]);
+    $db_user = parent::update($db_user['id'], [
+      'token' => md5(random_bytes(16)),
+      'token_created_at' => date(Config::DATA_FORMAT)]);
+
     $this->smtpClient->send_recovery_email($db_user);
   }
 
@@ -96,6 +104,9 @@ class UserService extends BaseService{
   public function reset($user){
     $db_user = $this->dao->get_user_by_token($user['token']);
     if(!isset($db_user['id'])) throw new Exception("Invalid token.");
+    if(strtotime(date(config::DATA_FORMAT)) - strtotime($db_user['token_created_at']) > 3600)
+      throw new Exception("Reset token expired. Generate a new one.", 400);
+
     $this->dao->update($db_user['id'], [
       "pass" => MD5($user['pass']),
       "token" => null

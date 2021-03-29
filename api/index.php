@@ -11,7 +11,7 @@
   Flight::set('flight.log_errors', True);
 
 
-  /* error handling for our API */
+  /* error handling for our API *
   Flight::map('error', function(Exception $ex){
       Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->GetCode() : 500);
   });
@@ -43,7 +43,7 @@
   /* register Business Logic layer services */
   Flight::register("userservice","UserService");
   Flight::register("adsservice","AdsService");
-    Flight::register("carsservice","CarsService");
+  Flight::register("carsservice","CarsService");
 
   /* include all routes */
   require_once dirname(__FILE__)."/routes/users.php";
