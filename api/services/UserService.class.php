@@ -3,6 +3,8 @@ require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 require_once dirname(__FILE__)."/../clients/SMTPClient.class.php";
 
+use \Firebase\JWT\JWT;
+
 class UserService extends BaseService{
 
   private $smtpClient;
@@ -76,9 +78,24 @@ class UserService extends BaseService{
   public function login($user){
     if(parent::checkEmail($user['login'])) $db_user = $this->dao->get_user_by_email($user['login']);
     else $db_user = $this->dao->get_user_by_username($user['login']);
+
     if(!isset($db_user['id'])) throw new Exception("User doesn't exist.", 400);
+
     if($db_user['status'] != 'ACTIVE') throw new Exception("Your account has not been yet activated, or is blocked.", 400);
     if(md5($user['pass']) != $db_user['pass']) throw new Exception("You have entered a wrong password.", 400);
+
+    $jwt = JWT::encode([
+        "id" => $db_user['id'],
+        "usr" => $db_user['username'],
+        "adm" => $db_user['admin']], "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.");
+
+    //$decoded = JWT::decode($jwt, $key, array('HS256'));
+
+    //print_r($decoded);
+
+
+    return ["token" => $jwt];
+
     return $db_user;
   }
 
