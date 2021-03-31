@@ -5,6 +5,12 @@
  * @OA\OpenApi(
  *   @OA\Server(url="http://localhost/carmarket/api/", description="Development Environment"),
  *   @OA\Server(url="https://car-market.live/api/", description="Production Environment")
+ * ),
+ * @OA\SecurityScheme(
+ *        securityScheme="ApiKeyAuth",
+ *        in="header",
+ *        name="Authentication",
+ *        type="apiKey"
  * )
  */
 
@@ -28,13 +34,20 @@
 
 
   /**
-   * @OA\Get(path="/users/{id}", tags={"users"},
+   * @OA\Get(path="/users/{id}", tags={"users"}, security={{"ApiKeyAuth":{}}},
    *     @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example=1, description="ID of the user"),
    *     @OA\Response(response="200", description="Fetch individual account")
    * )
    */
   Flight::route('GET /users/@id', function($id){
-      flight::json(Flight::userservice()->get_by_id($id));
+      $headers = getallheaders();
+      $token = @$headers["Authentication"];
+      try{
+        $decoded = (array)\Firebase\JWT\JWT::decode($token, "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.", array('HS256'));
+        flight::json(Flight::userservice()->get_by_id($id));
+      }catch (\Exception $e) {
+        Flight::json(["message" => $e->getMessage()], 401);die;
+      }
   });
 
 

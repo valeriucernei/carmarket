@@ -3,8 +3,6 @@ require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 require_once dirname(__FILE__)."/../clients/SMTPClient.class.php";
 
-use \Firebase\JWT\JWT;
-
 class UserService extends BaseService{
 
   private $smtpClient;
