@@ -12,5 +12,7 @@ class Config {
   const SMTP_PORT = "587";
   const SMTP_USER = "car.market.noreply@gmail.com";
   CONST SMTP_PASSWORD = "Asd-1234";
+
+  CONST JWT_SECRET = "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.";
 }
 ?>

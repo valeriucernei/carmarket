@@ -1,29 +1,29 @@
 <?php
-  /*FILTER BASED MIDDLEWARE*//*
-  Flight::before('start', function($params, $output){
-    if(Flight::request()->url =='/swagger') return TRUE;
-    //if(str_starts_with(Flight::request()->url, '/users/')) return TRUE;
-    $headers = getallheaders();
-    $token = @$headers["Authentication"];
-    try{
-      $decoded = (array)\Firebase\JWT\JWT::decode($token, "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.", ['HS256']);
-      Flight::set('user', $decoded);
-      return TRUE;
-    }catch (\Exception $e) {
-      Flight::json(["message" => $e->getMessage()], 401);
-      die;
-    }
-  });*/
-
     /*ROUTE BASED MIDDLEWARE*/
-    Flight::route('*', function(){
-      if(Flight::request()->url =='/swagger') return TRUE;
-      if(str_starts_with(Flight::request()->url, '/users/login')) return TRUE;
-      $headers = getallheaders();
-      $token = @$headers["Authentication"];
+    Flight::route('/user/*', function(){
       try{
-        $decoded = (array)\Firebase\JWT\JWT::decode($token, "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.", array('HS256'));
-        Flight::set('user', $decoded);
+        $user = (array)\Firebase\JWT\JWT::decode($token, Config::JWT_SECRET, array('HS256'));
+        if (Flight::request()->method != "GET" && $user["adm"] == "-1"){
+          throw new Exception("Read only user can't change anything", 403);
+        }
+        Flight::set('user', $user);
+        return TRUE;
+      }catch (\Exception $e) {
+        Flight::json(["message" => $e->getMessage()], 401);
+        die;
+      }
+    });
+
+
+
+
+    Flight::route('/admin/*', function(){
+      try{
+        $user = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
+        if ($user['adm'] != "1"){
+          throw new Exception("Admin access required", 403);
+        }
+        Flight::set('user', $user);
         return TRUE;
       }catch (\Exception $e) {
         Flight::json(["message" => $e->getMessage()], 401);
