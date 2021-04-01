@@ -2,7 +2,7 @@
     /*ROUTE BASED MIDDLEWARE*/
     Flight::route('/user/*', function(){
       try{
-        $user = (array)\Firebase\JWT\JWT::decode($token, Config::JWT_SECRET, array('HS256'));
+        $user = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
         if (Flight::request()->method != "GET" && $user["adm"] == "-1"){
           throw new Exception("Read only user can't change anything", 403);
         }

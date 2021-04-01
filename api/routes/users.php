@@ -15,7 +15,7 @@
  */
 
  /**
-  * @OA\Get(path="/accounts", tags={"users"}, security={{"ApiKeyAuth":{}}},
+  * @OA\Get(path="/admin/accounts", tags={"x-admin", "users"}, security={{"ApiKeyAuth":{}}},
   *     @OA\Parameter(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
   *     @OA\Parameter(type="integer", in="query", name="limit", default=15, description="Limit the number of results"),
   *     @OA\Parameter(type="string", in="query", name="search", description="Search string for accounts (Case insensitive search)"),
@@ -23,7 +23,7 @@
   *     @OA\Response(response="200", description="List accounts from database")
   * )
   */
-  Flight::route('GET /accounts', function(){
+  Flight::route('GET /admin/accounts', function(){
       $offset = Flight::query('offset', 0);
       $limit = Flight::query('limit', 10);
       $search = Flight::query('search');
@@ -34,20 +34,19 @@
 
 
   /**
-   * @OA\Get(path="/account/{id}", tags={"users"}, security={{"ApiKeyAuth":{}}},
+   * @OA\Get(path="/admin/account/{id}", tags={"x-admin", "users"}, security={{"ApiKeyAuth":{}}},
    *     @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example=1, description="ID of the user"),
    *     @OA\Response(response="200", description="Fetch individual account")
    * )
    */
-  Flight::route('GET /account/@id', function($id){
-    if(Flight::get('user')['id'] != $id) throw new Exception("This account is not for you.", 401);
+  Flight::route('GET /admin/account/@id', function($id){
     flight::json(Flight::userservice()->get_by_id($id));
   });
 
 
 
   /**
-   * @OA\Post(path="/register", tags={"users"}, security={{"ApiKeyAuth":{}}},
+   * @OA\Post(path="/register", tags={"login"},
    *   @OA\RequestBody(description="Basic user account info", required=true,
    *       @OA\MediaType(mediaType="application/json",
    *    			@OA\Schema(
@@ -72,7 +71,7 @@
 
 
   /**
-   * @OA\Get(path="/confirm/{token}", tags={"users"},
+   * @OA\Get(path="/confirm/{token}", tags={"login"},
    *     @OA\Parameter(type="string", in="path", name="token", default=123, description="Temporary token for activating account"),
    *     @OA\Response(response="200", description="Message upon successfull activation.")
    * )
@@ -85,7 +84,7 @@
 
 
   /**
-   * @OA\Put(path="/account/{id}", tags={"users"},
+   * @OA\Put(path="/admin/account/{id}", tags={"x-admin", "users"}, security={{"ApiKeyAuth": {}}},
    *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
    *   @OA\RequestBody(description="Basic account info that is going to be updated", required=true,
    *       @OA\MediaType(mediaType="application/json",
@@ -102,7 +101,7 @@
    *     @OA\Response(response="200", description="Update account based on id")
    * )
    */
-  Flight::route('PUT /account/@id', function($id){
+  Flight::route('PUT /admin/account/@id', function($id){
       $data = Flight::request()->data->getData();
       Flight::json(Flight::userservice()->update($id, $data));
   });
@@ -110,7 +109,7 @@
 
 
   /**
-   * @OA\Post(path="/login", tags={"users"},
+   * @OA\Post(path="/login", tags={"login"},
    *   @OA\RequestBody(description="User authorization route", required=true,
    *       @OA\MediaType(mediaType="application/json",
    *    			@OA\Schema(
@@ -130,7 +129,7 @@
 
 
   /**
-   * @OA\Post(path="/forgot", tags={"users"},
+   * @OA\Post(path="/forgot", tags={"login"},
    *   @OA\RequestBody(description="User forgot password route", required=true,
    *       @OA\MediaType(mediaType="application/json",
    *    			@OA\Schema(
@@ -150,7 +149,7 @@
 
 
   /**
-   * @OA\Post(path="/reset", tags={"users"},
+   * @OA\Post(path="/reset", tags={"login"},
    *   @OA\RequestBody(description="User forgot password route", required=true,
    *       @OA\MediaType(mediaType="application/json",
    *    			@OA\Schema(
@@ -166,6 +165,17 @@
       $data = Flight::request()->data->getData();
       Flight::userservice()->reset($data);
       Flight::json(["message" => "Password has been changed."]);
+  });
+
+
+
+  /**
+   * @OA\Get(path="/user/account", tags={"x-user", "user"}, security={{"ApiKeyAuth": {}}},
+   *     @OA\Response(response="200", description="Fetch user account")
+   * )
+   */
+  Flight::route('GET /user/account', function(){
+    Flight::json(Flight::userservice()->get_by_id(Flight::get('user')['id']));
   });
 
 ?>
