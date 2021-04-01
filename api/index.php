@@ -46,6 +46,7 @@
   Flight::register("carsservice","CarsService");
 
   /* include all routes */
+  require_once dirname(__FILE__)."/routes/middleware.php";
   require_once dirname(__FILE__)."/routes/users.php";
   require_once dirname(__FILE__)."/routes/ads.php";
   require_once dirname(__FILE__)."/routes/cars.php";

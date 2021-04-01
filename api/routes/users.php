@@ -15,7 +15,7 @@
  */
 
  /**
-  * @OA\Get(path="/users", tags={"users"},
+  * @OA\Get(path="/users", tags={"users"}, security={{"ApiKeyAuth":{}}},
   *     @OA\Parameter(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
   *     @OA\Parameter(type="integer", in="query", name="limit", default=15, description="Limit the number of results"),
   *     @OA\Parameter(type="string", in="query", name="search", description="Search string for accounts (Case insensitive search)"),
@@ -40,20 +40,14 @@
    * )
    */
   Flight::route('GET /users/@id', function($id){
-      $headers = getallheaders();
-      $token = @$headers["Authentication"];
-      try{
-        $decoded = (array)\Firebase\JWT\JWT::decode($token, "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.", array('HS256'));
-        flight::json(Flight::userservice()->get_by_id($id));
-      }catch (\Exception $e) {
-        Flight::json(["message" => $e->getMessage()], 401);die;
-      }
+    if(Flight::get('user')['id'] != $id) throw new Exception("This account is not for you.", 401);
+    flight::json(Flight::userservice()->get_by_id($id));
   });
 
 
 
   /**
-   * @OA\Post(path="/users/register", tags={"users"},
+   * @OA\Post(path="/users/register", tags={"users"}, security={{"ApiKeyAuth":{}}},
    *   @OA\RequestBody(description="Basic user account info", required=true,
    *       @OA\MediaType(mediaType="application/json",
    *    			@OA\Schema(
