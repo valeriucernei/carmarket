@@ -56,11 +56,10 @@
 
 
   /**
-  * @OA\Post(path="/ads/add", tags={"advertisements"},
+  * @OA\Post(path="/user/ads/add", tags={"x-user", "advertisements"}, security={{"ApiKeyAuth": {}}},
   *   @OA\RequestBody(description="Basic Adv Info", required=true,
   *       @OA\MediaType(mediaType="application/json",
   *    			@OA\Schema(
-  *    				 @OA\Property(property="user_id", required="true", type="integer", example="1",	description="User's username" ),
   *    				 @OA\Property(property="title", required="true", type="string", example="Advertisement Title",	description="Advertisement's Title" ),
   *    				 @OA\Property(property="description", type="string", example="Best car EVER!",	description="Advertisement's Description" ),
   *    				 @OA\Property(property="model", required="true", type="integer", example="7",	description="Car Model Number from Data Base" ),
@@ -77,15 +76,47 @@
   *  @OA\Response(response="200", description="Ad that has been added into database with ID assigned.")
   * )
   */
-  Flight::route('POST /ads/add', function(){
+  Flight::route('POST /user/ads/add', function(){
     $data = Flight::request()->data->getData();
+    $data['user_id'] = Flight::get('user')['id'];
     Flight::json(Flight::adsservice()->add_ad($data));
   });
 
 
 
   /**
-   * @OA\Put(path="/ads/{id}", tags={"advertisements"},
+   * @OA\Put(path="/user/ads/{id}", tags={"x-user", "advertisements"}, security={{"ApiKeyAuth": {}}},
+   *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+   *   @OA\RequestBody(description="Advertise info updater.", required=true,
+   *       @OA\MediaType(mediaType="application/json",
+   *    			@OA\Schema(
+   *    				 @OA\Property(property="title", required="true", type="string", example="Lada Mustang",	description="Advertisement's title" ),
+   *    				 @OA\Property(property="description", type="string", example="Best car Ever!",	description="Advertisement's description" ),
+   *    				 @OA\Property(property="model", type="string", example="11",	description="Car Model number" ),
+   *    				 @OA\Property(property="car_body", required="true", type="integer", example="2",	description="Car Body Number" ),
+   *    				 @OA\Property(property="fabricated", required="true", type="integer", example="2019",	description="Car Year of fabrication" ),
+   *    				 @OA\Property(property="km", type="integer", example="125000",	description="Car's mileage" ),
+   *    				 @OA\Property(property="price", type="integer", example="10000",	description="Car's price" ),
+   *    				 @OA\Property(property="gearbox", type="integer", example="1",	description="Car's gearbox type number" ),
+   *    				 @OA\Property(property="fuel_type", type="integer", example="1",	description="Car's fuel type number" ),
+   *    				 @OA\Property(property="motor_size", type="integer", example="2400",	description="Motor size in cm" )
+   *          )
+   *       )
+   *     ),
+   *     @OA\Response(response="200", description="Update account based on id")
+   * )
+   */
+  Flight::route('PUT /user/ads/@id', function($id){
+      if(Flight::adsservice()->get_ad_by_id($id)['user_id'] != Flight::get('user')['id'])
+        throw new Exception("You don't have access to this ad.", 403);
+      $data = Flight::request()->data->getData();
+      Flight::json(Flight::adsservice()->update_ad($id, $data));
+  });
+
+
+
+  /**
+   * @OA\Put(path="/ads/{id}", tags={"x-admin","advertisements"},
    *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
    *   @OA\RequestBody(description="Advertise info updater.", required=true,
    *       @OA\MediaType(mediaType="application/json",
@@ -110,5 +141,4 @@
       $data = Flight::request()->data->getData();
       Flight::json(Flight::adsservice()->update_ad($id, $data));
   });
-
 ?>

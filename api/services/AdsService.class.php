@@ -31,7 +31,9 @@ class AdsService extends BaseService{
 
 
   public function get_ad_by_id($id){
-    return $this->dao->get_ad_by_id($id);
+    $result = $this->dao->get_ad_by_id($id);
+    if(!$result) throw new Exception("This ad doesn't exist.", 404);
+    else return $this->dao->get_ad_by_id($id);
   }
 
 
@@ -70,13 +72,13 @@ class AdsService extends BaseService{
 
 
   public function update_ad($id, $data){
+
     if(!isset($data['title'])) throw new Exception("Title field is required.");
     if(!isset($data['car_body'])) throw new Exception("Car Body field is required.");
     if(!isset($data['fabricated'])) throw new Exception("Year field is required.");
     try{
         $this->dao->beginTransaction();
-        $ad = parent::update($id, [
-            "user_id" => $data['user_id'],
+        $ad = $this->dao->update($id, [
             "title" => $data['title'],
             "description" => $data['description'],
             "model" => $data['model']
