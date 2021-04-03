@@ -1,5 +1,6 @@
 <?php
 /*ROUTE BASED MIDDLEWARE*/
+/*middleware for regular users*/
 Flight::route('/user/*', function(){
     try{
         $user = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
@@ -15,6 +16,7 @@ Flight::route('/user/*', function(){
 
 
 
+/*middleware for admin users*/
 Flight::route('/admin/*', function(){
     try{
         $user = (array)\Firebase\JWT\JWT::decode(Flight::header("Authentication"), Config::JWT_SECRET, ["HS256"]);
