@@ -95,11 +95,13 @@ class UserService extends BaseService{
         if(!isset($db_user['id']))
             throw new Exception("User doesn't exist.", 400);
         if($db_user['status'] != 'ACTIVE')
-            throw new Exception("Your account has not been yet activated, or is blocked.", 400);
+            throw new Exception("Your account has not been yet activated,
+                                  or is blocked.", 400);
         if(md5($user['pass']) != $db_user['pass'])
             throw new Exception("You have entered a wrong password.", 400);
 
         $jwt = \Firebase\JWT\JWT::encode([
+            "exp" => (time() + Config::JWT_TOKEN_TIME),
             "id" => $db_user['id'],
             "usr" => $db_user['username'],
             "adm" => $db_user['admin']], Config::JWT_SECRET);
