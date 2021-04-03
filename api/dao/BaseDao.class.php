@@ -91,6 +91,20 @@ class BaseDao {
 
 
     /**
+     * Method to delete object from the table.
+     * @param  [type] $table  [description]
+     * @param  [type] $entity [description]
+     * @return [type]         [description]
+     */
+    protected function remove($table, $id){
+        $stmt = $this->connection->prepare("DELETE FROM ${table} WHERE id = :id");
+        $result = $stmt->execute(["id" => $id]);
+        print_r($result); die;
+    }
+
+
+
+    /**
    * Update query in database
    * @param  string $table     Table name
    * @param   $id        Search index (user ID, email...)
@@ -150,6 +164,17 @@ class BaseDao {
      */
     public function add($entity){
         return $this->insert($this->table, $entity);
+    }
+
+
+
+    /**
+     * Delete a row from data base
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function delete($id){
+        return $this->remove($this->table, $id);
     }
 
 

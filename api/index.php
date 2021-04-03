@@ -7,6 +7,7 @@ require_once dirname(__FILE__)."/../vendor/autoload.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";
 require_once dirname(__FILE__)."/services/AdsService.class.php";
 require_once dirname(__FILE__)."/services/CarsService.class.php";
+require_once dirname(__FILE__)."/services/PhotosService.class.php";
 
 Flight::set('flight.log_errors', True);
 
@@ -57,6 +58,7 @@ Flight::route('GET /', function(){
 Flight::register("userservice","UserService");
 Flight::register("adsservice","AdsService");
 Flight::register("carsservice","CarsService");
+Flight::register("photosservice","PhotosService");
 
 
 /* include all routes */
@@ -64,5 +66,6 @@ require_once dirname(__FILE__)."/routes/middleware.php";
 require_once dirname(__FILE__)."/routes/users.php";
 require_once dirname(__FILE__)."/routes/ads.php";
 require_once dirname(__FILE__)."/routes/cars.php";
+require_once dirname(__FILE__)."/routes/photos.php";
 
 Flight::start();

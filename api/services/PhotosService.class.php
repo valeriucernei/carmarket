@@ -10,11 +10,21 @@ class PhotosService extends BaseService{
 
 
 
-    public function get_photo($id){
-
+    public function get_photo_id($token){
+         $result = $this->dao->get_photo_id($token);
+         return $result;
     }
 
 
     public function get_ads_photos($id){
-      
+        $result = $this->dao->get_ads_photos($id);
+        return $result;
     }
+
+
+
+    public function delete_photo($id){
+        return parent::delete($id);
+    }
+
+}

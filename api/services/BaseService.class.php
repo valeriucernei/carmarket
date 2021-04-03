@@ -15,6 +15,12 @@ class BaseService{
 
 
 
+    public function delete($token){
+        return $this->dao->delete($token);
+    }
+
+
+
     public function update($id, $data){
         $this->dao->update($id, $data);
         return $this->dao->get_by_id($id);

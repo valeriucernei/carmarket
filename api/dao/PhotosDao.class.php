@@ -9,16 +9,16 @@ class PhotosDao extends BaseDao{
 
 
 
-    public function get_photo($id){
-        return $this->query_unique("SELECT id FROM atributes
-                                    WHERE ad_id = :id", ["id" => $id]);
+    public function get_photo_id($token){
+        return $this->query_unique("SELECT id FROM photos WHERE
+                                    name = :token", ["token" => $token]);
     }
 
 
 
     public function get_ads_photos($id){
         return $this->query("SELECT * FROM photos WHERE ad_id = :id",
-                            ["id"] => $id);
+                            ["id" => $id]);
     }
 
 
