@@ -44,8 +44,8 @@ Flight::route('POST /register', function(){
 *   @OA\RequestBody(description="User authorization route", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
-*    				 @OA\Property(property="login", required="true", type="string", example="Test_Username",	description="User's username or email" ),
-*    				 @OA\Property(property="pass", required="true", type="string", example="asd12345",	description="User's password" )
+*    				 @OA\Property(property="login", required="true", type="string", example="valera",	description="User's username or email" ),
+*    				 @OA\Property(property="pass", required="true", type="string", example="123321",	description="User's password" )
 *          )
 *       )
 *     ),
@@ -53,8 +53,7 @@ Flight::route('POST /register', function(){
 * )
 */
 Flight::route('POST /login', function(){
-    $data = Flight::request()->data->getData();
-    Flight::json(Flight::userservice()->login($data));
+    Flight::json(Flight::jwt(Flight::userservice()->login(Flight::request()->data->getData())));
 });
 
 
@@ -93,9 +92,7 @@ Flight::route('POST /forgot', function(){
 * )
 */
 Flight::route('POST /reset', function(){
-    $data = Flight::request()->data->getData();
-    Flight::userservice()->reset($data);
-    Flight::json(["message" => "Password has been changed."]);
+    Flight::json(Flight::jwt(Flight::userservice()->reset(Flight::request()->data->getData())));
 });
 
 
@@ -107,8 +104,7 @@ Flight::route('POST /reset', function(){
 * )
 */
 Flight::route('GET /confirm/@token', function($token){
-    Flight::userservice()->confirm($token);
-    Flight::json(["message" => "Your account has been activated."]);
+    Flight::json(Flight::jwt(Flight::userservice()->confirm($token)));
 });
 
 

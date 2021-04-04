@@ -13,7 +13,7 @@ Flight::set('flight.log_errors', True);
 
 
 
-/* error handling for our API */
+/* error handling for our API *
 Flight::map('error', function(Exception $ex){
     Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->GetCode() : 500);
 });
@@ -34,6 +34,18 @@ Flight::map('query', function($name, $default_value = NULL){
 Flight::map('header', function($name){
     $headers = getallheaders();
     return @$headers[$name];
+});
+
+
+
+/* utility function for getting jwt token */
+Flight::map('jwt', function($user){
+  $jwt = \Firebase\JWT\JWT::encode([
+      "exp" => (time() + Config::JWT_TOKEN_TIME),
+      "id" => $user['id'],
+      "usr" => $user['username'],
+      "adm" => $user['admin']], Config::JWT_SECRET);
+  return ['token' => $jwt];
 });
 
 

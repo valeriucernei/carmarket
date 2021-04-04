@@ -45,9 +45,9 @@ Flight::route('GET /ads', function(){
 
 
 /**
-* @OA\Get(path="/ads/{id}", tags={"advertisements"},  description="Fetches a single AD by it's ID",
-*     @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example=1, description="ID of the ad"),
-*     @OA\Response(response="200", description="Fetch individual advertisement")
+* @OA\Get(path="/ads/{id}", tags={"advertisements"},  description="Query to get ad info by ID",
+*     @OA\Parameter(type="integer", in="path", name="id", default="1", description="Ad ID"),
+*     @OA\Response(response="200", description="Fetched ad info")
 * )
 */
 Flight::route('GET /ads/@id', function($id){

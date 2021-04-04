@@ -82,6 +82,8 @@ class UserService extends BaseService{
         ]);
 
         $this->smtpClient->send_confirmed_email($user);
+
+        return $user;
     }
 
 
@@ -100,13 +102,7 @@ class UserService extends BaseService{
         if(md5($user['pass']) != $db_user['pass'])
             throw new Exception("You have entered a wrong password.", 400);
 
-        $jwt = \Firebase\JWT\JWT::encode([
-            "exp" => (time() + Config::JWT_TOKEN_TIME),
-            "id" => $db_user['id'],
-            "usr" => $db_user['username'],
-            "adm" => $db_user['admin']], Config::JWT_SECRET);
-
-        return ["token" => $jwt];
+        return $db_user;
     }
 
 
@@ -142,6 +138,7 @@ class UserService extends BaseService{
             "pass" => MD5($user['pass']),
             "token" => null
         ]);
+        return $db_user;
     }
 
 }
