@@ -14,7 +14,7 @@ class AdsDao extends BaseDao{
                             $fabricated_max, $km_min, $km_max, $price_min, $price_max,
                             $gearbox, $fuel_type, $motor_size_min, $motor_size_max){
       list($order_column, $order_direction) = self::parse_order($order);
-      $query = "SELECT * FROM ads, atributes WHERE atributes.ad_id = ads.id";
+      $query = "SELECT * FROM ads_list WHERE 1 = 1";
       if($car_body > 0) $query .= " AND car_body = ${car_body}";
       $query .= " AND fabricated >= :fabricated_min";
       $query .= " AND fabricated <= :fabricated_max";
@@ -42,11 +42,8 @@ class AdsDao extends BaseDao{
 
 
     public function get_ad_by_id($id){
-        return $this->query_unique("SELECT ads.*, car_body, fabricated, km,
-                                    price, gearbox, fuel_type, motor_size
-                                    FROM ads, atributes
-                                    WHERE atributes.ad_id = ads.id
-                                    AND ads.id = :id", ["id" => $id]);
+        return $this->query_unique("SELECT * FROM ads_list
+                                    WHERE id = :id", ["id" => $id]);
     }
 
 
@@ -58,8 +55,8 @@ class AdsDao extends BaseDao{
 
         list($order_column, $order_direction) = parent::parse_order($order);
 
-        $query = "SELECT * FROM ads, atributes WHERE atributes.ad_id = ads.id
-                  AND LOWER(title) LIKE CONCAT('%', :title, '%')";
+        $query = "SELECT * FROM ads_list
+                  WHERE LOWER(title) LIKE CONCAT('%', :title, '%')";
 
         if($car_body > 0) $query .= " AND car_body = ${car_body}";
         $query .= " AND fabricated >= :fabricated_min";

@@ -11,8 +11,14 @@ Flight::route('GET /photos/@token', function($token){
     Flight::json(Flight::photosservice()->get_photo_id($token));
 });
 
-/*
 
-Flight::rout('GET /photos/ad/@id', function($id){
-    Flight::json(Flight::photosservice()->get_ads_photos($ad));
-});*/
+
+/**
+* @OA\Get(path="/photos/ad/{id}", tags={"photos"},  description="Query to get all photos of an ad",
+*     @OA\Parameter(type="string", in="path", name="id", default="1", description="Ad ID"),
+*     @OA\Response(response="200", description="Photod ID")
+* )
+*/
+Flight::route('GET /photos/ad/@id', function($id){
+    Flight::json(Flight::photosservice()->get_ads_photos($id));
+});

@@ -12,6 +12,7 @@ class PhotosService extends BaseService{
 
     public function get_photo_id($token){
          $result = $this->dao->get_photo_id($token);
+         if(!$result) throw new Exception("No image found with this token.", 404);
          return $result;
     }
 
