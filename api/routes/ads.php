@@ -7,6 +7,7 @@
 *     @OA\Parameter(type="integer", in="query", name="limit", default=15, description="Limit the number of results"),
 *     @OA\Parameter(type="string", in="query", name="search", description="Search string for accounts (Case insensitive search)"),
 *     @OA\Parameter(type="string", in="query", name="order", default="-ads.id", description="Sorting for return elements -column_name ascending, or +column_name descending"),
+*     @OA\Parameter(type="integer", in="query", name="user_id", default=null, description="ID of the user who created the ad"),
 *     @OA\Parameter(type="integer", in="query", name="car_body", default=null, description="Car Body number"),
 *     @OA\Parameter(type="integer", in="query", name="fabricated_min", default=1970, description="Minimal year of fabrication"),
 *     @OA\Parameter(type="integer", in="query", name="fabricated_max", default=2021, description="Maximum year of fabrication"),
@@ -26,6 +27,7 @@ Flight::route('GET /ads', function(){
     $limit = Flight::query('limit', 10);
     $search = Flight::query('search');
     $order = Flight::query('order', "-ads.id");
+    $user_id = Flight::query('user_id');
     $car_body = Flight::query('car_body');
     $fabricated_min = Flight::query('fabricated_min', 1970);
     $fabricated_max = Flight::query('fabricated_max', date("Y"));
@@ -38,8 +40,8 @@ Flight::route('GET /ads', function(){
     $motor_size_min = Flight::query('motor_size_min',0);
     $motor_size_max = Flight::query('motor_size_max',10000);
     Flight::json(Flight::adsservice()->get_ads($search, $offset, $limit, $order,
-    $car_body, $fabricated_min, $fabricated_max, $km_min, $km_max, $price_min,
-    $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max));
+    $user_id, $car_body, $fabricated_min, $fabricated_max, $km_min, $km_max,
+    $price_min, $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max));
 });
 
 

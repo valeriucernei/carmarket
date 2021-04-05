@@ -14,16 +14,16 @@ class AdsService extends BaseService{
 
 
 
-    public function get_ads($search, $offset, $limit, $order, $car_body, $fabricated_min,
+    public function get_ads($search, $offset, $limit, $order, $user_id, $car_body, $fabricated_min,
                             $fabricated_max, $km_min, $km_max, $price_min, $price_max,
                             $gearbox, $fuel_type, $motor_size_min, $motor_size_max){
         if($search){
-              return $this->dao->get_ads($search, $offset, $limit, $order, $car_body,
+              return $this->dao->get_ads($search, $offset, $limit, $order, $user_id, $car_body,
                                         $fabricated_min, $fabricated_max, $km_min,
                                         $km_max, $price_min, $price_max, $gearbox,
                                         $fuel_type, $motor_size_min, $motor_size_max);
           }else{
-              return $this->dao->get_all_ads($offset, $limit, $order, $car_body,
+              return $this->dao->get_all_ads($offset, $limit, $order, $user_id, $car_body,
                                             $fabricated_min, $fabricated_max, $km_min,
                                             $km_max, $price_min, $price_max, $gearbox,
                                             $fuel_type, $motor_size_min, $motor_size_max);
@@ -93,7 +93,8 @@ class AdsService extends BaseService{
             $ad = $this->dao->update($id, [
                 "title" => $data['title'],
                 "description" => $data['description'],
-                "model" => $data['model']]);
+                "model" => $data['model'],
+                "updated" => date(Config::DATA_FORMAT)]);
 
             $atr_id = $this->atributesDao->get_atributes_id($id);
 
