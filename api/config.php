@@ -1,20 +1,5 @@
 <?php
-class Config {/*
-  const DATA_FORMAT = "Y-m-d H:i:s";
-
-  const DB_HOST = "localhost";
-  const DB_USERNAME = "carmarket";
-  const DB_PASSWORD = "123321"; //F.v4<hHkSY?#]Nu)G#q@R%54(+cZ3:*d
-  const DB_SCHEME = "carmarket";
-  const DB_PORT = "3307";
-
-  const SMTP_HOST = "smtp.gmail.com";
-  const SMTP_PORT = "587";
-  const SMTP_USER = "car.market.noreply@gmail.com";
-  CONST SMTP_PASSWORD = "Asd-1234";
-
-  CONST JWT_SECRET = "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.";
-  CONST JWT_TOKEN_TIME = 604800;*/
+class Config {
     const DATA_FORMAT = "Y-m-d H:i:s";
 
     public static function DB_HOST(){
@@ -52,4 +37,3 @@ class Config {/*
         return isset($_ENV[$name]) && trim($_ENV[$name]) != '' ? $_ENV[$name] : $default;
     }
 }
-?>
