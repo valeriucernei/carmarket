@@ -15,11 +15,11 @@ class BaseDao {
     public function __construct($table){
         $this->table = $table;
         try {
-            $this->connection = new PDO("mysql:host=".Config::DB_HOST.
-                                        ";dbname=".Config::DB_SCHEME.
-                                        ";port=".Config::DB_PORT,
-                                        Config::DB_USERNAME,
-                                        Config::DB_PASSWORD);
+            $this->connection = new PDO("mysql:host=".Config::DB_HOST().
+                                        ";dbname=".Config::DB_SCHEME().
+                                        ";port=".Config::DB_PORT(),
+                                        Config::DB_USERNAME(),
+                                        Config::DB_PASSWORD());
 
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
