@@ -36,37 +36,10 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body style="border-style: none;font-family: Poppins, sans-serif;background: rgb(247, 247, 247);">
+<body style="font-family: Poppins, sans-serif;">
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="padding: 8px;border-bottom-style: none;">
-        <div class="container"><a class="navbar-brand logo" href="#" style="font-family: Poppins, sans-serif;font-size: 32px;">carmarket</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1"><span class="ms-auto navbar-text" style="min-width: 200px;"><button class="btn btn-light btn-lg" type="button" style="font-size: 16px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-person-circle" style="font-size: 22px;">
-                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"></path>
-                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
-                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path>
-                        </svg>&nbsp;Valeriu Cernei</button> <button class="btn btn-light btn-lg" type="button" style="font-size: 16px;margin-right: 16px;" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button><button class="btn btn-warning btn-lg" type="button" style="font-size: 16px;">Sell car</button></span></div>
-            <div class="modal fade" role="dialog" tabindex="-1" id="loginModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title"><strong>Login Form</strong></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3"><label class="form-label" for="loginInput">Username or Email Address</label><input class="form-control" type="text" id="loginInput" placeholder="username or email address" required=""></div>
-                                <div><label class="form-label" for="passwordInput">Password</label><input class="form-control" type="password" id="passwordInput" placeholder="******" required=""></div>
-                                <div class="alert alert-danger mt-3" role="alert"><span>No user found with such login and password.</span></div><button class="btn btn-link btn-sm mb-3" type="button" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#forgotModal">Forgot password?</button>
-                                <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remeber me</label></div>
-                                <div class="container" style="padding: 0;">
-                                    <div class="row">
-                                        <div class="col-6 col-md-6"><button class="btn btn-primary btn-lg" type="submit">Login</button></div>
-                                        <div class="col-6 col-md-6 text-end"><button class="btn btn-secondary btn-lg" type="button" style="margin-left: 16px;">Sign up</button></div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="container"><a class="navbar-brand logo" href="#" style="font-family: Poppins, sans-serif;font-size: 24px;">carmarket</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse text-end" id="navcol-1"><span class="ms-auto navbar-text actions" style="min-width: 194px;padding-left: 8px;"> <button class="btn btn-light btn-lg" type="button" style="font-size: 16px;margin-right: 16px;" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button><button class="btn btn-warning btn-lg" type="button" style="font-size: 16px;">Sell car</button></span></div>
         </div>
     </nav>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button d-none d-md-block" id="submenu">
@@ -87,150 +60,28 @@
             </div>
         </div>
     </nav>
-    <div class="container" style="margin-top: 18px;">
-        <div class="row text-center justify-content-center">
-            <div class="col-md-12 col-lg-12 col-xl-11 col-xxl-3">
-                <div class="card sticky-md-top">
-                    <h4 class="text-center" style="margin: 6px 0 0;"><strong>Search</strong></h4>
-                    <div class="row" style="margin: auto; width:100%;">
-                        <div class="col-6 col-md-6 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Brand</h6><select class="js-brand">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-md-6 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Model</h6><select class="js-model" disabled="">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Year of production</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-right: 8px;"><select id="year-min" class="js-year-min">
-                                        <option value=""></option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 8px;"><select id="year-max" class="js-year-max">
-                                        <option value=""></option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Mileage</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-km-min">
-                                        <option value=""></option>
-                                        <option value="5000">5 000 km</option>
-                                        <option value="10000">10 000 km</option>
-                                        <option value="20000">20 000 km</option>
-                                        <option value="50000">50 000 km</option>
-                                        <option value="100000">100 000 km</option>
-                                        <option value="125000">125 000 km</option>
-                                        <option value="150000">150 000 km</option>
-                                        <option value="200000">200 000 km</option>
-                                        <option value="250000">250 000 km</option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-km-max">
-                                        <option value=""></option>
-                                        <option value="5000">5 000 km</option>
-                                        <option value="10000">10 000 km</option>
-                                        <option value="20000">20 000 km</option>
-                                        <option value="50000">50 000 km</option>
-                                        <option value="100000">100 000 km</option>
-                                        <option value="125000">125 000 km</option>
-                                        <option value="150000">150 000 km</option>
-                                        <option value="200000">200 000 km</option>
-                                        <option value="250000">250 000 km</option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Motor size</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select id="motor-min" class="js-motor-min">
-                                        <option value=""></option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select id="motor-max" class="js-motor-max">
-                                        <option value=""></option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Gearbox</h6><select class="js-gear">
-                                <option value=""></option>
-                                <option value="1">Manual</option>
-                                <option value="2">Automatic</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Fuel</h6><select class="js-fuel">
-                                <option value=""></option>
-                                <option value="1">Gasoline</option>
-                                <option value="2">Diesel</option>
-                                <option value="3">Gas</option>
-                                <option value="4">Hybrid</option>
-                                <option value="5">Electric</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 col-lg-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Price</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-price-min">
-                                        <option value=""></option>
-                                        <option value="1000">1 000 €</option>
-                                        <option value="2000">2 000 €</option>
-                                        <option value="5000">5 000 €</option>
-                                        <option value="10000">10 000 €</option>
-                                        <option value="20000">20 000 €</option>
-                                        <option value="30000">30 000 €</option>
-                                        <option value="40000">40 000 €</option>
-                                        <option value="50000">50 000 €</option>
-                                        <option value="60000">60 000 €</option>
-                                        <option value="70000">70 000 €</option>
-                                        <option value="80000">80 000 €</option>
-                                        <option value="90000">90 000 €</option>
-                                        <option value="100000">100 000 €</option>
-                                        <option value="200000">200 000 €</option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-price-max">
-                                        <option value=""></option>
-                                        <option value="1000">1 000 €</option>
-                                        <option value="2000">2 000 €</option>
-                                        <option value="5000">5 000 €</option>
-                                        <option value="10000">10 000 €</option>
-                                        <option value="20000">20 000 €</option>
-                                        <option value="30000">30 000 €</option>
-                                        <option value="40000">40 000 €</option>
-                                        <option value="50000">50 000 €</option>
-                                        <option value="60000">60 000 €</option>
-                                        <option value="70000">70 000 €</option>
-                                        <option value="80000">80 000 €</option>
-                                        <option value="90000">90 000 €</option>
-                                        <option value="100000">100 000 €</option>
-                                        <option value="200000">200 000 €</option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12" style="text-align: center;padding: 0 8px;"><button class="btn btn-danger" type="button" style="margin: 16px 0 8px;width: 100%;">Search</button></div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4 col-lg-3 col-xl-3">
+                <div class="card" id="profile-box">
+                    <div class="card-body">
+                        <div class="photo mt-3"><i class="fa fa-user-circle-o"></i></div>
+                        <h5 class="card-title"><strong>Fname Lname</strong></h5>
+                        <p class="admin">Admin Lvl. 1</p>
+                        <ul class="list-unstyled mt-3">
+                            <li active=""><button class="btn active" type="button">Personal information</button></li>
+                            <li active=""><button class="btn" type="button">Your publications</button></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-12 col-xl-11 col-xxl-9">
+            <div class="col-md-8 col-lg-9 col-xl-9">
+                <div class="card" id="publications">
+                    <div class="card-body">
+                        <h4 class="card-title mb-1"><strong>Your publications</strong></h4>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-xxl-12 text-end form-inline mb-3"><label class="form-label d-inline-block" for="sort-select">Sort by&nbsp;</label><select class="js-sort">
-                            <option value="-ads.id" selected="">Default</option>
-                            <option value="-ads.updated">Date ↑</option>
-                            <option value="+ads.updated">Date ↓</option>
-                            <option value="-ads.price">Price ↑</option>
-                            <option value="+ads.price">Price ↓</option>
-                        </select></div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
                             <div class="card-body">
                                 <h6>Volkswagen Sharan&nbsp;</h6>
@@ -546,9 +397,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div style="text-align: center;">
-        <div class="mypagination"><a href="#">«</a><a class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">»</a></div>
     </div>
     <footer class="footer-basic" style="border-top-style: solid;border-top-color: rgb(219,55,39);">
         <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
