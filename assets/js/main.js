@@ -28,10 +28,13 @@ $(document).ready(function() {
 
 function getUrl() {
     var getUrl = window.location;
-    return getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    if(baseUrl.slice(-1) == "/") baseUrl = baseUrl.slice(-1);
+    return baseUrl;
 }
 
 function doLogin() {
+    alert(getUrl());
     $("#loginButton").addClass('disabled');
     var login_info = {
         "login" : $("#loginInput").val(),
