@@ -27,8 +27,8 @@ $(document).ready(function() {
 });
 
 function getUrl() {
-  var getUrl = window.location;
-  return getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    var getUrl = window.location;
+    return getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 }
 
 function doLogin() {
