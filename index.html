@@ -80,7 +80,7 @@
                         <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remeber me</label></div>
                         <div class="container" style="padding: 0;">
                             <div class="row">
-                                <div class="col-6 col-md-6"><button class="btn btn-primary btn-lg" type="submit">Login</button></div>
+                                <div class="col-6 col-md-6"><button id="loginButton" class="btn btn-primary btn-lg loginButton" type="submit">Login</button></div>
                                 <div class="col-6 col-md-6 text-end"><a class="btn btn-secondary btn-lg" href="#register" onclick="$('#loginModal').modal('hide')" type="button" style="margin-left: 16px;">Sign up</a></div>
                             </div>
                         </div>
@@ -134,6 +134,7 @@
         });
 
         function doLogin() {
+            $("#loginButton").addClass('disabled');
             var login_info = {
                 "login" : $("#loginInput").val(),
                 "pass" : $("#passwordInput").val()
@@ -141,11 +142,11 @@
 
             $.post("http://localhost/carmarket/api/login", login_info).done(function( data ) {
                 $('#loginModal').modal('hide');
+                $("#loginButton").removeClass('disabled');
             }).fail(function(error){
-                $("#wrongPass").show();
+                $("#wrongPass").show().text( error.responseJSON.message );
+                $("#loginButton").removeClass('disabled');
             });
-
-            //console.log(login_info);
         }
     </script>
 </body>
