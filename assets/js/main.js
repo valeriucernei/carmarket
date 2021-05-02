@@ -23,6 +23,18 @@ $(document).ready(function() {
         window.localStorage.clear("token");
         location.reload();
     });
+
+    if (history.pushState) {
+        if(window.location.href.split('/').pop().charAt(0) != '?'){
+            window.history.pushState("object or string", "Title", '?'
+                                      + window.location.href.split('/').pop());
+        }
+    } else {
+        document.location.href = "?";
+        if(window.location.href.split('/').pop().charAt(0) != '?'){
+            document.location.href = '?' + window.location.href.split('/').pop();
+        }
+    }
 });
 
 function getUrl() {
@@ -39,7 +51,7 @@ function doLogin() {
         "pass" : $("#passwordInput").val()
     };
 
-    $.post(getUrl() + "/api/login", login_info).done(function( data ) {
+    $.post(getUrl() + "/api/login/", login_info).done(function( data ) {
         $('#loginModal').modal('hide');
         $("#loginButton").removeClass('disabled');
         window.localStorage.setItem("token", data.token);

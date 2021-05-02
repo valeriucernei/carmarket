@@ -33,7 +33,7 @@
     <!-- FIRST NAVBAR -->
 
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="padding: 8px;border-bottom-style: none;">
-        <div class="container"><a class="navbar-brand logo" href="#main" style="font-family: Poppins, sans-serif;font-size: 32px;">carmarket</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand logo" href="?#main" style="font-family: Poppins, sans-serif;font-size: 32px;">carmarket</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1"><span class="ms-auto navbar-text" style="min-width: 200px;"><a href="#profile" class="btn btn-white btn-lg login-user" type="button" style="font-size: 16px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-person-circle" style="font-size: 22px;">
                             <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"></path>
                             <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
@@ -73,7 +73,7 @@
                     <h4 class="modal-title"><strong>Login Form</strong></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form onsubmit="return doLogin()">
+                    <form onsubmit="doLogin()">
                         <div class="mb-3"><label class="form-label" for="loginInput">Username or Email Address</label><input class="form-control" type="text" id="loginInput" placeholder="username or email address" required=""></div>
                         <div><label class="form-label" for="passwordInput">Password</label><input class="form-control" type="password" id="passwordInput" placeholder="******" required=""></div>
                         <div id="wrongPass" class="alert alert-danger mt-3" role="alert" style="display: none;"><span>No user found with such login and password.</span></div><a class="btn btn-link btn-sm mb-3" onclick="$('#loginModal').modal('hide')" href="#forgot" type="button">Forgot password?</a>
