@@ -33,7 +33,6 @@ function getUrl() {
 }
 
 function doLogin() {
-    alert(getUrl());
     $("#loginButton").addClass('disabled');
     var login_info = {
         "login" : $("#loginInput").val(),
