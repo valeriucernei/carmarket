@@ -73,10 +73,10 @@
                     <h4 class="modal-title"><strong>Login Form</strong></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form onsubmit="return doLogin()">
                         <div class="mb-3"><label class="form-label" for="loginInput">Username or Email Address</label><input class="form-control" type="text" id="loginInput" placeholder="username or email address" required=""></div>
                         <div><label class="form-label" for="passwordInput">Password</label><input class="form-control" type="password" id="passwordInput" placeholder="******" required=""></div>
-                        <div class="alert alert-danger mt-3" role="alert"><span>No user found with such login and password.</span></div><a class="btn btn-link btn-sm mb-3" onclick="$('#loginModal').modal('hide')" href="#forgot" type="button">Forgot password?</a>
+                        <div id="wrongPass" class="alert alert-danger mt-3" role="alert" style="display: none;"><span>No user found with such login and password.</span></div><a class="btn btn-link btn-sm mb-3" onclick="$('#loginModal').modal('hide')" href="#forgot" type="button">Forgot password?</a>
                         <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remeber me</label></div>
                         <div class="container" style="padding: 0;">
                             <div class="row">
@@ -129,9 +129,24 @@
     <script src="assets/js/jquery.spapp.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-          var app = $.spapp({defaultView : 'main'}); // initialize
-          app.run();
+            var app = $.spapp({defaultView : 'main'}); // initialize
+            app.run();
         });
+
+        function doLogin() {
+            var login_info = {
+                "login" : $("#loginInput").val(),
+                "pass" : $("#passwordInput").val()
+            };
+
+            $.post("http://localhost/carmarket/api/login", login_info).done(function( data ) {
+                $('#loginModal').modal('hide');
+            }).fail(function(error){
+                $("#wrongPass").show();
+            });
+
+            //console.log(login_info);
+        }
     </script>
 </body>
 </html>
