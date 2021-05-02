@@ -130,19 +130,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
           var app = $.spapp({defaultView : 'main'}); // initialize
-
-          app.route({view: 'main', load: 'listings.html' });
-          app.route({view: 'confirmed', load: 'confirmed.html' });
-          app.route({view: 'forgot', load: 'forgot.html' });
-          app.route({view: 'new', load: 'new.html' });
-          app.route({view: 'profile', load: 'profile.html' });
-          app.route({view: 'publications', load: 'publications.html' });
-          app.route({view: 'register', load: 'register.html' });
-          app.route({view: 'reset', load: 'reset.html' });
-          app.route({view: 'view', load: 'view.html' });
-          app.route({view: 'view_profile', load: 'view_profile.html' });
-
-          // run app
           app.run();
         });
     </script>
