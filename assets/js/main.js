@@ -12,14 +12,13 @@ $(document).ready(function() {
     app.run();
 
     if(window.localStorage.getItem("token")){
-        $("#profileButton").show();
-        $("#login").hide();
-        $("#logout").show();
+        $(".login-user").show();
+        $(".login-guest").hide();
     }else{
-        $("#profileButton").hide();
-        $("#login").show();
-        $("#logout").hide();
+      $(".login-user").hide();
+      $(".login-guest").show();
     }
+
     $("#logout").click(function (){
         window.localStorage.clear("token");
         location.reload();
@@ -29,7 +28,7 @@ $(document).ready(function() {
 function getUrl() {
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    if(baseUrl.slice(-1) == "/") baseUrl = baseUrl.slice(-1);
+    if(baseUrl.slice(-1) == "/") baseUrl = baseUrl.slice(0, -1);
     return baseUrl;
 }
 
