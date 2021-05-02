@@ -1,5 +1,5 @@
 (function($) {
- 
+
   $.spapp = function(options) {
 
     // set config and routes
@@ -7,7 +7,7 @@
 
     config = $.extend({
       defaultView  : $("main#spapp > section:last-child").attr("id"),
-      templateDir  : './tpl/',
+      templateDir  : './views/',
       pageNotFound : false
     }, options );
 
@@ -40,15 +40,21 @@
 
       if(elm.hasClass("spapp-created")) {
         route.onReady();
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       } else {
         elm.addClass("spapp-created");
         if( ! route.load) {
           route.onCreate();
           route.onReady();
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         } else {
           elm.load(config.templateDir+route.load, function() {
             route.onCreate();
             route.onReady();
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           });
         }
       }
@@ -57,10 +63,14 @@
     // and run
     this.run = function() {
       window.addEventListener('hashchange', function() { routeChange(); });
-      if( ! window.location.hash) { window.location.hash = config.defaultView; } else { routeChange(); }
+      if( ! window.location.hash) {
+        window.location.hash = config.defaultView;
+      } else {
+        routeChange();
+      }
     }
 
     return this;
   };
- 
+
 }(jQuery));

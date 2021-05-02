@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -23,533 +22,91 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/Image-Tab-Gallery-Horizontal.css">
-    <link rel="stylesheet" href="assets/css/Lightbox-Gallery.css">
     <link rel="stylesheet" href="assets/css/login-register.css">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="assets/css/pagination.css">
     <link rel="stylesheet" href="assets/css/Pretty-Search-Form.css">
-    <link rel="stylesheet" href="assets/css/profile-info.css">
-    <link rel="stylesheet" href="assets/css/profile.css">
-    <link rel="stylesheet" href="assets/css/publications.css">
-    <link rel="stylesheet" href="assets/css/Simple-Slider.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/spapp.css">
 </head>
-
 <body style="border-style: none;font-family: Poppins, sans-serif;background: rgb(247, 247, 247);">
+
+    <!-- FIRST NAVBAR -->
+
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="padding: 8px;border-bottom-style: none;">
-        <div class="container"><a class="navbar-brand logo" href="#" style="font-family: Poppins, sans-serif;font-size: 32px;">carmarket</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1"><span class="ms-auto navbar-text" style="min-width: 200px;"><button class="btn btn-light btn-lg" type="button" style="font-size: 16px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-person-circle" style="font-size: 22px;">
+        <div class="container"><a class="navbar-brand logo" href="#main" style="font-family: Poppins, sans-serif;font-size: 32px;">carmarket</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1"><span class="ms-auto navbar-text" style="min-width: 200px;"><a href="#profile" class="btn btn-light btn-lg" type="button" style="font-size: 16px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-person-circle" style="font-size: 22px;">
                             <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"></path>
                             <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
                             <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path>
-                        </svg>&nbsp;Valeriu Cernei</button> <button class="btn btn-light btn-lg" type="button" style="font-size: 16px;margin-right: 16px;" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button><button class="btn btn-warning btn-lg" type="button" style="font-size: 16px;">Sell car</button></span></div>
-            <div class="modal fade" role="dialog" tabindex="-1" id="loginModal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title"><strong>Login Form</strong></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3"><label class="form-label" for="loginInput">Username or Email Address</label><input class="form-control" type="text" id="loginInput" placeholder="username or email address" required=""></div>
-                                <div><label class="form-label" for="passwordInput">Password</label><input class="form-control" type="password" id="passwordInput" placeholder="******" required=""></div>
-                                <div class="alert alert-danger mt-3" role="alert"><span>No user found with such login and password.</span></div><button class="btn btn-link btn-sm mb-3" type="button" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#forgotModal">Forgot password?</button>
-                                <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remeber me</label></div>
-                                <div class="container" style="padding: 0;">
-                                    <div class="row">
-                                        <div class="col-6 col-md-6"><button class="btn btn-primary btn-lg" type="submit">Login</button></div>
-                                        <div class="col-6 col-md-6 text-end"><button class="btn btn-secondary btn-lg" type="button" style="margin-left: 16px;">Sign up</button></div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </svg>&nbsp;Valeriu Cernei</a> <button class="btn btn-light btn-lg" type="button" style="font-size: 16px;margin-right: 16px;" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button><a href="#new" class="btn btn-warning btn-lg" type="button" style="font-size: 16px;">Sell car</a></span></div>
         </div>
     </nav>
+
+    <!-- SECOND RED NAVBAR -->
+
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button d-none d-md-block" id="submenu">
         <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <div id="main-nav" class="container navbar-collapse collapse" style="padding-left: 0px;padding-right: 0px;">
                     <ul class="navbar-nav w-100">
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="http://treedax.com" style="padding-left: 0px;">Sedan</a></li>
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="#">Combi</a></li>
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="#">Compact</a></li>
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="#">Coupe</a></li>
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="#">Cabrio</a></li>
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="#">Suv</a></li>
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="#">City-car</a></li>
-                        <li class="nav-item"><a class="text-start link-light nav-link" href="#">Mini</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main" style="padding-left: 0px;">Sedan</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main">Combi</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main">Compact</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main">Coupe</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main">Cabrio</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main">Suv</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main">City-car</a></li>
+                        <li class="nav-item"><a class="text-start link-light nav-link" href="#main">Mini</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-    <div class="container" style="margin-top: 18px;">
-        <div class="row text-center justify-content-center">
-            <div class="col-md-12 col-lg-12 col-xl-11 col-xxl-3">
-                <div class="card sticky-md-top">
-                    <h4 class="text-center" style="margin: 6px 0 0;"><strong>Search</strong></h4>
-                    <div class="row" style="margin: auto; width:100%;">
-                        <div class="col-6 col-md-6 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Brand</h6><select class="js-brand">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-md-6 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Model</h6><select class="js-model" disabled="">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Year of production</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-right: 8px;"><select id="year-min" class="js-year-min">
-                                        <option value=""></option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 8px;"><select id="year-max" class="js-year-max">
-                                        <option value=""></option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Mileage</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-km-min">
-                                        <option value=""></option>
-                                        <option value="5000">5 000 km</option>
-                                        <option value="10000">10 000 km</option>
-                                        <option value="20000">20 000 km</option>
-                                        <option value="50000">50 000 km</option>
-                                        <option value="100000">100 000 km</option>
-                                        <option value="125000">125 000 km</option>
-                                        <option value="150000">150 000 km</option>
-                                        <option value="200000">200 000 km</option>
-                                        <option value="250000">250 000 km</option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-km-max">
-                                        <option value=""></option>
-                                        <option value="5000">5 000 km</option>
-                                        <option value="10000">10 000 km</option>
-                                        <option value="20000">20 000 km</option>
-                                        <option value="50000">50 000 km</option>
-                                        <option value="100000">100 000 km</option>
-                                        <option value="125000">125 000 km</option>
-                                        <option value="150000">150 000 km</option>
-                                        <option value="200000">200 000 km</option>
-                                        <option value="250000">250 000 km</option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Motor size</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select id="motor-min" class="js-motor-min">
-                                        <option value=""></option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select id="motor-max" class="js-motor-max">
-                                        <option value=""></option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Gearbox</h6><select class="js-gear">
-                                <option value=""></option>
-                                <option value="1">Manual</option>
-                                <option value="2">Automatic</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                            <h6 class="text-text-muted">Fuel</h6><select class="js-fuel">
-                                <option value=""></option>
-                                <option value="1">Gasoline</option>
-                                <option value="2">Diesel</option>
-                                <option value="3">Gas</option>
-                                <option value="4">Hybrid</option>
-                                <option value="5">Electric</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 col-lg-6 col-xl-4 col-xxl-12" style="padding: 8px;">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h6 class="text-text-muted">Price</h6>
-                                </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-price-min">
-                                        <option value=""></option>
-                                        <option value="1000">1 000 €</option>
-                                        <option value="2000">2 000 €</option>
-                                        <option value="5000">5 000 €</option>
-                                        <option value="10000">10 000 €</option>
-                                        <option value="20000">20 000 €</option>
-                                        <option value="30000">30 000 €</option>
-                                        <option value="40000">40 000 €</option>
-                                        <option value="50000">50 000 €</option>
-                                        <option value="60000">60 000 €</option>
-                                        <option value="70000">70 000 €</option>
-                                        <option value="80000">80 000 €</option>
-                                        <option value="90000">90 000 €</option>
-                                        <option value="100000">100 000 €</option>
-                                        <option value="200000">200 000 €</option>
-                                    </select></div>
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-price-max">
-                                        <option value=""></option>
-                                        <option value="1000">1 000 €</option>
-                                        <option value="2000">2 000 €</option>
-                                        <option value="5000">5 000 €</option>
-                                        <option value="10000">10 000 €</option>
-                                        <option value="20000">20 000 €</option>
-                                        <option value="30000">30 000 €</option>
-                                        <option value="40000">40 000 €</option>
-                                        <option value="50000">50 000 €</option>
-                                        <option value="60000">60 000 €</option>
-                                        <option value="70000">70 000 €</option>
-                                        <option value="80000">80 000 €</option>
-                                        <option value="90000">90 000 €</option>
-                                        <option value="100000">100 000 €</option>
-                                        <option value="200000">200 000 €</option>
-                                    </select></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12" style="text-align: center;padding: 0 8px;"><button class="btn btn-danger" type="button" style="margin: 16px 0 8px;width: 100%;">Search</button></div>
-                    </div>
+
+    <!-- LOGIN MODAL -->
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="loginModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><strong>Login Form</strong></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-12 col-xl-11 col-xxl-9">
-                <div class="row">
-                    <div class="col-xxl-12 text-end form-inline mb-3"><label class="form-label d-inline-block" for="sort-select">Sort by&nbsp;</label><select class="js-sort">
-                            <option value="-ads.id" selected="">Default</option>
-                            <option value="-ads.updated">Date ↑</option>
-                            <option value="+ads.updated">Date ↓</option>
-                            <option value="-ads.price">Price ↑</option>
-                            <option value="+ads.price">Price ↓</option>
-                        </select></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3"><label class="form-label" for="loginInput">Username or Email Address</label><input class="form-control" type="text" id="loginInput" placeholder="username or email address" required=""></div>
+                        <div><label class="form-label" for="passwordInput">Password</label><input class="form-control" type="password" id="passwordInput" placeholder="******" required=""></div>
+                        <div class="alert alert-danger mt-3" role="alert"><span>No user found with such login and password.</span></div><a class="btn btn-link btn-sm mb-3" onclick="$('#loginModal').modal('hide')" href="#forgot" type="button">Forgot password?</a>
+                        <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remeber me</label></div>
+                        <div class="container" style="padding: 0;">
+                            <div class="row">
+                                <div class="col-6 col-md-6"><button class="btn btn-primary btn-lg" type="submit">Login</button></div>
+                                <div class="col-6 col-md-6 text-end"><a class="btn btn-secondary btn-lg" href="#register" onclick="$('#loginModal').modal('hide')" type="button" style="margin-left: 16px;">Sign up</a></div>
                             </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
-                            <div class="card-body">
-                                <h6>Volkswagen Sharan&nbsp;</h6>
-                                <ul class="list-inline atributes">
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">
-                                            <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>
-                                            <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                                        </svg>&nbsp;2020</li>
-                                    <li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;180 000 km</li>
-                                    <li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;Diesel</li>
-                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="5" cy="6" r="2"></circle>
-                                            <circle cx="12" cy="6" r="2"></circle>
-                                            <circle cx="19" cy="6" r="2"></circle>
-                                            <circle cx="5" cy="18" r="2"></circle>
-                                            <circle cx="12" cy="18" r="2"></circle>
-                                            <line x1="5" y1="8" x2="5" y2="16"></line>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
-                                        </svg>&nbsp;Manual</li>
-                                    <li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;2 300 cm<sup>3</sup></li>
-                                </ul>
-                                <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
-                            </div>
-                        </a></div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <div style="text-align: center;">
-        <div class="mypagination"><a href="#">«</a><a class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">»</a></div>
-    </div>
+
+    <!-- CONTENT -->
+
+    <main id="spapp" role="main">
+        <section id="main" data-load="listings.html"></section>
+        <section id="confirmed" data-load="confirmed.html"></section>
+        <section id="forgot" data-load="forgot.html"></section>
+        <section id="new" data-load="new.html"></section>
+        <section id="profile" data-load="profile.html"></section>
+        <section id="publications" data-load="publications.html"></section>
+        <section id="register" data-load="register.html"></section>
+        <section id="reset" data-load="reset.html"></section>
+        <section id="view" data-load="view.html"></section>
+        <section id="view_profile" data-load="view_profile.html"></section>
+    </main>
+
+    <!-- FOOTER -->
+
     <footer class="footer-basic" style="border-top-style: solid;border-top-color: rgb(219,55,39);">
         <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
         <ul class="list-inline">
@@ -561,16 +118,33 @@
         </ul>
         <p class="copyright">Carmarket ©&nbsp; 2021<br></p>
     </footer>
+
+    <!-- SCRIPTS -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
-    <script src="assets/js/Image-Tab-Gallery-Horizontal.js"></script>
-    <script src="assets/js/Lightbox-Gallery.js"></script>
-    <script src="assets/js/new-ad.js"></script>
-    <script src="assets/js/quick-search.js"></script>
-    <script src="assets/js/Simple-Slider.js"></script>
-</body>
+    <script src="assets/js/jquery.spapp.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+          var app = $.spapp({defaultView : 'main'}); // initialize
 
+          app.route({view: 'main', load: 'listings.html' });
+          app.route({view: 'confirmed', load: 'confirmed.html' });
+          app.route({view: 'forgot', load: 'forgot.html' });
+          app.route({view: 'new', load: 'new.html' });
+          app.route({view: 'profile', load: 'profile.html' });
+          app.route({view: 'publications', load: 'publications.html' });
+          app.route({view: 'register', load: 'register.html' });
+          app.route({view: 'reset', load: 'reset.html' });
+          app.route({view: 'view', load: 'view.html' });
+          app.route({view: 'view_profile', load: 'view_profile.html' });
+
+          // run app
+          app.run();
+        });
+    </script>
+</body>
 </html>
