@@ -35,11 +35,12 @@
 
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="padding: 8px;border-bottom-style: none;">
         <div class="container"><a class="navbar-brand logo" href="#main" style="font-family: Poppins, sans-serif;font-size: 32px;">carmarket</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1"><span class="ms-auto navbar-text" style="min-width: 200px;"><a href="#profile" class="btn btn-light btn-lg" type="button" style="font-size: 16px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-person-circle" style="font-size: 22px;">
+            <div class="collapse navbar-collapse" id="navcol-1"><span class="ms-auto navbar-text" style="min-width: 200px;"><a id="profileButton" href="#profile" class="btn btn-white btn-lg" type="button" style="font-size: 16px; display:none;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-person-circle" style="font-size: 22px;">
                             <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"></path>
                             <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
                             <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path>
-                        </svg>&nbsp;Valeriu Cernei</a> <button class="btn btn-light btn-lg" type="button" style="font-size: 16px;margin-right: 16px;" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button><a href="#new" class="btn btn-warning btn-lg" type="button" style="font-size: 16px;">Sell car</a></span></div>
+                        </svg>&nbsp;Valeriu Cernei</a> <button id="login" class="btn btn-light btn-lg" type="button" style="font-size: 16px;margin-right: 16px;" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button><a href="#new" class="btn btn-warning btn-lg" type="button" style="font-size: 16px;">Sell car</a></span></div>
+                        <button id="logout" class="btn btn-white btn-lg" type="button" style="font-size: 16px;">Log out</button>
         </div>
     </nav>
 
@@ -77,7 +78,6 @@
                         <div class="mb-3"><label class="form-label" for="loginInput">Username or Email Address</label><input class="form-control" type="text" id="loginInput" placeholder="username or email address" required=""></div>
                         <div><label class="form-label" for="passwordInput">Password</label><input class="form-control" type="password" id="passwordInput" placeholder="******" required=""></div>
                         <div id="wrongPass" class="alert alert-danger mt-3" role="alert" style="display: none;"><span>No user found with such login and password.</span></div><a class="btn btn-link btn-sm mb-3" onclick="$('#loginModal').modal('hide')" href="#forgot" type="button">Forgot password?</a>
-                        <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remeber me</label></div>
                         <div class="container" style="padding: 0;">
                             <div class="row">
                                 <div class="col-6 col-md-6"><button id="loginButton" class="btn btn-primary btn-lg loginButton" type="submit">Login</button></div>
@@ -127,27 +127,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
     <script src="assets/js/jquery.spapp.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var app = $.spapp({defaultView : 'main'}); // initialize
-            app.run();
-        });
-
-        function doLogin() {
-            $("#loginButton").addClass('disabled');
-            var login_info = {
-                "login" : $("#loginInput").val(),
-                "pass" : $("#passwordInput").val()
-            };
-
-            $.post("http://localhost/carmarket/api/login", login_info).done(function( data ) {
-                $('#loginModal').modal('hide');
-                $("#loginButton").removeClass('disabled');
-            }).fail(function(error){
-                $("#wrongPass").show().text( error.responseJSON.message );
-                $("#loginButton").removeClass('disabled');
-            });
-        }
-    </script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
