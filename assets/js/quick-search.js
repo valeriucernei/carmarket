@@ -1,10 +1,55 @@
 $(document).ready(function() {
+
+
+    $.ajax({
+        url: "http://localhost/carmarket/api/cars/brands",
+        type: "GET",
+        success: function(data, textStatus, jqXHR)
+        {
+            var xdata = $.map(data, function (obj) {
+                obj.text = obj.text || obj.name;
+                return obj;
+            });
+
+            $(".js-brand").select2({
+                placeholder: "BMW, Audi, Mercedes...",
+                theme:"bootstrap-5",
+                width: '100%',
+                allowClear: true,
+                minimumResultsForSearch: Infinity,
+                data:xdata,
+            });
+
+        },
+        error: function (request, textStatus, errorThrown) {
+            swal("Error ", request.responseJSON.message, "error");
+            if(request.status == "401"){
+                alert("Unauthorized Access ");
+                return false;
+            }
+        }
+    });
+
+
+
+
+    /*
     $('.js-brand').select2({
         placeholder: "BMW, Audi, Mercedes...",
         theme:"bootstrap-5",
         width: '100%',
         allowClear: true,
-        minimumResultsForSearch: Infinity
+        minimumResultsForSearch: Infinity,
+        ajax: {
+            url: getUrl()+"/api/cars/brands",
+            dataType: 'json'
+        },
+        processResults: function (data) {
+          // Transforms the top-level key of the response object from 'items' to 'results'
+          return {
+            results: data.name
+          };
+        }
     }).on("select2:unselecting", function(e) {
         $(this).data('state', 'unselected');
     }).on("select2:open", function(e) {
@@ -16,7 +61,7 @@ $(document).ready(function() {
             }, 1);
         }
     });
-
+*/
     $('.js-model').select2({
         placeholder: "Golf, S-Class, A8, X5...",
         theme:"bootstrap-5",

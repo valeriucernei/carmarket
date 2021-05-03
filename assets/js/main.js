@@ -2,11 +2,16 @@ $(document).ready(function() {
     var app = $.spapp({defaultView : 'main'}); // initialize
 
     app.route({ view : "main", load : "listings.html", onReady: function() {
-        $.getScript("assets/js/quick-search.js", function(){});}
+        $.getScript("assets/js/quick-search.js", function(){});
+        $.getScript("assets/js/listings.js", function(){});}
     });
 
     app.route({ view : "new", load : "new.html", onReady: function() {
         $.getScript("assets/js/new-ad.js", function(){});}
+    });
+
+    app.route({ view : "register", load : "register.html", onReady: function() {
+        $.getScript("assets/js/register.js", function(){});}
     });
 
     app.run();
@@ -23,6 +28,10 @@ $(document).ready(function() {
         window.localStorage.clear("token");
         location.reload();
     });
+
+    $('#loginModal').on('shown.bs.modal', function () {
+      $('#loginInput').trigger('focus')
+    })
 
     if (history.pushState) {
         if(window.location.href.split('/').pop().charAt(0) != '?'){
