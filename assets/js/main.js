@@ -14,6 +14,10 @@ $(document).ready(function() {
         $.getScript("assets/js/register.js", function(){});}
     });
 
+    app.route({ view : "forgot", load : "forgot.html", onReady: function() {
+        $.getScript("assets/js/forgot.js", function(){});}
+    });
+
     app.run();
 
     if(window.localStorage.getItem("token")){
