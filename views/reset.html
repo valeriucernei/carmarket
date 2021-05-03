@@ -4,14 +4,15 @@
             <div class="card" style="padding: 8px 16px;">
                 <div class="card-body">
                     <h4 class="text-center card-title">Password reset</h4>
-                    <form>
+                    <form id="resetForm" onsubmit="doReset()">
                         <div class="row">
+                            <input id="change-password-token" name="token" type="hidden">
                             <div class="col-md-6 mt-3"><label class="form-label" for="resetpasswordInput">New Password<span style="color: red;">*</span></label><input class="form-control form-control mb-3" type="password" id="resetpasswordInput" required="" minlength="6" maxlength="32"></div>
                             <div class="col-md-6 mt-3"><label class="form-label" for="resetpasswordInput2">Confirm New Password<span style="color: red;">*</span></label><input class="form-control form-control mb-3" type="password" id="resetpasswordInput2" required="" minlength="6" maxlength="32"></div>
                             <div class="col-xxl-12">
-                                <div class="alert alert-danger" role="alert"><span>Passwords <strong>DO NOT</strong> match.<br></span></div>
+                                <div id="resetAlert" class="alert alert-danger" role="alert"></div>
                             </div>
-                            <div class="col text-end"><button class="btn btn-primary" type="submit">Reset Password</button></div>
+                            <div class="col text-end"><button id="resetButton" class="btn btn-primary" type="submit">Reset Password</button></div>
                         </div>
                     </form>
                 </div>
@@ -19,3 +20,37 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        $('#resetAlert').hide();
+        var urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.has('token')){
+            $("#change-password-token").val(urlParams.get('token'));
+        }
+    })
+
+    function doReset() {
+          $('#resetAlert').hide();
+          $("#resetButton").addClass('disabled');
+          if($('#resetpasswordInput').val() != $('#resetpasswordInput2').val()){
+             $('#resetAlert').show().text("Passwords don't match !");
+             return 0;
+          }
+
+          var reset_info = {
+              "token" : $("#change-password-token").val(),
+              "pass" : $("#resetpasswordInput").val()
+          };
+
+          $("#resetButton").addClass('disabled');
+          $.post(getUrl() + "/api/reset", reset_info).done(function(data){
+              location.replace("#reset-accepted");
+              $("#resetButton").removeClass('disabled');
+          }).fail(function(error){
+              $('#resetAlert').show().text( error.responseJSON.message );
+              $("#resetButton").removeClass('disabled');
+          });
+
+      }
+</script>

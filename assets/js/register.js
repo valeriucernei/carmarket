@@ -14,14 +14,15 @@ function doRegister() {
         return 0;
     }
 
+
     var register_info = {
         "username" : $("#regusername").val(),
         "fname" : $("#regfname").val(),
-        "lname" : $("#reglname").val(),
         "pass" : $('#regpass1').val(),
         "email" : $("#regemail").val(),
         "phone" : $("#regphone").val()
     };
+    if($("#reglname").val() != "") register_info["lname"] = $("#reglname").val();
 
     $.post(getUrl() + "/api/register/", register_info).done(function( data ) {
         $('#regConfirmModal').modal('show');
