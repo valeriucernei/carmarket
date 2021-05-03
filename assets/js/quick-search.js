@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 
     $.ajax({
-        url: "http://localhost/carmarket/api/cars/brands",
+        url: getUrl() + "/api/cars/brands",
         type: "GET",
         success: function(data, textStatus, jqXHR)
         {
