@@ -74,13 +74,13 @@
                     <h4 class="modal-title"><strong>Login Form</strong></h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="loginForm">
+                    <form id="loginForm" method="post" onsubmit="doLogin(); return false;">
                         <div class="mb-3"><label class="form-label" for="loginInput">Username or Email Address</label><input name="login" class="form-control" type="text" id="loginInput" placeholder="username or email address" required=""></div>
                         <div><label class="form-label" for="passwordInput">Password</label><input name="pass" class="form-control" type="password" id="passwordInput" placeholder="password" required=""></div>
                         <div id="wrongPass" class="alert alert-danger mt-3" role="alert" style="display: none;"><span>No user found with such login and password.</span></div><a class="btn btn-link btn-sm mb-3" onclick="$('#loginModal').modal('hide')" href="#forgot" type="button">Forgot password?</a>
                         <div class="container" style="padding: 0;">
                             <div class="row">
-                                <div class="col-6 col-md-6"><button id="loginButton" onclick="doLogin(); return false;" type="submit" class="btn btn-primary btn-lg loginButton">Login</button></div>
+                                <div class="col-6 col-md-6"><button id="loginButton" type="submit" class="btn btn-primary btn-lg loginButton">Login</button></div>
                                 <div class="col-6 col-md-6 text-end"><a class="btn btn-secondary btn-lg" href="#register" onclick="$('#loginModal').modal('hide')" type="button" style="margin-left: 16px;">Sign up</a></div>
                             </div>
                         </div>

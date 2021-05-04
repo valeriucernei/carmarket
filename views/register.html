@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-body" style="padding: 8px 16px;">
                     <h4 class="text-center">Registration Form</h4>
-                    <form id="registerForm">
+                    <form id="registerForm" method="post" onsubmit="doRegister(); return false;">
                         <div class="container mb-3" style="padding: 0;">
                             <div class="row">
                                 <div class="col-md-6"><label class="form-label" for="regfname">First name<span style="color: red;">*</span></label><input name="fname" class="form-control" type="text" id="regfname" required="" minlength="3" maxlength="24"></div>
@@ -34,7 +34,7 @@
                                 <div class="col-xxl-12">
                                     <p class="text-start mb-0"><span style="color: red;">*</span>These fields are requried.</p>
                                 </div>
-                                <div class="col text-end"><button id="regButton" onclick="doRegister(); return false;" class="btn btn-primary btn-lg" type="submit">Register</button></div>
+                                <div class="col text-end"><button id="regButton" class="btn btn-primary btn-lg" type="submit">Register</button></div>
                             </div>
                         </div>
                     </form>
