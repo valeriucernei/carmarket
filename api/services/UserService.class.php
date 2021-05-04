@@ -143,6 +143,8 @@ class UserService extends BaseService{
 
     public function update_info($id, $data){
         if(isset($data['pass'])) $data['pass'] = md5($data['pass']);
+        if(isset($data['pass']) && strlen($data['pass']) < 6)
+            throw new Exception("Password is too short. Min 6 characters", 400, $e);
         try{
           return $this->update($id, $data);
         } catch (\Exception $e) {

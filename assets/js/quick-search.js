@@ -1,57 +1,12 @@
 $(document).ready(function() {
-
-
-    $.ajax({
-        url: getUrl() + "/api/cars/brands",
-        type: "GET",
-        success: function(data, textStatus, jqXHR)
-        {
-            var xdata = $.map(data, function (obj) {
-                obj.text = obj.text || obj.name;
-                return obj;
-            });
-
-            $(".js-brand").select2({
-                placeholder: "BMW, Audi, Mercedes...",
-                theme:"bootstrap-5",
-                width: '100%',
-                allowClear: true,
-                minimumResultsForSearch: Infinity,
-                data:xdata,
-            }).on("select2:unselecting", function(e) {
-                $(this).data('state', 'unselected');
-            }).on("select2:open", function(e) {
-                if ($(this).data('state') === 'unselected') {
-                    $(this).removeData('state');
-                    var self = $(this);
-                    setTimeout(function() {
-                        self.select2('close');
-                    }, 1);
-                }
-            });
-        }
-    });
-
-
-
-
-    /*
-    $('.js-brand').select2({
+    loadBrands();
+    
+    $(".js-brand").select2({
         placeholder: "BMW, Audi, Mercedes...",
         theme:"bootstrap-5",
         width: '100%',
         allowClear: true,
-        minimumResultsForSearch: Infinity,
-        ajax: {
-            url: getUrl()+"/api/cars/brands",
-            dataType: 'json'
-        },
-        processResults: function (data) {
-          // Transforms the top-level key of the response object from 'items' to 'results'
-          return {
-            results: data.name
-          };
-        }
+        minimumResultsForSearch: Infinity
     }).on("select2:unselecting", function(e) {
         $(this).data('state', 'unselected');
     }).on("select2:open", function(e) {
@@ -63,7 +18,8 @@ $(document).ready(function() {
             }, 1);
         }
     });
-*/
+
+
     $('.js-model').select2({
         placeholder: "Golf, S-Class, A8, X5...",
         theme:"bootstrap-5",
@@ -293,6 +249,56 @@ $(document).ready(function() {
     }
 
 });
+
+function loadBrands() {
+    $.ajax({
+        url: getUrl() + "/api/cars/brands",
+        type: "GET",
+        success: function(data, textStatus, jqXHR){
+            var xdata = $.map(data, function (obj) {
+                obj.text = obj.text || obj.name;
+                return obj;
+            });
+            $(".js-brand").select2({
+                placeholder: "BMW, Audi, Mercedes...",
+                theme:"bootstrap-5",
+                width: '100%',
+                allowClear: true,
+                minimumResultsForSearch: Infinity,
+                data:xdata,
+            }).on('select2:select', function (e) {
+                $(".js-model").prop("disabled", false);
+                $(".js-model").empty();
+                loadModels($(".js-brand").val());
+            }).on('select2:clear', function (e) {
+                $(".js-model").prop("disabled", true).val(null).trigger("change");
+            });
+        }
+    });
+
+}
+
+function loadModels(id) {
+  $.ajax({
+      url: getUrl() + "/api/cars/models/"+ id,
+      type: "GET",
+      success: function(data, textStatus, jqXHR){
+          var xdata = $.map(data, function (obj) {
+              obj.text = obj.text || obj.name;
+              return obj;
+          });
+          $(".js-model").select2({
+              placeholder: "Golf, S-Class, A8, X5...",
+              theme:"bootstrap-5",
+              width: '100%',
+              allowClear: true,
+              minimumResultsForSearch: Infinity,
+              data:xdata
+          }).val(null).trigger("change");
+      }
+  });
+
+}
 
 $(document).on('keypress', '.select2-search__field', function () {
     $(this).val($(this).val().replace(/[^\d].+/, ""));

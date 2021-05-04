@@ -18,7 +18,25 @@ $(document).ready(function() {
         $.getScript("assets/js/forgot.js", function(){});}
     });
 
+    app.route({ view : "reset", load : "reset.html", onReady: function() {
+        $.getScript("assets/js/reset.js", function(){});}
+    });
+
     app.run();
+    /*
+    if (history.pushState) {
+            if(window.location.href.split('/').pop() == '#main'){
+                alert("GOOD");
+                window.history.pushState("object or string", "Title", '/test');
+                //window.history.replaceState("CarMarket", "CarMarket", "/");
+                //window.history.pushState("object or string", "Title", '?'
+                //                      + window.location.href.split('/').pop());
+            }
+        } else {
+            if(window.location.href.split('/').pop() == '#main'){
+                document.location.href = '';
+        }
+    }*/
 
     if(window.localStorage.getItem("token")){
         $(".login-user").show();
@@ -34,37 +52,14 @@ $(document).ready(function() {
     });
 
     $('#loginModal').on('shown.bs.modal', function () {
-      $('#loginInput').trigger('focus')
+      $('#loginInput').trigger('focus');
     })
-
-    if (history.pushState) {
-        if(window.location.href.split('/').pop().charAt(0) != '?'){
-            window.history.pushState("object or string", "Title", '?'
-                                      + window.location.href.split('/').pop());
-        }
-    } else {
-        document.location.href = "?";
-        if(window.location.href.split('/').pop().charAt(0) != '?'){
-            document.location.href = '?' + window.location.href.split('/').pop();
-        }
-    }
 });
-
-function getUrl() {
-    var getUrl = window.location;
-    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    if(baseUrl.slice(-1) == "/") baseUrl = baseUrl.slice(0, -1);
-    return baseUrl;
-}
 
 function doLogin() {
     $("#loginButton").addClass('disabled');
-    var login_info = {
-        "login" : $("#loginInput").val(),
-        "pass" : $("#passwordInput").val()
-    };
 
-    $.post(getUrl() + "/api/login/", login_info).done(function( data ) {
+    $.post(getUrl() + "/api/login/", jsonize_form("#loginForm")).done(function( data ) {
         $('#loginModal').modal('hide');
         $("#loginButton").removeClass('disabled');
         window.localStorage.setItem("token", data.token);
