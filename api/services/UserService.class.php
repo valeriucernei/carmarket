@@ -141,4 +141,29 @@ class UserService extends BaseService{
         return $db_user;
     }
 
+    public function update_info($id, $data){
+        if(isset($data['pass'])) $data['pass'] = md5($data['pass']);
+        try{
+          return $this->update($id, $data);
+        } catch (\Exception $e) {
+            if(str_contains($e->getMessage(), 'users.username_UNIQUE'))
+                throw new Exception("Account with same username exists in data base.", 400, $e);
+            else if(str_contains($e->getMessage(), 'users.email_UNIQUE'))
+                throw new Exception("Account with same email address exists in data base.", 400, $e);
+            else throw $e;
+        }
+    }
+
+    public function get_by_id_basic($id){
+        $db_user = $this->dao->get_by_id($id);
+        $result = [
+          'username' => $db_user['username'],
+          'fname' => $db_user['fname'],
+          'email' => $db_user['email'],
+          'phone' => $db_user['phone']
+        ];
+        if(isset($db_user['lname'])) $result['lname'] = $db_user['lname'];
+        return $result;
+    }
+
 }

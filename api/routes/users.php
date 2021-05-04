@@ -166,8 +166,7 @@ Flight::route('PUT /admin/account/@id', function($id){
 
 
 /**
-* @OA\Put(path="/user/account/{id}", tags={"x-user", "accounts"}, description="User edit it's personal information", security={{"ApiKeyAuth": {}}},
-*   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+* @OA\Put(path="/user/account", tags={"x-user", "accounts"}, description="User edit it's personal information", security={{"ApiKeyAuth": {}}},
 *   @OA\RequestBody(description="Basic account info that is going to be updated", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
@@ -185,7 +184,7 @@ Flight::route('PUT /admin/account/@id', function($id){
 */
 Flight::route('PUT /user/account', function(){
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::userservice()->update(Flight::get('user')['id'], $data));
+    Flight::json(Flight::userservice()->update_info(Flight::get('user')['id'], $data));
 });
 
 
@@ -197,4 +196,14 @@ Flight::route('PUT /user/account', function(){
 */
 Flight::route('GET /user/account', function(){
     Flight::json(Flight::userservice()->get_by_id(Flight::get('user')['id']));
+});
+
+/**
+* @OA\Get(path="/account/{id}", tags={"accounts"}, description="Query to get user's basic infrmation",
+*   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+*     @OA\Response(response="200", description="Fetch user account")
+* )
+*/
+Flight::route('GET /account/@id', function($id){
+    Flight::json(Flight::userservice()->get_by_id_basic($id));
 });
