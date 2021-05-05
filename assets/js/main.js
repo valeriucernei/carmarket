@@ -23,20 +23,6 @@ $(document).ready(function() {
     });
 
     app.run();
-    /*
-    if (history.pushState) {
-            if(window.location.href.split('/').pop() == '#main'){
-                alert("GOOD");
-                window.history.pushState("object or string", "Title", '/test');
-                //window.history.replaceState("CarMarket", "CarMarket", "/");
-                //window.history.pushState("object or string", "Title", '?'
-                //                      + window.location.href.split('/').pop());
-            }
-        } else {
-            if(window.location.href.split('/').pop() == '#main'){
-                document.location.href = '';
-        }
-    }*/
 
     if(window.localStorage.getItem("token")){
         $(".login-user").show();

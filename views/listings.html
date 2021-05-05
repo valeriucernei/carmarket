@@ -4,14 +4,15 @@
         <div class="col-md-12 col-lg-12 col-xl-11 col-xxl-3">
             <div class="card sticky-md-top">
                 <h4 class="text-center" style="margin: 6px 0 0;"><strong>Search</strong></h4>
+                <form id="searchForm" method="post" onsubmit="doSearch(); return false;">
                 <div class="row" style="margin: auto; width:100%;">
                     <div class="col-6 col-md-6 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                        <h6 class="text-text-muted">Brand</h6><select class="js-brand">
+                        <h6 class="text-text-muted">Brand</h6><select name="" class="js-brand js-select2-notags js-select2-settings">
                             <option value=""></option>
                         </select>
                     </div>
                     <div class="col-6 col-md-6 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                        <h6 class="text-text-muted">Model</h6><select class="js-model" disabled="">
+                        <h6 class="text-text-muted">Model</h6><select class="js-model js-select2-notags js-select2-settings" disabled="">
                             <option value=""></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -22,10 +23,10 @@
                             <div class="col-lg-12">
                                 <h6 class="text-text-muted">Year of production</h6>
                             </div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-right: 8px;"><select id="year-min" class="js-year-min">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-right: 8px;"><select id="year-min" class="js-year-min js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                 </select></div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 8px;"><select id="year-max" class="js-year-max">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 8px;"><select id="year-max" class="js-year-max js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                 </select></div>
                         </div>
@@ -35,7 +36,7 @@
                             <div class="col-lg-12">
                                 <h6 class="text-text-muted">Mileage</h6>
                             </div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-km-min">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-km-min js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                     <option value="5000">5 000 km</option>
                                     <option value="10000">10 000 km</option>
@@ -47,7 +48,7 @@
                                     <option value="200000">200 000 km</option>
                                     <option value="250000">250 000 km</option>
                                 </select></div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-km-max">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-km-max js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                     <option value="5000">5 000 km</option>
                                     <option value="10000">10 000 km</option>
@@ -66,23 +67,23 @@
                             <div class="col-lg-12">
                                 <h6 class="text-text-muted">Motor size</h6>
                             </div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select id="motor-min" class="js-motor-min">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select id="motor-min" class="js-motor-min js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                 </select></div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select id="motor-max" class="js-motor-max">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select id="motor-max" class="js-motor-max js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                 </select></div>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                        <h6 class="text-text-muted">Gearbox</h6><select class="js-gear">
+                        <h6 class="text-text-muted">Gearbox</h6><select class="js-gear js-select2-notags js-select2-settings">
                             <option value=""></option>
                             <option value="1">Manual</option>
                             <option value="2">Automatic</option>
                         </select>
                     </div>
                     <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-2 col-xxl-6" style="padding: 8px;">
-                        <h6 class="text-text-muted">Fuel</h6><select class="js-fuel">
+                        <h6 class="text-text-muted">Fuel</h6><select class="js-fuel js-select2-notags js-select2-settings">
                             <option value=""></option>
                             <option value="1">Gasoline</option>
                             <option value="2">Diesel</option>
@@ -96,7 +97,7 @@
                             <div class="col-lg-12">
                                 <h6 class="text-text-muted">Price</h6>
                             </div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-price-min">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 8px;"><select class="js-price-min js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                     <option value="1000">1 000 €</option>
                                     <option value="2000">2 000 €</option>
@@ -113,7 +114,7 @@
                                     <option value="100000">100 000 €</option>
                                     <option value="200000">200 000 €</option>
                                 </select></div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-price-max">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-left: 8px;"><select class="js-price-max js-select2-tags js-select2-settings">
                                     <option value=""></option>
                                     <option value="1000">1 000 €</option>
                                     <option value="2000">2 000 €</option>
@@ -132,13 +133,14 @@
                                 </select></div>
                         </div>
                     </div>
-                    <div class="col-xl-12" style="text-align: center;padding: 0 8px;"><button class="btn btn-danger" type="button" style="margin: 16px 0 8px;width: 100%;">Search</button></div>
+                    <div class="col-xl-12" style="text-align: center;padding: 0 8px;"><button class="btn btn-danger" type="submit" style="margin: 16px 0 8px;width: 100%;">Search</button></div>
                 </div>
+                </form>
             </div>
         </div>
         <div class="col-md-12 col-lg-12 col-xl-11 col-xxl-9">
             <div class="row">
-                <div class="col-xxl-12 text-end form-inline mb-3"><label class="form-label d-inline-block" for="sort-select">Sort by&nbsp;</label><select class="js-sort">
+                <div class="col-xxl-12 text-end form-inline mb-3"><label class="form-label d-inline-block" for="sort-select">Sort by&nbsp;</label><select class="js-sort js-select2-tags js-select2-settings">
                         <option value="-ads.id" selected="">Default</option>
                         <option value="-ads.updated">Date ↑</option>
                         <option value="+ads.updated">Date ↓</option>
@@ -146,7 +148,7 @@
                         <option value="+ads.price">Price ↓</option>
                     </select></div>
                 <!-- MAIN CONTENT ----------------------------------------------------->
-
+                <div id="listings-content" class="row">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="https://picsum.photos/200" style="object-fit: cover;">
                         <div class="card-body">
                             <h6>Volkswagen Sharan&nbsp;</h6>
@@ -227,7 +229,7 @@
                             <p class="price">123 000&nbsp;<i class="fa fa-euro"></i></p>
                         </div>
                     </a></div>
-
+                </div>
                 <!-- MAIN CONTENT END ------------------------------------------------->
             </div>
         </div>
