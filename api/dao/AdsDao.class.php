@@ -10,7 +10,7 @@ class AdsDao extends BaseDao{
 
 
 
-    public function get_all_ads($offset, $limit, $order, $user_id, $car_body, $fabricated_min,
+    public function get_all_ads($offset, $limit, $order, $user_id, $model, $car_body, $fabricated_min,
                             $fabricated_max, $km_min, $km_max, $price_min, $price_max,
                             $gearbox, $fuel_type, $motor_size_min, $motor_size_max){
 
@@ -19,6 +19,7 @@ class AdsDao extends BaseDao{
         $query = "SELECT * FROM ads_list WHERE 1 = 1";
 
         if($user_id > 0) $query .= " AND user_id = ${user_id}";
+        if($model > 0) $query .= " AND model = ${model}";
         if($car_body > 0) $query .= " AND car_body = ${car_body}";
         $query .= " AND fabricated >= :fabricated_min";
         $query .= " AND fabricated <= :fabricated_max";
@@ -55,7 +56,7 @@ class AdsDao extends BaseDao{
 
 
 
-    public function get_ads($search, $offset, $limit, $order, $user_id, $car_body,
+    public function get_ads($search, $offset, $limit, $order, $user_id, $model, $car_body,
                             $fabricated_min, $fabricated_max, $km_min, $km_max,
                             $price_min, $price_max, $gearbox, $fuel_type ,
                             $motor_size_min, $motor_size_max){
@@ -65,6 +66,7 @@ class AdsDao extends BaseDao{
         $query = "SELECT * FROM ads_list
                   WHERE LOWER(title) LIKE CONCAT('%', :title, '%')";
         if($user_id > 0) $query .= " AND user_id = ${user_id}";
+        if($model > 0) $query .= " AND model = ${model}";
         if($car_body > 0) $query .= " AND car_body = ${car_body}";
         $query .= " AND fabricated >= :fabricated_min";
         $query .= " AND fabricated <= :fabricated_max";

@@ -12,18 +12,16 @@ class AdsService extends BaseService{
         $this->atributesDao = new AtributesDao();
     }
 
-
-
-    public function get_ads($search, $offset, $limit, $order, $user_id, $car_body, $fabricated_min,
-                            $fabricated_max, $km_min, $km_max, $price_min, $price_max,
-                            $gearbox, $fuel_type, $motor_size_min, $motor_size_max){
+    public function get_ads($search, $offset, $limit, $order, $user_id, $model, $car_body,
+                            $fabricated_min, $fabricated_max, $km_min, $km_max, $price_min,
+                            $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max){
         if($search){
-              return $this->dao->get_ads($search, $offset, $limit, $order, $user_id, $car_body,
+              return $this->dao->get_ads($search, $offset, $limit, $order, $user_id, $model, $car_body,
                                         $fabricated_min, $fabricated_max, $km_min,
                                         $km_max, $price_min, $price_max, $gearbox,
                                         $fuel_type, $motor_size_min, $motor_size_max);
           }else{
-              return $this->dao->get_all_ads($offset, $limit, $order, $user_id, $car_body,
+              return $this->dao->get_all_ads($offset, $limit, $order, $user_id, $model, $car_body,
                                             $fabricated_min, $fabricated_max, $km_min,
                                             $km_max, $price_min, $price_max, $gearbox,
                                             $fuel_type, $motor_size_min, $motor_size_max);

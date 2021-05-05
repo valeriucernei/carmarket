@@ -8,6 +8,7 @@
 *     @OA\Parameter(type="string", in="query", name="search", description="Search string for accounts (Case insensitive search)"),
 *     @OA\Parameter(type="string", in="query", name="order", default="-ads.id", description="Sorting for return elements -column_name ascending, or +column_name descending"),
 *     @OA\Parameter(type="integer", in="query", name="user_id", default=null, description="ID of the user who created the ad"),
+*     @OA\Parameter(type="integer", in="query", name="model", default=null, description="ID of car Model or Brand"),
 *     @OA\Parameter(type="integer", in="query", name="car_body", default=null, description="Car Body number"),
 *     @OA\Parameter(type="integer", in="query", name="fabricated_min", default=1970, description="Minimal year of fabrication"),
 *     @OA\Parameter(type="integer", in="query", name="fabricated_max", default=2021, description="Maximum year of fabrication"),
@@ -28,6 +29,7 @@ Flight::route('GET /ads', function(){
     $search = Flight::query('search');
     $order = Flight::query('order', "-ads.id");
     $user_id = Flight::query('user_id');
+    $model = Flight::query('model');
     $car_body = Flight::query('car_body');
     $fabricated_min = Flight::query('fabricated_min', 1970);
     $fabricated_max = Flight::query('fabricated_max', date("Y"));
@@ -40,11 +42,9 @@ Flight::route('GET /ads', function(){
     $motor_size_min = Flight::query('motor_size_min',0);
     $motor_size_max = Flight::query('motor_size_max',10000);
     Flight::json(Flight::adsservice()->get_ads($search, $offset, $limit, $order,
-    $user_id, $car_body, $fabricated_min, $fabricated_max, $km_min, $km_max,
+    $user_id, $model, $car_body, $fabricated_min, $fabricated_max, $km_min, $km_max,
     $price_min, $price_max, $gearbox, $fuel_type, $motor_size_min, $motor_size_max));
 });
-
-
 
 /**
 * @OA\Get(path="/ads/{id}", tags={"advertisements"},  description="Query to get ad info by ID",
@@ -55,8 +55,6 @@ Flight::route('GET /ads', function(){
 Flight::route('GET /ads/@id', function($id){
     flight::json(Flight::adsservice()->get_ad_by_id($id));
 });
-
-
 
 /**
 * @OA\Post(path="/user/ads/add", tags={"x-user", "advertisements"}, description="Query for users to add a new ad", security={{"ApiKeyAuth": {}}},
@@ -82,8 +80,6 @@ Flight::route('GET /ads/@id', function($id){
 Flight::route('POST /user/ads/add', function(){
     Flight::json(Flight::adsservice()->add_ad(Flight::get('user'), Flight::request()->data->getData()));
 });
-
-
 
 /**
  * @OA\Put(path="/user/ads/{id}", tags={"x-user", "advertisements"}, description="Query for users to edit one of their ad", security={{"ApiKeyAuth": {}}},
@@ -112,8 +108,6 @@ Flight::route('PUT /user/ads/@id', function($id){
         throw new Exception("You don't have access to this ad.", 403);
     Flight::json(Flight::adsservice()->update_ad($id, Flight::request()->data->getData()));
 });
-
-
 
 /**
  * @OA\Put(path="/admin/ads/{id}", tags={"x-admin","advertisements"}, description="Query for Admins, to edit any ad in the system", security={{"ApiKeyAuth": {}}},
