@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 function doLogin() {
     $("#loginButton").addClass('disabled');
-    $.post(getUrl() + "/api/login/", jsonize_form("#loginForm")).done(function( data ) {
+    $.post("api/login/", jsonize_form("#loginForm")).done(function( data ) {
         $('#loginModal').modal('hide');
         $("#loginButton").removeClass('disabled');
         window.localStorage.setItem("token", data.token);

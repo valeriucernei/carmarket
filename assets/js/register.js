@@ -8,7 +8,7 @@ function doRegister() {
     $('#regpassnotmatch').hide();
     $("#regButton").addClass('disabled');
 
-    $.post(getUrl() + "/api/register/", jsonize_form("#registerForm")).done(function( data ) {
+    $.post("api/register/", jsonize_form("#registerForm")).done(function( data ) {
         $('#regConfirmModal').modal('show');
     }).fail(function(error){
         $("#regalert").show().text( error.responseJSON.message );

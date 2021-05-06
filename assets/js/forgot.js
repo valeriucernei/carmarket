@@ -13,7 +13,7 @@ function doForgot(){
         "email" : $("#forgotinput").val()
     };
 
-    $.post(getUrl() + "/api/forgot/", forgot_info).done(function( data ) {
+    $.post("api/forgot/", forgot_info).done(function( data ) {
         $('#forgotSuccess').show();
         $("#resetButton").removeClass('disabled');
     }).fail(function(error){

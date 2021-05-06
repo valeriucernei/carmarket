@@ -2,21 +2,26 @@ $(document).ready(function() {
     loadBrands();
     loadRest();
     loadSearchData();
-    doSearch();
+    doSearch(1);
 });
 
-function doSearch(){
+function doSearch(page){
   $("#searchButton").addClass('disabled');
   freezeSearch();
   $("#listings-content,#mypagination").html("");
   $('#listings-content').append('<div id="loader" style="text-align: center;"></div>');
   var searchData = jsonize_form("#searchForm");
+  var total = 0;
+  searchData.limit = 1000;
+  $.get("api/ads/", searchData).done(function( data ) {
+      total = data.length;
+      alert("Total "+total);
+  });
   searchData.offset = 0;
-  window.history.replaceState(null, null, "?p=1#main");
-  searchData.limit = 24;
+  searchData.limit = 4;
   searchData.order = $(".js-sort").val();
   console.log(searchData);
-  $.get(getUrl() + "/api/ads/", searchData).done(function( data ) {
+  $.get("api/ads/", searchData).done(function( data ) {
       $("#searchButton").removeClass('disabled');
       console.log(data);
       $("#listings-content").html("");
@@ -57,20 +62,27 @@ function doSearch(){
           }
           html += '</ul><p class="price">'+parseInt(data[i].price).toLocaleString()+'&nbsp;<i class="fa fa-euro"></i></p></div></a></div>';
           $('#listings-content').append(html);
-          unfreezeSearch();
-          loadPagination();
       }
+      unfreezeSearch();
+
+      //  loadPagination
+      pages = data.length/searchData.limit;
+      alert(data.length);alert(searchData.limit);alert(pages);
+      current = 4;
+      $(".mypagination").html("");
+      if(current > 1) $(".mypagination").append('<a onclick="doSearch('+(current-1)+')">«</a>');
+      for(var i = 1; i <= pages; i++) {
+          if(i == current) $(".mypagination").append('<a onclick="doSearch('+i+')" class="active">'+i+'</a>');
+          else $(".mypagination").append('<a onclick="doSearch('+i+')">'+i+'</a>');
+      }
+      if(current < pages) $(".mypagination").append('<a onclick="doSearch('+(current+1)+')">»</a>');
+
+
   }).fail(function(error){
       $("#searchButton").removeClass('disabled');
       unfreezeSearch();
       console.log(error);
   });
-}
-
-function loadPagination(){
-    $(".mypagination").html('<a href="#">«</a>');
-    for(var i = 0; i < 3; i++) $(".mypagination").append('<a href="#">'+(i+1)+'</a>');
-    $(".mypagination").append('<a href="#">»</a>');
 }
 
 function loadBrands() {
@@ -181,7 +193,7 @@ function loadRest(){
       tags: true,
       minimumResultsForSearch: Infinity
   }).on('select2:select', function (e) {
-      doSearch();
+      doSearch(1);
   });
 }
 

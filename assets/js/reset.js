@@ -20,7 +20,7 @@ function doReset() {
       };
 
       $("#resetButton").addClass('disabled');
-      $.post(getUrl() + "/api/reset", reset_info).done(function(data){
+      $.post("api/reset", reset_info).done(function(data){
           $("#resetButton").removeClass('disabled');
           window.localStorage.setItem("token", data.token);
           location.replace("?#main");
