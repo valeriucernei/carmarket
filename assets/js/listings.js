@@ -4,14 +4,14 @@ $(document).ready(function() {
 
 function updateListings(page){
   $("#searchButton").addClass('disabled');
-  freezeSearch();
   $("#listings-content,.mypagination").html("");
   $('#listings-content').append('<div id="loader" style="text-align: center;"></div>');
   var searchData = jsonize_form("#searchForm");
+  freezeSearch();
+  console.log(searchData);
   searchData.limit = 12;
   searchData.offset = (page-1) * searchData.limit;
   searchData.order = $(".js-sort").val();
-  console.log(searchData);
   $.get("api/ads/", searchData).done(function( data ) {
       $("#searchButton").removeClass('disabled');
       console.log(data);
@@ -55,6 +55,7 @@ function updateListings(page){
           $('#listings-content').append(html);
       }
       unfreezeSearch();
+
       var total = 0;
       searchData.limit = 1000; searchData.offset = 0;
       $.get("api/ads/", searchData).done(function( data ) {

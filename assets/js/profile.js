@@ -1,3 +1,4 @@
+/*
 $(document).ready(function() {
     getUserProfile();
 });
@@ -40,3 +41,4 @@ function updateProfile(){
          }
       });
 }
+*/

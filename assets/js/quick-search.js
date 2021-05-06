@@ -19,7 +19,7 @@ function loadBrands() {
                 width: '100%',
                 allowClear: true,
                 minimumResultsForSearch: Infinity,
-                data:xdata
+                data:xdata,
             }).on('select2:select', function (e) {
                 $(".js-model").prop("disabled", true);
                 $(".js-model").empty();
@@ -133,8 +133,9 @@ function freezeSearch(){
 }
 
 function unfreezeSearch(){
-    $(".js-brand,.js-model,.js-year-min,.js-year-max,.js-km-min,.js-km-max,"+
+    $(".js-brand,.js-year-min,.js-year-max,.js-km-min,.js-km-max,"+
       ".js-motor-min,.js-motor-max,.js-gear,.js-fuel,.js-price-min,.js-price-max").prop("disabled", false);
+    if($(".js-brand").val() > 0) $(".js-model").prop("disabled", false);
 }
 
 $(document).on('keypress', '.select2-search__field', function () {
