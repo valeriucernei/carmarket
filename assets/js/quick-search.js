@@ -8,17 +8,11 @@ $(document).ready(function() {
 function doSearch(page){
   $("#searchButton").addClass('disabled');
   freezeSearch();
-  $("#listings-content,#mypagination").html("");
+  $("#listings-content,.mypagination").html("");
   $('#listings-content').append('<div id="loader" style="text-align: center;"></div>');
   var searchData = jsonize_form("#searchForm");
-  var total = 0;
-  searchData.limit = 1000;
-  $.get("api/ads/", searchData).done(function( data ) {
-      total = data.length;
-      alert("Total "+total);
-  });
-  searchData.offset = 0;
   searchData.limit = 4;
+  searchData.offset = (page-1) * searchData.limit;
   searchData.order = $(".js-sort").val();
   console.log(searchData);
   $.get("api/ads/", searchData).done(function( data ) {
@@ -39,7 +33,7 @@ function doSearch(page){
               case 2: gearbox = "Automatic"; break;
           }
           var html = '<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card animate-bottom" href="#"><img src="'+getUrl()+"/assets/img/listings/"+data[i].photo+'" style="object-fit: cover;">';
-          html += '<div class="card-body"><h6>'+data[i].brand_name+' '+data[i].model_name+'&nbsp;</h6><ul class="list-inline atributes">';
+          html += '<div class="card-body"><h6>'+data[i].id+' '+data[i].brand_name+' '+data[i].model_name+'&nbsp;</h6><ul class="list-inline atributes">';
 
           if (parseInt(data[i].fabricated) > 0){
               html += '<li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">';
@@ -64,20 +58,22 @@ function doSearch(page){
           $('#listings-content').append(html);
       }
       unfreezeSearch();
-
-      //  loadPagination
-      pages = data.length/searchData.limit;
-      alert(data.length);alert(searchData.limit);alert(pages);
-      current = 4;
-      $(".mypagination").html("");
-      if(current > 1) $(".mypagination").append('<a onclick="doSearch('+(current-1)+')">«</a>');
-      for(var i = 1; i <= pages; i++) {
-          if(i == current) $(".mypagination").append('<a onclick="doSearch('+i+')" class="active">'+i+'</a>');
-          else $(".mypagination").append('<a onclick="doSearch('+i+')">'+i+'</a>');
-      }
-      if(current < pages) $(".mypagination").append('<a onclick="doSearch('+(current+1)+')">»</a>');
-
-
+      var total = 0;
+      searchData.limit = 1000; searchData.offset = 0;
+      $.get("api/ads/", searchData).done(function( data ) {
+          total = data.length;
+          //  loadPagination
+          pages = Math.ceil(total/4);
+          console.log(total);
+          console.log(data.length+" "+searchData.limit+" "+pages);
+          $(".mypagination").html("");
+          if(page > 1) $(".mypagination").append('<a onclick="doSearch('+(page-1)+')">«</a>');
+          for(var i = 1; i <= pages; i++) {
+              if(i == page) $(".mypagination").append('<a onclick="doSearch('+i+')" class="active">'+i+'</a>');
+              else $(".mypagination").append('<a onclick="doSearch('+i+')">'+i+'</a>');
+          }
+          if(page < pages) $(".mypagination").append('<a onclick="doSearch('+(page+1)+')">»</a>');
+      });
   }).fail(function(error){
       $("#searchButton").removeClass('disabled');
       unfreezeSearch();
