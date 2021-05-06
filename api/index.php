@@ -13,7 +13,7 @@ Flight::set('flight.log_errors', True);
 
 
 
-/* error handling for our API */
+/* error handling for our API *
 Flight::map('error', function(Exception $ex){
     Flight::json(["message" => $ex->getMessage()], $ex->getCode() ? $ex->GetCode() : 500);
 });
