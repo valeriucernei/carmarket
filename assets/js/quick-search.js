@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 function loadBrands() {
     $.ajax({
-        url: getUrl() + "/api/cars/brands",
+        url: "api/cars/brands",
         type: "GET",
         success: function(data, textStatus, jqXHR){
             var xdata = $.map(data, function (obj) {
@@ -19,7 +19,7 @@ function loadBrands() {
                 width: '100%',
                 allowClear: true,
                 minimumResultsForSearch: Infinity,
-                data:xdata,
+                data:xdata
             }).on('select2:select', function (e) {
                 $(".js-model").prop("disabled", true);
                 $(".js-model").empty();
@@ -44,7 +44,7 @@ function loadBrands() {
 
 function loadModels(id) {
   $.ajax({
-      url: getUrl() + "/api/cars/models/"+ id,
+      url: "api/cars/models/"+ id,
       type: "GET",
       success: function(data, textStatus, jqXHR){
           var xdata = $.map(data, function (obj) {

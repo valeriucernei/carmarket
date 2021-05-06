@@ -22,10 +22,21 @@ $(document).ready(function() {
         $.getScript("assets/js/reset.js", function(){});}
     });
 
+    app.route({ view : "profile", load : "profile.html", onReady: function() {
+        $.getScript("assets/js/profile.js", function(){});}
+    });
+
     app.run();
 
     if(window.localStorage.getItem("token")){
-        $(".login-user").show();
+        $.ajax({
+             url: "api/user/account",
+             type: "GET",
+             beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+             success: function(data) {
+                 $("#profileButton.login-user").show().html(data.fname+" "+data.lname);
+             }
+        });
         $(".login-guest").hide();
     }else{
       $(".login-user").hide();
