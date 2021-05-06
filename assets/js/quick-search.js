@@ -8,11 +8,6 @@ function doSearch(){
   $("#searchButton").addClass('disabled');
   $("#listings-content").html("");
   var searchData = jsonize_form("#searchForm");
-  if(searchData.model > 0) delete searchData.brand;
-  if(searchData.brand > 0) {
-     searchData.model = searchData.brand;
-     delete searchData.brand;
-  }
   searchData.limit = 100;
   searchData.order = $(".js-sort").val();
   console.log(searchData);
