@@ -2,18 +2,24 @@ $(document).ready(function() {
     loadBrands();
     loadRest();
     loadSearchData();
+    doSearch();
 });
 
 function doSearch(){
   $("#searchButton").addClass('disabled');
-  $("#listings-content").html("");
+  freezeSearch();
+  $("#listings-content,#mypagination").html("");
+  $('#listings-content').append('<div id="loader" style="text-align: center;"></div>');
   var searchData = jsonize_form("#searchForm");
-  searchData.limit = 100;
+  searchData.offset = 0;
+  window.history.replaceState(null, null, "?p=1#main");
+  searchData.limit = 24;
   searchData.order = $(".js-sort").val();
   console.log(searchData);
   $.get(getUrl() + "/api/ads/", searchData).done(function( data ) {
       $("#searchButton").removeClass('disabled');
       console.log(data);
+      $("#listings-content").html("");
       for(var i = 0; i < data.length; i++){
           var fuel, gearbox;
           switch(parseInt(data[i].fuel_type)){
@@ -27,7 +33,7 @@ function doSearch(){
               case 1: gearbox = "Manual"; break;
               case 2: gearbox = "Automatic"; break;
           }
-          var html = '<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card" href="#"><img src="'+getUrl()+"/assets/img/listings/"+data[i].photo+'" style="object-fit: cover;">';
+          var html = '<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card animate-bottom" href="#"><img src="'+getUrl()+"/assets/img/listings/"+data[i].photo+'" style="object-fit: cover;">';
           html += '<div class="card-body"><h6>'+data[i].brand_name+' '+data[i].model_name+'&nbsp;</h6><ul class="list-inline atributes">';
 
           if (parseInt(data[i].fabricated) > 0){
@@ -51,11 +57,20 @@ function doSearch(){
           }
           html += '</ul><p class="price">'+parseInt(data[i].price).toLocaleString()+'&nbsp;<i class="fa fa-euro"></i></p></div></a></div>';
           $('#listings-content').append(html);
+          unfreezeSearch();
+          loadPagination();
       }
   }).fail(function(error){
       $("#searchButton").removeClass('disabled');
+      unfreezeSearch();
       console.log(error);
   });
+}
+
+function loadPagination(){
+    $(".mypagination").html('<a href="#">«</a>');
+    for(var i = 0; i < 3; i++) $(".mypagination").append('<a href="#">'+(i+1)+'</a>');
+    $(".mypagination").append('<a href="#">»</a>');
 }
 
 function loadBrands() {
@@ -179,6 +194,16 @@ function loadSearchData(){
     for (var i = 500; i <= 3000; i += 250){
         $('#motor-min,#motor-max').append(`<option value="${i}">${i} cm&sup3;</option>`);
     }
+}
+
+function freezeSearch(){
+    $(".js-brand,.js-model,.js-year-min,.js-year-max,.js-km-min,.js-km-max,"+
+      ".js-motor-min,.js-motor-max,.js-gear,.js-fuel,.js-price-min,.js-price-max").prop("disabled", true);
+}
+
+function unfreezeSearch(){
+    $(".js-brand,.js-model,.js-year-min,.js-year-max,.js-km-min,.js-km-max,"+
+      ".js-motor-min,.js-motor-max,.js-gear,.js-fuel,.js-price-min,.js-price-max").prop("disabled", false);
 }
 
 $(document).on('keypress', '.select2-search__field', function () {
