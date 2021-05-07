@@ -26,6 +26,10 @@ $(document).ready(function() {
         $.getScript("assets/js/profile.js", function(){});}
     });
 
+    app.route({ view : "view", load : "view.html", onReady: function() {
+        $.getScript("assets/js/Simple-Slider.js", function(){});
+    }});
+
     app.run();
 
     if(window.localStorage.getItem("token")){

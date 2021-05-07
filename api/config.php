@@ -27,7 +27,7 @@ class Config {
         return Config::get_env("SMTP_USER", "car.market.noreply@gmail.com");
     }
     public static function SMTP_PASSWORD(){
-        return Config::get_env("SMTP_PASSWORD", "Asd-1234");
+        return Config::get_env("SMTP_PASSWORD", "nptnyevozkjosmcc");
     }
 
     const JWT_SECRET = "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.";

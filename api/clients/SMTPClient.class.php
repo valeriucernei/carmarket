@@ -23,8 +23,8 @@ class SMTPClient{
                         'noreply@car-market.live' => 'CarMarket No Reply Mail'])
                     ->setTo([$user['email']])
                     ->setBody(
-                        'Confirmation link: http://localhost/carmarket/api/confirm/'.
-                        $user['token']);
+                        'Confirmation link: http://localhost/carmarket/?confirmation='.
+                        $user['token']."#confirm");
         $this->mailer->send($message);
     }
 
