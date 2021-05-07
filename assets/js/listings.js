@@ -29,7 +29,7 @@ function updateListings(page){
               case 1: gearbox = "Manual"; break;
               case 2: gearbox = "Automatic"; break;
           }
-          var html = '<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card animate-bottom" href="#"><img src="'+getUrl()+"/assets/img/listings/"+data[i].photo+'" style="object-fit: cover;">';
+          var html = '<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card animate-bottom" href="?id='+data[i].id+'#view"><img src="assets/img/listings/'+data[i].photo+'" style="object-fit: cover;">';
           html += '<div class="card-body"><h6>'+data[i].brand_name+' '+data[i].model_name+'&nbsp;</h6><ul class="list-inline atributes">';
 
           if (parseInt(data[i].fabricated) > 0){
