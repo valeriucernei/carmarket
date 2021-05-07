@@ -13,7 +13,7 @@
 <script type="text/javascript">
     $(function() {
         var urlParams = new URLSearchParams(window.location.search);
-        if(urlParams.has('token')){
+        if(urlParams.has('confirmation')){
             $.get("api/confirm/" + urlParams.get('confirmation')).done(function(data){
                 $("#confirmedAlert").show();
                 window.localStorage.setItem("token", data.token);
