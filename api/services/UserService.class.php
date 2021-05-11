@@ -142,11 +142,16 @@ class UserService extends BaseService{
     }
 
     public function update_info($id, $data){
-        if(isset($data['pass'])) $data['pass'] = md5($data['pass']);
-        if(isset($data['pass']) && strlen($data['pass']) < 6)
-            throw new Exception("Password is too short. Min 6 characters", 400, $e);
+        $verify = $this->dao->get_by_id($id);
+        if(!isset($data['fname']) || strlen($data['fname'])<3) $data['fname'] = $verify['fname'];
+        if(!isset($data['lname']) || strlen($data['lname'])<3) $data['lname'] = $verify['lname'];
+        if(!isset($data['email']) || strlen($data['email'])<3) $data['email'] = $verify['email'];
+        if(!isset($data['phone']) || strlen($data['phone'])<3) $data['phone'] = $verify['phone'];
+        if(!isset($data['pass']) || strlen($data['pass'])<6) $data['pass'] = $verify['pass'];
+        else $data['pass'] = md5($data['pass']);
+
         try{
-          return $this->update($id, $data);
+            return $this->update($id, $data);
         } catch (\Exception $e) {
             if(str_contains($e->getMessage(), 'users.username_UNIQUE'))
                 throw new Exception("Account with same username exists in data base.", 400, $e);

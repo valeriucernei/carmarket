@@ -11,6 +11,7 @@ function updateListings(page){
   searchData.limit = 12;
   searchData.offset = (page-1) * searchData.limit;
   searchData.order = $(".js-sort").val();
+  console.log(searchData);
   $.get("api/ads/", searchData).done(function( data ) {
       $("#searchButton").removeClass('disabled');
       console.log(data);
