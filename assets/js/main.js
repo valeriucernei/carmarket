@@ -24,14 +24,16 @@ $(document).ready(function() {
 
     app.route({ view : "profile", load : "profile.html", onReady: function() {
         $.getScript("assets/js/profile.js", function(){});
+        $.getScript("assets/js/profile_info.js", function(){});
+    }});
+
+    app.route({ view : "publications", load : "publications.html", onReady: function() {
+        $.getScript("assets/js/profile.js", function(){});
+        $.getScript("assets/js/publications.js", function(){});
     }});
 
     app.route({ view : "view", load : "view.html", onReady: function() {
         $.getScript("assets/js/Simple-Slider.js", function(){});
-    }});
-
-    app.route({ view : "publications", load : "publications.html", onReady: function() {
-        $.getScript("assets/js/publications.js", function(){});
     }});
 
     app.run();
