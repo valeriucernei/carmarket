@@ -3,31 +3,35 @@ $(document).ready(function() {
 
     app.route({ view : "main", load : "listings.html", onReady: function() {
         $.getScript("assets/js/quick-search.js", function(){});
-        $.getScript("assets/js/listings.js", function(){});}
-    });
+        $.getScript("assets/js/listings.js", function(){});
+    }});
 
     app.route({ view : "new", load : "new.html", onReady: function() {
-        $.getScript("assets/js/new-ad.js", function(){});}
-    });
+        $.getScript("assets/js/new-ad.js", function(){});
+    }});
 
     app.route({ view : "register", load : "register.html", onReady: function() {
-        $.getScript("assets/js/register.js", function(){});}
-    });
+        $.getScript("assets/js/register.js", function(){});
+    }});
 
     app.route({ view : "forgot", load : "forgot.html", onReady: function() {
-        $.getScript("assets/js/forgot.js", function(){});}
-    });
+        $.getScript("assets/js/forgot.js", function(){});
+    }});
 
     app.route({ view : "reset", load : "reset.html", onReady: function() {
-        $.getScript("assets/js/reset.js", function(){});}
-    });
+        $.getScript("assets/js/reset.js", function(){});
+    }});
 
     app.route({ view : "profile", load : "profile.html", onReady: function() {
-        $.getScript("assets/js/profile.js", function(){});}
-    });
+        $.getScript("assets/js/profile.js", function(){});
+    }});
 
     app.route({ view : "view", load : "view.html", onReady: function() {
         $.getScript("assets/js/Simple-Slider.js", function(){});
+    }});
+
+    app.route({ view : "publications", load : "publications.html", onReady: function() {
+        $.getScript("assets/js/publications.js", function(){});
     }});
 
     app.run();
