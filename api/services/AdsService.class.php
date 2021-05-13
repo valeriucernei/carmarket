@@ -49,13 +49,13 @@ class AdsService extends BaseService{
         if(!isset($data['description']) || strlen($data['description'])<1)
             $data['description'] = null;
         if(!isset($data['km']) || strlen($data['km'])<1)
-            $data['km'] = null;
+            $data['km'] = "0";
         if(!isset($data['motor_size']) || strlen($data['motor_size'])<1)
-            $data['motor_size'] = null;
+            $data['motor_size'] = "0";
         if(!isset($data['gearbox']) || strlen($data['gearbox'])<1)
-            $data['gearbox'] = null;
+            $data['gearbox'] = "0";
         if(!isset($data['fuel_type']) || strlen($data['fuel_type'])<1)
-            $data['fuel_type'] = null;
+            $data['fuel_type'] = "0";
 
         try{
             $this->dao->beginTransaction();
