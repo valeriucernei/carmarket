@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    $('#regalert').hide();
-    $('#regpassnotmatch').hide();
 });
 
 function doRegister() {

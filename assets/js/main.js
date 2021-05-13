@@ -36,6 +36,10 @@ $(document).ready(function() {
         $.getScript("assets/js/Simple-Slider.js", function(){});
     }});
 
+    app.route({ view : "new", load : "new.html", onReady: function() {
+        $.getScript("assets/js/new.js", function(){});
+    }});
+
     app.run();
 
     if(window.localStorage.getItem("token")){

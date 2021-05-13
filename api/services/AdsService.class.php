@@ -46,6 +46,17 @@ class AdsService extends BaseService{
         if(!isset($data['fabricated']))
             throw new Exception("Year field is required.");
 
+        if(!isset($data['description']) || strlen($data['description'])<1)
+            $data['description'] = null;
+        if(!isset($data['km']) || strlen($data['km'])<1)
+            $data['km'] = null;
+        if(!isset($data['motor_size']) || strlen($data['motor_size'])<1)
+            $data['motor_size'] = null;
+        if(!isset($data['gearbox']) || strlen($data['gearbox'])<1)
+            $data['gearbox'] = null;
+        if(!isset($data['fuel_type']) || strlen($data['fuel_type'])<1)
+            $data['fuel_type'] = null;
+
         try{
             $this->dao->beginTransaction();
 
@@ -68,8 +79,8 @@ class AdsService extends BaseService{
             $this->dao->commit();
         } catch (\Exception $e) {
             $this->dao->rollBack();
-            throw new Exception("Something went wrong! Ad has not been added.
-                                  Please, try again.", 400);
+            throw new Exception("Something went wrong! Ad has not been added."
+                                  + "Please, try again.", 400);
         }
         $this->atributesDao->update($atributes['id'], ["ad_id" => $ad['id']]);
         return $this->dao->get_ad_by_id($ad['id']);
@@ -108,8 +119,8 @@ class AdsService extends BaseService{
             $this->dao->commit();
         } catch (\Exception $e) {
             $this->dao->rollBack();
-            throw new Exception("Something went wrong! Ad has not been updated.
-                                  Please, try again.", 400);
+            throw new Exception("Something went wrong! Ad has not been updated."
+                                  + "Please, try again.", 400);
         }
         return $this->dao->get_ad_by_id($id);
     }
