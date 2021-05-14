@@ -23,7 +23,7 @@ class SMTPClient{
                         'noreply@car-market.live' => 'CarMarket No Reply Mail'])
                     ->setTo([$user['email']])
                     ->setBody(
-                        'Confirmation link: http://localhost/carmarket/?confirmation='.
+                        'Confirmation link: https://car-market.live/?confirmation='.
                         $user['token']."#confirm");
         $this->mailer->send($message);
     }
@@ -45,7 +45,7 @@ class SMTPClient{
         $message = (new Swift_Message('CarMarket | Reset Password Link'))
             ->setFrom(['noreply@car-market.live' => 'CarMarket No Reply Mail'])
             ->setTo([$user['email']])
-            ->setBody('Recovery link: http://localhost/carmarket/?token='.$user['token']."#reset");
+            ->setBody('Recovery link: https://car-market.live/?token='.$user['token']."#reset");
         $this->mailer->send($message);
     }
 

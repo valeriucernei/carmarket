@@ -15,7 +15,7 @@ function getPublications(){
         success: function(data){
             searchData['user_id'] = data.id;
             searchData['offset'] = 0;
-            searchData['limit'] = 24;
+            searchData['limit'] = 1000;
             showPublications(searchData);
         },
         error: function(error){ console.log(error); }
