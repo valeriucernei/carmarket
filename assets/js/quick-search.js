@@ -125,17 +125,6 @@ function loadSearchData(){
     }
 }
 
-function freezeSearch(){
-    $(".js-brand,.js-model,.js-year-min,.js-year-max,.js-km-min,.js-km-max,"+
-      ".js-motor-min,.js-motor-max,.js-gear,.js-fuel,.js-price-min,.js-price-max").prop("disabled", true);
-}
-
-function unfreezeSearch(){
-    $(".js-brand,.js-year-min,.js-year-max,.js-km-min,.js-km-max,"+
-      ".js-motor-min,.js-motor-max,.js-gear,.js-fuel,.js-price-min,.js-price-max").prop("disabled", false);
-    if($(".js-brand").val() > 0) $(".js-model").prop("disabled", false);
-}
-
 $(document).on('keypress', '.select2-search__field', function () {
     $(this).val($(this).val().replace(/[^\d].+/, ""));
     if ((event.which < 48 || event.which > 57)) {

@@ -55,6 +55,10 @@ class AdsDao extends BaseDao{
                                     WHERE id = :id", ["id" => $id]);
     }
 
+    public function get_ads_count(){
+        return $this->query("SELECT COUNT(id) as count FROM ads_list", NULL);
+    }
+
 
 
     public function get_ads($search, $offset, $limit, $order, $user_id, $brand, $model, $car_body,

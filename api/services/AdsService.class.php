@@ -86,6 +86,10 @@ class AdsService extends BaseService{
         return $this->dao->get_ad_by_id($ad['id']);
     }
 
+    public function get_ads_count(){
+        return $this->dao->get_ads_count();
+    }
+
 
 
     public function update_ad($id, $data){
