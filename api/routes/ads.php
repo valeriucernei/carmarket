@@ -49,15 +49,6 @@ Flight::route('GET /ads', function(){
 });
 
 /**
-* @OA\Get(path="/ads/number", tags={"advertisements"},  description="Query to get the number of ads in database",
-*     @OA\Response(response="200", description="Fetched ads number")
-* )
-*/
-Flight::route('GET /ads/number', function(){
-    flight::json(Flight::adsservice()->get_ads_count());
-});
-
-/**
 * @OA\Get(path="/ads/{id}", tags={"advertisements"},  description="Query to get ad info by ID",
 *     @OA\Parameter(type="integer", in="path", name="id", default="1", description="Ad ID"),
 *     @OA\Response(response="200", description="Fetched ad info")
