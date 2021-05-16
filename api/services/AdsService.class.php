@@ -79,8 +79,7 @@ class AdsService extends BaseService{
             $this->dao->commit();
         } catch (\Exception $e) {
             $this->dao->rollBack();
-            throw new Exception("Something went wrong! Ad has not been added."
-                                  + "Please, try again.", 400);
+            throw new Exception("Something went wrong! Ad has not been added. Please, try again.", 400, $e);
         }
         $this->atributesDao->update($atributes['id'], ["ad_id" => $ad['id']]);
         return $this->dao->get_ad_by_id($ad['id']);
@@ -119,8 +118,7 @@ class AdsService extends BaseService{
             $this->dao->commit();
         } catch (\Exception $e) {
             $this->dao->rollBack();
-            throw new Exception("Something went wrong! Ad has not been updated."
-                                  + "Please, try again.", 400);
+            throw new Exception("Something went wrong! Ad has not been updated. Please, try again.", 400);
         }
         return $this->dao->get_ad_by_id($id);
     }
