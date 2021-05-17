@@ -1,11 +1,15 @@
 <?php
 require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/PhotosDao.class.php";
+require_once dirname(__FILE__)."/../clients/CDNClient.class.php";
 
 class PhotosService extends BaseService{
 
+    private $CDNClient;
+
     public function __construct(){
         $this->dao = new PhotosDao();
+        $this->CDNClient = new CDNClient();
     }
 
 
@@ -26,6 +30,10 @@ class PhotosService extends BaseService{
 
     public function delete_photo($id){
         return parent::delete($id);
+    }
+
+    public function upload($data){
+        return $this->CDNClient->upload($data['name'], $data['content']);
     }
 
 }

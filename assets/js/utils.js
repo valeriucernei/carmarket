@@ -14,6 +14,16 @@ function jsonize_form(selector){
     return form_data;
 }
 
+function insertData(selector, data){
+    var selectorData = $(selector).serializeArray();
+    var selectorNameData = "";
+
+    for(var i = 0; i < selectorData.length; i++){
+         selectorNameData = selectorData[i].name;
+         $('input[name="'+selectorNameData+'"]').val(data[selectorNameData]);
+    }
+}
+
 function createCard(data){
     var fuel, gearbox;
     switch(parseInt(data.fuel_type)){

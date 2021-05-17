@@ -1,7 +1,7 @@
 $(document).ready(function() {
     if(!localStorage.getItem("token")) {
         location.replace("#main");
-        $("#loginModal").modal("show")
+        $("#loginModal").modal("show");
     }
     else {
         loadBrands();
@@ -72,7 +72,7 @@ function loadBrands() {
     });
 }
 
-function loadModels(id) {
+function loadModels(id, model) {
     $.ajax({
         url: "api/cars/models/"+ id,
         type: "GET",
@@ -92,7 +92,7 @@ function loadModels(id) {
                 $(".js-model").prop("disabled", true).val(null).trigger("change");
             }).on("select2:unselecting", function(e) {
                 $(this).data('state', 'unselected');
-            }).val(null).trigger("change").prop("disabled", false);
+            }).val(model).trigger("change").prop("disabled", false);
         }
     });
 }

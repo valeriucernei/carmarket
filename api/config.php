@@ -30,6 +30,23 @@ class Config {
         return Config::get_env("SMTP_PASSWORD", "nptnyevozkjosmcc");
     }
 
+    /*CDN CONFIG*/
+    public static function CDN_KEY(){
+        return Config::get_env("CDN_KEY", "CLXDZS24AL6KDVDGCG33");
+    }
+    public static function CDN_SECRET(){
+        return Config::get_env("CDN_SECRET", "9al/BuSCGmdkK8DZMh5sk5ooJLYnbXJGbiV/kVSoaSY");
+    }
+    public static function CDN_SPACE(){
+        return Config::get_env("CDN_SPACE", "cdn.car-market.live");
+    }
+    public static function CDN_BASE_URL(){
+        return Config::get_env("CDN_BASE_URL", "https://fra1.digitaloceanspaces.com");
+    }
+    public static function CDN_REGION(){
+        return Config::get_env("CDN_REGION", "fra1");
+    }
+
     const JWT_SECRET = "?8JwAt8>&M3JYX}nky+=*N#V,pbW9Tz.";
     const JWT_TOKEN_TIME = 604800;
 

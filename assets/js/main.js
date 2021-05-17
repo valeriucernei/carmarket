@@ -7,7 +7,12 @@ $(document).ready(function() {
     }});
 
     app.route({ view : "new", load : "new.html", onReady: function() {
-        $.getScript("assets/js/new-ad.js", function(){});
+        $.getScript("assets/js/new.js", function(){});
+    }});
+
+    app.route({ view : "edit", load : "edit.html", onReady: function() {
+        $.getScript("assets/js/new.js", function(){});
+        $.getScript("assets/js/edit.js", function(){});
     }});
 
     app.route({ view : "register", load : "register.html", onReady: function() {
@@ -34,10 +39,7 @@ $(document).ready(function() {
 
     app.route({ view : "view", load : "view.html", onReady: function() {
         $.getScript("assets/js/Simple-Slider.js", function(){});
-    }});
-
-    app.route({ view : "new", load : "new.html", onReady: function() {
-        $.getScript("assets/js/new.js", function(){});
+        $.getScript("assets/js/view.js", function(){});
     }});
 
     app.run();
