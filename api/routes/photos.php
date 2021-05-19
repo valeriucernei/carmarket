@@ -28,7 +28,7 @@ Flight::route('GET /photos/ad/@id', function($id){
 *   @OA\RequestBody(description="Upload file to CDN", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
-*    				 @OA\Property(property="name", required="true", type="string", example="filename",	description="Photo's name" ),
+*    			   @OA\Property(property="id", required="true", type="integer", example="1",	description="ID of the AD" ),
 *    				 @OA\Property(property="content", required="true", type="string", example="base64",	description="Base64 content encoded" )
 *          )
 *       )
@@ -37,5 +37,5 @@ Flight::route('GET /photos/ad/@id', function($id){
 * )
 */
 Flight::route('POST /user/photos/add', function(){
-    Flight::json(["url" => Flight::photosservice()->upload(Flight::request()->data->getData())]);
+    Flight::json(["url" => Flight::photosservice()->upload(Flight::get('user')['id'], Flight::request()->data->getData())]);
 });

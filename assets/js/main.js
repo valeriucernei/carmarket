@@ -7,6 +7,8 @@ $(document).ready(function() {
     }});
 
     app.route({ view : "new", load : "new.html", onReady: function() {
+        $.getScript("assets/js/image-uploader.min.js", function(){});
+        $.getScript("assets/js/images.js", function(){});
         $.getScript("assets/js/new.js", function(){});
     }});
 
@@ -40,6 +42,10 @@ $(document).ready(function() {
     app.route({ view : "view", load : "view.html", onReady: function() {
         $.getScript("assets/js/Simple-Slider.js", function(){});
         $.getScript("assets/js/view.js", function(){});
+    }});
+
+    app.route({ view : "test", load : "test.html", onReady: function() {
+        $.getScript("assets/js/test.js", function(){});
     }});
 
     app.run();

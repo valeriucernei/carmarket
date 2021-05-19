@@ -13,6 +13,7 @@ $(document).ready(function() {
 });
 
 function addNewListing(){
+    console.log("start");
     var carInfo = jsonize_form("#newListingForm");
     console.log(carInfo);
 
@@ -26,7 +27,7 @@ function addNewListing(){
         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
         success: function (data) {
             console.info(data);
-            $(".form-select,.form-control").prop("disabled", false);
+            uploadImages(data.id);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);

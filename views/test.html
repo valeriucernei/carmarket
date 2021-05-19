@@ -1,0 +1,18 @@
+
+<div class="container mt-3">
+    <fieldset class="form-group">
+        <a href="javascript:void(0)" onclick="$('#pro-image').click()" style="text-decoration: none">
+            <div class="input-group">
+                <span class="input-group-text rounded-0 rounded-top rounded-bottom" id="imagesInputLabel">Select images<br></span>
+                <input class="form-control rounded-0 rounded-top rounded-bottom" id="imagesInputNumber" value="Selected: 0" disabled readonly style="background-color:white; cursor: pointer;">
+            </div>
+        </a>
+        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+    </fieldset>
+    <div class="preview-images-zone rounded-bottom border border-top-0" style="display:none;">
+
+    </div>
+    <button class="btn btn-primary mt-3" onclick="test()">test</button> <p id="procent"></p>
+    <div id="imagesAlert" class="alert alert-danger mt-3" role="alert" style="display: none;"><span>Maximum number of photos is 10.</span></div>
+    <div id="upload-images"></div>
+</div>
