@@ -23,13 +23,12 @@ function uploadImages(ad_id){
     var files = $("div[class^='pro-img']").prevObject[0].images;
     if(files.length == 0) return 0;
     console.log(files);
-
+    var x = 0;
     for(var i = 0; i < files.length; i++){
         var upload = {
             id: ad_id,
             content: files[i].currentSrc.split(',')[1]
         };
-        console.log("Start upload image: " + (i+1));
         $.ajax({
             url: "api/user/photos/add",
             type: "POST",
@@ -39,9 +38,9 @@ function uploadImages(ad_id){
                 xhr.setRequestHeader('Authentication', localStorage.getItem("token"));
             },
             success: function (data) {
-                if(i == files.length-1) {
-                  $(".form-select,.form-control").prop("disabled", false);
-                  alert("All loaded!");
+                x++;
+                if(x == parseInt(files.length)){
+                  location.replace("?id=" + ad_id +"#view");
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {

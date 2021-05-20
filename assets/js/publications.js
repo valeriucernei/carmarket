@@ -16,6 +16,7 @@ function getPublications(){
             searchData['user_id'] = data.id;
             searchData['offset'] = 0;
             searchData['limit'] = 1000;
+            searchData['order'] = "+updated";
             showPublications(searchData);
         },
         error: function(error){ console.log(error); }

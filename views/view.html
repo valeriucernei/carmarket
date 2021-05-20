@@ -1,5 +1,43 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/Simple-Slider.css">
+
+<style>
+    /*jssor slider loading skin spin css*/
+    .jssorl-009-spin img {
+        animation-name: jssorl-009-spin;
+        animation-duration: 1.6s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    @keyframes jssorl-009-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /*jssor slider arrow skin 106 css*/
+    .jssora106 {display:block;position:absolute;cursor:pointer;}
+    .jssora106 .c {fill:#fff;opacity:.3;}
+    .jssora106 .a {fill:none;stroke:#000;stroke-width:350;stroke-miterlimit:10;}
+    .jssora106:hover .c {opacity:.5;}
+    .jssora106:hover .a {opacity:.8;}
+    .jssora106.jssora106dn .c {opacity:.2;}
+    .jssora106.jssora106dn .a {opacity:1;}
+    .jssora106.jssora106ds {opacity:.3;pointer-events:none;}
+
+    /*jssor slider thumbnail skin 101 css*/
+    .jssort101 .p {position: absolute;top:0;left:0;box-sizing:border-box;background:#000;}
+    .jssort101 .p .cv {position:relative;top:0;left:0;width:100%;height:100%;border:2px solid #000;box-sizing:border-box;z-index:1;}
+    .jssort101 .a {fill:none;stroke:#fff;stroke-width:400;stroke-miterlimit:10;visibility:hidden;}
+    .jssort101 .p:hover .cv, .jssort101 .p.pdn .cv {border:none;border-color:transparent;}
+    .jssort101 .p:hover{padding:2px;}
+    .jssort101 .p:hover .cv {background-color:rgba(0,0,0,6);opacity:.35;}
+    .jssort101 .p:hover.pdn{padding:0;}
+    .jssort101 .p:hover.pdn .cv {border:2px solid #fff;background:none;opacity:.35;}
+    .jssort101 .pav .cv {border-color:#fff;opacity:.35;}
+    .jssort101 .pav .a, .jssort101 .p:hover .a {visibility:visible;}
+    .jssort101 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.6;}
+    .jssort101 .pav .t, .jssort101 .p:hover .t{opacity:1;}
+</style>
+
 <div class="container mt-3 js-ad-view" >
     <div class="row">
         <div class="col-12 col-md-8 col-lg-8 col-xl-8 col-xxl-8 offset-xxl-0">
@@ -9,19 +47,46 @@
         <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3">
             <div class="btn-group mt-3" role="group" style="width: 100%;max-width: 400px;"><button class="btn btn-success" type="button">Renew</button><button class="btn btn-warning" type="button" style="color: white;">Edit</button><button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete</button></div>
         </div>
-        <div class="col-12 col-md-8 col-lg-8 col-xl-8 col-xxl-8 offset-xl-0 offset-xxl-0 mt-2">
-            <div class="simple-slider" style="background-color: rgb(58,58,58);">
-                <div class="swiper-container" style="max-height: 500px;">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" style="background: url(&quot;https://loremflickr.com/720/540/car&quot;) center center / cover no-repeat;"></div>
-                        <div class="swiper-slide" style="background: url(&quot;https://loremflickr.com/540/720/car&quot;) center center / cover no-repeat;"></div>
-                        <div class="swiper-slide" style="background: url(&quot;https://loremflickr.com/860/440/car&quot;) center center / cover no-repeat;"></div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
-            </div>
+        <div class="col-12 col-md-8 col-lg-8 col-xl-8 col-xxl-8 offset-xl-0 offset-xxl-0 mt-2" style="padding: 0px">
+            <div id="jssor_1" style="position:relative; width:980px;height:620pxoverflow:hidden;visibility:hidden;">
+                 <!-- Loading Screen -->
+                 <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+                     <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="assets/img/spin.svg" />
+                 </div>
+                 <div class="slider-for" data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:550px;overflow:hidden;">
+
+                 </div><a data-scale="0" href="https://www.jssor.com" style="display:none;position:absolute;">web animation</a>
+                 <!-- Thumbnail Navigator -->
+                 <div data-u="thumbnavigator" class="jssort101" style="position:absolute;left:0px;bottom:0px;width:980px;height:70px;background-color:#000;" data-autocenter="1" data-scale-bottom="0.75">
+                     <div data-u="slides">
+                         <div data-u="prototype" class="p" style="width:130px;height:60px;">
+                             <div data-u="thumbnailtemplate" class="t"></div>
+                             <svg viewbox="0 0 16000 16000" class="cv">
+                                 <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
+                                 <line class="a" x1="6190.5" y1="8000" x2="9809.5" y2="8000"></line>
+                                 <line class="a" x1="8000" y1="9809.5" x2="8000" y2="6190.5"></line>
+                             </svg>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- Arrow Navigator -->
+                 <div data-u="arrowleft" class="jssora106" style="width:75px;height:75px;top:202px;left:15px;" data-scale="0.75">
+                     <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                         <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                         <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
+                         <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
+                     </svg>
+                 </div>
+                 <div data-u="arrowright" class="jssora106" style="width:75px;height:75px;top:202px;right:15px;" data-scale="0.75">
+                     <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                         <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                         <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
+                         <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
+                     </svg>
+                 </div>
+             </div>
+             <!-- #endregion Jssor Slider End -->
+
         </div>
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-3 offset-xl-0">
             <div class="card mt-2">
