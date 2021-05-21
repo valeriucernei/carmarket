@@ -85,15 +85,20 @@ class AdsService extends BaseService{
         return $this->dao->get_ad_by_id($ad['id']);
     }
 
+    public function update_user_ad($user_id, $id, $data){
+        if(!verify_ad_user($user_id, $id))
+            throw new Exception("You don't have access to this ad.", 400);
 
+        return update_ad($id, $data);
+    }
 
     public function update_ad($id, $data){
         if(!isset($data['title']))
-            throw new Exception("Title field is required.");
+            throw new Exception("Title field is required.", 400);
         if(!isset($data['car_body']))
-            throw new Exception("Car Body field is required.");
+            throw new Exception("Car Body field is required.", 400);
         if(!isset($data['fabricated']))
-            throw new Exception("Year field is required.");
+            throw new Exception("Year field is required.", 400);
 
         try{
             $this->dao->beginTransaction();
@@ -121,6 +126,15 @@ class AdsService extends BaseService{
             throw new Exception("Something went wrong! Ad has not been updated. Please, try again.", 400);
         }
         return $this->dao->get_ad_by_id($id);
+    }
+
+    public function verify_ad_user($id, $ad){
+        $ad = $this->dao->get_ad_by_id($ad);
+        if($id == $ad['user_id']){
+            return true;
+        } else {
+            throw new Exception("You don't have access to this ad.", 400);
+        }
     }
 
 }

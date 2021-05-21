@@ -14,24 +14,18 @@ class PhotosService extends BaseService{
         $this->CDNClient = new CDNClient();
     }
 
-
-
-    public function get_photo_id($token){
-         $result = $this->dao->get_photo_id($token);
-         if(!$result) throw new Exception("No image found with this token.", 404);
-         return $result;
-    }
-
-
     public function get_ads_photos($id){
         $result = $this->dao->get_ads_photos($id);
         return $result;
     }
 
-
-
-    public function delete_photo($id){
-        return parent::delete($id);
+    public function delete_photo($data){
+        /*try{
+            $this->dao->remove($data['filename']);
+        } catch(\Exception $e) {
+            throw new Exception("Something went wrong with image "+$data['filename'], 500, $e);
+        }*/
+        return $this->CDNClient->delete($data['filename']);
     }
 
     public function upload($id, $data){

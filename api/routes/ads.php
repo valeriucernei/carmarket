@@ -106,9 +106,7 @@ Flight::route('POST /user/ads/add', function(){
  * )
  */
 Flight::route('PUT /user/ads/@id', function($id){
-    if(Flight::adsservice()->get_ad_by_id($id)['user_id'] != Flight::get('user')['id'])
-        throw new Exception("You don't have access to this ad.", 403);
-    Flight::json(Flight::adsservice()->update_ad($id, Flight::request()->data->getData()));
+    Flight::json(Flight::adsservice()->update_user_ad(Flight::get('user')['id'], $id, Flight::request()->data->getData()));
 });
 
 /**
@@ -135,4 +133,14 @@ Flight::route('PUT /user/ads/@id', function($id){
  */
 Flight::route('PUT /admin/ads/@id', function($id){
     Flight::json(Flight::adsservice()->update_ad($id, Flight::request()->data->getData()));
+});
+
+/**
+* @OA\Get(path="/user/ads/verify/{ad_id}", tags={"x-user", "advertisements"}, security={{"ApiKeyAuth":{}}},
+*     @OA\Parameter(@OA\Schema(type="integer"), in="path", type="integer", name="ad_id", example=1, deion="ID of the ad"),
+*     @OA\Response(response="200", deion="Fetch individual advertisement")
+* )
+*/
+Flight::route('GET /user/ads/verify/@ad_id', function($ad_id){
+    Flight::json(Flight::adsservice()->verify_ad_user(Flight::get('user')['id'], $ad_id));
 });

@@ -7,20 +7,13 @@ class PhotosDao extends BaseDao{
         parent::__construct("photos");
     }
 
-
-
-    public function get_photo_id($token){
-        return $this->query_unique("SELECT id FROM photos WHERE
-                                    name = :token", ["token" => $token]);
-    }
-
-
-
     public function get_ads_photos($id){
         return $this->query("SELECT * FROM photos WHERE ad_id = :id",
                             ["id" => $id]);
     }
 
-
+    public function remove($filename){
+        return parent::remove($filename);
+    }
 
 }

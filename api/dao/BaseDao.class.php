@@ -27,25 +27,17 @@ class BaseDao {
         }
     }
 
-
-
     public function beginTransaction(){
         $response = $this->connection->beginTransaction();
     }
-
-
 
     public function commit(){
         $this->connection->commit();
     }
 
-
-
     public function rollBack(){
         $response = $this->connection->rollBack();
     }
-
-
 
     public function parse_order($order){
       switch(substr($order, 0, 1)){
@@ -56,8 +48,6 @@ class BaseDao {
       $order_column = substr($order, 1);
       return [$order_column, $order_direction];
     }
-
-
 
     /**
    * Insert function into database
@@ -88,21 +78,26 @@ class BaseDao {
         return $entity;
     }
 
-
-
     /**
      * Method to delete object from the table.
      * @param  [type] $table  [description]
      * @param  [type] $entity [description]
      * @return [type]         [description]
      */
-    protected function remove($table, $id){
-        $stmt = $this->connection->prepare("DELETE FROM ${table} WHERE id = :id");
-        $result = $stmt->execute(["id" => $id]);
+    protected function delete($table, $filename){
+        $stmt = $this->connection->prepare("DELETE FROM ${table} WHERE name = :name");
+        $result = $stmt->execute(["name" => $filename]);
         print_r($result); die;
     }
 
-
+    /**
+     * Remove Data from Data Base in class table
+     * @param  $entity Array of data
+     * @return [type]      Return entry ID
+     */
+    public function remove($filename){
+        return $this->delete($this->table, $filename);
+    }
 
     /**
    * Update query in database
@@ -128,8 +123,6 @@ class BaseDao {
         $stmt->execute($entity);
     }
 
-
-
     /**
    * Return array with all data regardling query
    * @param  $query  SQL Query
@@ -142,8 +135,6 @@ class BaseDao {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
-
     /**
    * Return unique array regardling query
    * @param  [type] $query  SQL Query
@@ -155,8 +146,6 @@ class BaseDao {
         return reset($results);
     }
 
-
-
     /**
      * Add Data into Data Base in class table
      * @param  $entity Array of data
@@ -165,19 +154,6 @@ class BaseDao {
     public function add($entity){
         return $this->insert($this->table, $entity);
     }
-
-
-
-    /**
-     * Delete a row from data base
-     * @param  [type] $id [description]
-     * @return [type]     [description]
-     */
-    public function delete($id){
-        return $this->remove($this->table, $id);
-    }
-
-
 
     /**
      * Update existing data  in class table
@@ -188,8 +164,6 @@ class BaseDao {
         $this->execute_update($this->table, $id, $entity);
     }
 
-
-
     public function get_all($offset, $limit, $order){
         list($order_column, $order_direction) = self::parse_order($order);
 
@@ -197,8 +171,6 @@ class BaseDao {
                             ORDER BY ${order_column} ${order_direction}
                             LIMIT ${limit} OFFSET ${offset}", []);
     }
-
-
 
     /**
      * [get_by_id description]
