@@ -34,13 +34,17 @@ $(document).ready(function() {
         $.getScript("assets/js/profile_info.js", function(){});
     }});
 
+    app.route({ view : "viewprofile", load : "view_profile.html", onReady: function() {
+        $.getScript("assets/js/viewprofile.js", function(){});
+    }});
+
     app.route({ view : "publications", load : "publications.html", onReady: function() {
         $.getScript("assets/js/profile.js", function(){});
         $.getScript("assets/js/publications.js", function(){});
     }});
 
     app.route({ view : "view", load : "view.html", onReady: function() {
-        $.getScript("assets/js/jssor.slider-28.1.0.min.js", function(){});
+        //$.getScript("assets/js/jssor.slider-28.1.0.min.js", function(){});
         $.getScript("assets/js/view.js", function(){});
     }});
 

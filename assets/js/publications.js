@@ -17,20 +17,8 @@ function getPublications(){
             searchData['offset'] = 0;
             searchData['limit'] = 1000;
             searchData['order'] = "+updated";
-            showPublications(searchData);
+            showPublications(searchData, "#publicationsList");
         },
         error: function(error){ console.log(error); }
-    });
-}
-
-function showPublications(searchData){
-    $.get("api/ads/", searchData).done(function( data ) {
-        console.log(data);
-        $("#publicationsList").html("");
-        for(var i = 0; i < data.length; i++){
-            $('#publicationsList').append(createCard(data[i]));
-        }
-    }).fail(function(error){
-        console.log(error);
     });
 }

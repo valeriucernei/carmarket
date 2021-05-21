@@ -37,7 +37,7 @@ function createCard(data){
         case 1: gearbox = "Manual"; break;
         case 2: gearbox = "Automatic"; break;
     }
-    var html = '<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card animate-bottom" href="?id='+data.id+'#view"><img src="https://cdn.car-market.live.fra1.cdn.digitaloceanspaces.com/'+data.photo+'" style="object-fit: cover;">';
+    var html = '<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-3"><a class="card animate-bottom" onclick="goToListing('+data.id+')"><img src="https://cdn.car-market.live.fra1.cdn.digitaloceanspaces.com/'+data.photo+'" style="object-fit: cover;">';
     html += '<div class="card-body"><h6>'+data.brand_name+' '+data.model_name+'&nbsp;</h6><ul class="list-inline atributes">';
 
     if (parseInt(data.fabricated) > 0){
@@ -72,4 +72,26 @@ function unfreezeSearch(){
     $(".js-brand,.js-year-min,.js-year-max,.js-km-min,.js-km-max,"+
       ".js-motor-min,.js-motor-max,.js-gear,.js-fuel,.js-price-min,.js-price-max").prop("disabled", false);
     if($(".js-brand").val() > 0) $(".js-model").prop("disabled", false);
+}
+
+function showPublications(searchData, selector){
+    $.get("api/ads/", searchData).done(function( data ) {
+        console.log(data);
+        $(selector).html("");
+        for(var i = 0; i < data.length; i++){
+            $(selector).append(createCard(data[i]));
+        }
+    }).fail(function(error){
+        console.log(error);
+    });
+}
+
+function goToListing(id){
+    window.history.replaceState(null, null, "?id="+id);
+    location.replace("#view");
+}
+
+function goToProfile(id){
+    window.history.replaceState(null, null, "?id="+id);
+    location.replace("#viewprofile");
 }

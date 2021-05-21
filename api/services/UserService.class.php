@@ -168,6 +168,7 @@ class UserService extends BaseService{
           'fname' => $db_user['fname'],
           'email' => $db_user['email'],
           'phone' => $db_user['phone'],
+          'status' => $db_user['status'],
           'reg_date' => $db_user['reg_date']
         ];
         if(isset($db_user['lname'])) $result['lname'] = $db_user['lname'];
