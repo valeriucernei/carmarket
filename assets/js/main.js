@@ -44,7 +44,7 @@ $(document).ready(function() {
     }});
 
     app.route({ view : "view", load : "view.html", onReady: function() {
-        //$.getScript("assets/js/jssor.slider-28.1.0.min.js", function(){});
+        $.getScript("assets/js/jssor.slider-28.1.0.min.js", function(){});
         $.getScript("assets/js/view.js", function(){});
     }});
 

@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    if(!localStorage.getItem("token")) location.replace("#main");
-    else {
+    if(isLogged()){
         $("#fname,#lname,#email,#phone,#updpass1,#updpass2").prop("disabled", true).val("");
         getProfileCard();
         getUserProfile();

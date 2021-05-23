@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    if(!localStorage.getItem("token")) location.replace("#main");
-    else {
+    if(isLogged()) {
         getProfileCard();
         getPublications();
     }

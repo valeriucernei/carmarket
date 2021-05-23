@@ -1,26 +1,22 @@
 $(document).ready(function() {
-    if(!localStorage.getItem("token")) {
-        location.replace("#main");
-        $("#loginModal").modal("show");
-    }
-    else {
+    if(isLogged()) {
         loadEditForm();
+        $("#editad-description").keyup(function(){
+            $("#newad-count").text($(this).val().length + " / 1000");
+        });
     }
 });
 
 function loadEditForm(){
-    $("#new-header").html('<div class="col-xxl-12" id="new-header"><h4 style="text-align: center;">Edit your offer</h4>'
-                        + '<p style="text-align: center;">Below you have all current offer information. Edit it and press save.</p></div>');
-    $("#newEditButton").html("HUY");
-    $("#newListingForm").attr("onsubmit","updateListing(); return false;");
-
     var urlParams = new URLSearchParams(window.location.search);
+
     if(urlParams.has('id')){
         $.get("api/ads/" + urlParams.get('id')).done(function(data){
             console.log(data);
-            insertData("#newListingForm",data);
+            insertData("#editListingForm",data);
             $('#newad-car-body').val(data.car_body).trigger('change');
             $('#newad-brand').val(data.brand).trigger('change');
+            $('#editad-description').val(data.description);
             loadModels(data.brand, data.model);
             $('#newad-model').prop("disabled", false).val(data.model).trigger('change');
             $('#newad-gearbox').val(data.car_body).trigger('change');
@@ -31,4 +27,27 @@ function loadEditForm(){
     } else {
         $('#confirmedAlertError').show().text("No token found!");
     }
+}
+
+function updateListing(){
+    var urlParams = new URLSearchParams(window.location.search);
+    var updated_data = jsonize_form("#editListingForm");
+    console.log(updated_data);
+
+    $(".form-select,.form-control,#newEditButton").prop("disabled", true);
+    $.ajax({
+        url: "api/user/ads/" + urlParams.get('id'),
+        type: "PUT",
+        data: JSON.stringify(updated_data),
+        contentType: "application/json",
+        beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
+        success: function(data) {
+            $(".form-select,.form-control,#newEditButton").prop("disabled", true);
+            location.replace("?id="+urlParams.get('id')+"#view");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+
 }

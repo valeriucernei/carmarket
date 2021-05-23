@@ -1,9 +1,5 @@
 $(document).ready(function() {
-    if(!localStorage.getItem("token")) {
-        location.replace("#main");
-        $("#loginModal").modal("show");
-    }
-    else {
+    if(isLogged()) {
         loadBrands();
         loadRest();
         $("#newad-description").keyup(function(){
@@ -13,11 +9,9 @@ $(document).ready(function() {
 });
 
 function addNewListing(){
-    console.log("start");
     var carInfo = jsonize_form("#newListingForm");
     console.log(carInfo);
-
-    $(".form-select,.form-control").prop("disabled", true);
+    $(".form-select,.form-control,#newAdButton").prop("disabled", true);
 
     $.ajax({
         url: 'api/user/ads/add/',

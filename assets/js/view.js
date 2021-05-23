@@ -2,7 +2,6 @@ $(function() {
     var urlParams = new URLSearchParams(window.location.search);
     if(urlParams.has('id')){
         $.get("api/ads/" + urlParams.get('id')).done(function(data){
-            $.getScript("assets/js/jssor.slider-28.1.0.min.js", function(){});
             $(".car-attributes-short,.car-attributes").html("");
             $(".js-ad-view").show();
             $(".car-title").html(data.title);
