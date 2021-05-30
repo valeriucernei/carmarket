@@ -87,7 +87,7 @@ class BaseDao {
     protected function delete($table, $filename){
         $stmt = $this->connection->prepare("DELETE FROM ${table} WHERE name = :name");
         $result = $stmt->execute(["name" => $filename]);
-        print_r($result); die;
+        return $result;
     }
 
     /**

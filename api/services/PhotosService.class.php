@@ -20,11 +20,11 @@ class PhotosService extends BaseService{
     }
 
     public function delete_photo($data){
-        /*try{
+        try{
             $this->dao->remove($data['filename']);
         } catch(\Exception $e) {
             throw new Exception("Something went wrong with image "+$data['filename'], 500, $e);
-        }*/
+        }
         return $this->CDNClient->delete($data['filename']);
     }
 
