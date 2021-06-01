@@ -144,3 +144,13 @@ Flight::route('PUT /admin/ads/@id', function($id){
 Flight::route('GET /user/ads/verify/@ad_id', function($ad_id){
     Flight::json(Flight::adsservice()->verify_ad_user(Flight::get('user')['id'], $ad_id));
 });
+
+/**
+* @OA\Get(path="/user/ads/delete/{ad_id}", tags={"x-user", "advertisements"}, security={{"ApiKeyAuth":{}}},
+*     @OA\Parameter(@OA\Schema(type="integer"), in="path", type="integer", name="ad_id", example=1, deion="ID of the ad"),
+*     @OA\Response(response="200", deion="Success! Ad deleted.")
+* )
+*/
+Flight::route('GET /user/ads/delete/@ad_id', function($ad_id){
+    Flight::json(Flight::adsservice()->delete_ad(Flight::get('user')['id'], $ad_id));
+});

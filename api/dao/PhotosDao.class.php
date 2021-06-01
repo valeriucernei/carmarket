@@ -16,4 +16,10 @@ class PhotosDao extends BaseDao{
         return parent::remove($filename);
     }
 
+    public function delete_photos($ad_id){
+        return $this->query_unique("DELETE FROM `carmarket`.`photos`
+                                    WHERE (`ad_id` = :ad_id);",
+                                    ["ad_id" => $ad_id]);
+    }
+
 }

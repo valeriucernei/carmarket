@@ -2,6 +2,7 @@
 require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/AdsDao.class.php";
 require_once dirname(__FILE__)."/../dao/AtributesDao.class.php";
+require_once dirname(__FILE__)."/../dao/PhotosDao.class.php";
 
 class AdsService extends BaseService{
 
@@ -10,6 +11,7 @@ class AdsService extends BaseService{
     public function __construct(){
         $this->dao = new AdsDao();
         $this->atributesDao = new AtributesDao();
+        $this->photosDao = new PhotosDao();
     }
 
     public function get_ads($search, $offset, $limit, $order, $user_id, $brand, $model, $car_body,
@@ -94,9 +96,9 @@ class AdsService extends BaseService{
         }
     }
 
-    public function update_user_ad($user_id, $id, $data){
-        if($this->verify_ad_user($user_id, $id))
-            return $this->update_ad($id, $data);
+    public function update_user_ad($user_id, $ad_id, $data){
+        if($this->verify_ad_user($user_id, $ad_id))
+            return $this->update_ad($ad_id, $data);
     }
 
     public function update_ad($id, $data){
@@ -130,9 +132,23 @@ class AdsService extends BaseService{
             $this->dao->commit();
         } catch (\Exception $e) {
             $this->dao->rollBack();
-            throw new Exception("Something went wrong! Ad has not been updated. Please, try again.", 400);
+            throw new Exception("Something went wrong! Ad has not been updated. Please, try again.", 500);
         }
         return $this->dao->get_ad_by_id($id);
+    }
+
+    public function delete_ad($user_id, $ad_id){
+        if($this->verify_ad_user($user_id, $ad_id)){
+            try {
+                $this->atributesDao->delete_atributes($ad_id);
+                $this->photosDao->delete_photos($ad_id);
+                $this->photosDao->delete_photos($ad_id);
+                $this->dao->delete_ad($ad_id);
+            } catch (\Exception $e) {
+                throw new Exception("Something went wrong!", 500, $e);
+            }
+            return ['message' => 'Success!'];
+        }
     }
 
 }

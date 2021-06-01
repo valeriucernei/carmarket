@@ -101,4 +101,10 @@ class AdsDao extends BaseDao{
         ]);
     }
 
+    public function delete_ad($ad_id){
+        return $this->query_unique("DELETE FROM `carmarket`.`ads`
+                                    WHERE (`id` = :ad_id);",
+                                    ["ad_id" => $ad_id]);
+    }
+
 }

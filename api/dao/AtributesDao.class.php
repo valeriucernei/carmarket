@@ -14,4 +14,10 @@ class AtributesDao extends BaseDao{
                                     WHERE ad_id = :id", ["id" => $id]);
     }
 
+    public function delete_atributes($ad_id){
+        return $this->query_unique("DELETE FROM `carmarket`.`atributes`
+                                    WHERE (`ad_id` = :ad_id);", 
+                                    ["ad_id" => $ad_id]);
+    }
+
 }
