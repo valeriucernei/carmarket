@@ -47,6 +47,8 @@ class AdsService extends BaseService{
             throw new Exception("Car Body field is required.");
         if(!isset($data['fabricated']))
             throw new Exception("Year field is required.");
+        if(!isset($data['model']))
+            throw new Exception("Model field is required.");
 
         if(!isset($data['description']) || strlen($data['description'])<1)
             $data['description'] = null;
@@ -58,7 +60,8 @@ class AdsService extends BaseService{
             $data['gearbox'] = "0";
         if(!isset($data['fuel_type']) || strlen($data['fuel_type'])<1)
             $data['fuel_type'] = "0";
-
+        if(!isset($data['price']) || strlen($data['price'])<1)
+            $data['price'] = "0";
         try{
             $this->dao->beginTransaction();
 
@@ -77,7 +80,6 @@ class AdsService extends BaseService{
                 "fuel_type" => $data['fuel_type'],
                 "motor_size" => $data['motor_size'],
                 "ad_id" => 1]);
-
             $this->dao->commit();
         } catch (\Exception $e) {
             $this->dao->rollBack();
@@ -141,7 +143,6 @@ class AdsService extends BaseService{
         if($this->verify_ad_user($user_id, $ad_id)){
             try {
                 $this->atributesDao->delete_atributes($ad_id);
-                $this->photosDao->delete_photos($ad_id);
                 $this->photosDao->delete_photos($ad_id);
                 $this->dao->delete_ad($ad_id);
             } catch (\Exception $e) {

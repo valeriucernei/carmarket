@@ -44,7 +44,7 @@ function updateListing(){
         success: function(data) {
             console.log("Ad updated.");
             $(".form-select,.form-control,#newEditButton").prop("disabled", false);
-            location.replace("?id=" + ad_id +"#view");
+            location.replace("?id=" + urlParams.get('id') +"#view");
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);

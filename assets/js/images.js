@@ -21,7 +21,11 @@ $(document).ready(function() {
 
 function uploadImages(ad_id){
     var files = $("div[class^='pro-img']").prevObject[0].images;
-    if(files.length == 0) return 0;
+    if(files.length == 0) {
+      $(".form-select,.form-control,#newEditButton").prop("disabled", false);
+      location.replace("?id=" + ad_id +"#view");
+      return 0;
+    }
     console.log(files);
     var x = 0;
     for(var i = 0; i < files.length; i++){
