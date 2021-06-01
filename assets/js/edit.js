@@ -42,12 +42,12 @@ function updateListing(){
         contentType: "application/json",
         beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
         success: function(data) {
-            $(".form-select,.form-control,#newEditButton").prop("disabled", true);
-            location.replace("?id="+urlParams.get('id')+"#view");
+            console.log("Ad updated.");
+            $(".form-select,.form-control,#newEditButton").prop("disabled", false);
+            location.replace("?id=" + ad_id +"#view");
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR);
         }
     });
-
 }

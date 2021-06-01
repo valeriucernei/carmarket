@@ -13,6 +13,8 @@ $(document).ready(function() {
     }});
 
     app.route({ view : "edit", load : "edit.html", onReady: function() {
+        $.getScript("assets/js/image-uploader.min.js", function(){});
+        $.getScript("assets/js/images.js", function(){});
         $.getScript("assets/js/new.js", function(){});
         $.getScript("assets/js/edit.js", function(){});
     }});

@@ -40,6 +40,7 @@ function uploadImages(ad_id){
             success: function (data) {
                 x++;
                 if(x == parseInt(files.length)){
+                  $(".form-select,.form-control,#newEditButton").prop("disabled", false);
                   location.replace("?id=" + ad_id +"#view");
                 }
             },
@@ -48,6 +49,29 @@ function uploadImages(ad_id){
             }
         });
     }
+}
+
+function deleteImage(filename, current, max) {
+    $.ajax({
+        url: "api/user/photos/remove",
+        type: "POST",
+        data: JSON.stringify({filename: filename}),
+        contentType: "application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authentication', localStorage.getItem("token"));
+        },
+        success: function (data) {
+            console.log(data);
+            if(current == (max-1)) {
+                console.log("Photos deleted all");
+                var urlParams = new URLSearchParams(window.location.search);
+                uploadImages(parseInt(urlParams.get('id')));
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
 }
 
 function readImage() {
@@ -73,7 +97,7 @@ function readImage() {
                 var picFile = event.target;
                 var html =  '<div class="preview-image preview-show-' + num + '">' +
                             '<div class="image-cancel" data-no="' + num + '">x</div>' +
-                            '<div class="image-zone"><img id="pro-img" src="' + picFile.result + '"></div></div>';
+                            '<div class="image-zone"><img class="pro-img" src="' + picFile.result + '"></div></div>';
                 output.append(html);
                 num += 1;
             });
