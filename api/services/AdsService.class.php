@@ -3,15 +3,19 @@ require_once dirname(__FILE__)."/BaseService.class.php";
 require_once dirname(__FILE__)."/../dao/AdsDao.class.php";
 require_once dirname(__FILE__)."/../dao/AtributesDao.class.php";
 require_once dirname(__FILE__)."/../dao/PhotosDao.class.php";
+require_once dirname(__FILE__)."/../clients/CDNClient.class.php";
 
 class AdsService extends BaseService{
 
     private $atributesDao;
+    private $photosDao;
+    private $CDNClient;
 
     public function __construct(){
         $this->dao = new AdsDao();
         $this->atributesDao = new AtributesDao();
         $this->photosDao = new PhotosDao();
+        $this->CDNClient = new CDNClient();
     }
 
     public function get_ads($search, $offset, $limit, $order, $user_id, $brand, $model, $car_body,
@@ -142,6 +146,10 @@ class AdsService extends BaseService{
     public function delete_ad($user_id, $ad_id){
         if($this->verify_ad_user($user_id, $ad_id)){
             try {
+                $photos = $this->photosDao->get_ads_photos($ad_id);
+                foreach ($photos as $photo) {
+                    $this->CDNClient->delete($photo['name']);
+                }
                 $this->atributesDao->delete_atributes($ad_id);
                 $this->photosDao->delete_photos($ad_id);
                 $this->dao->delete_ad($ad_id);
