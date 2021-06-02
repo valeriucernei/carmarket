@@ -25,7 +25,7 @@ $(function() {
             searchData['limit'] = 1000;
             searchData['order'] = "+updated";
 
-            showPublications(searchData, "#userPublicationsList");
+            CMUtils.howPublications(searchData, "#userPublicationsList");
         });
     } else {
         location.replace("#main");

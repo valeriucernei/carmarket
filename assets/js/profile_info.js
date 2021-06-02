@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    if(isLogged()){
+    if(CMUtils.isLogged()){
         $("#fname,#lname,#email,#phone,#updpass1,#updpass2").prop("disabled", true).val("");
         getProfileCard();
         getUserProfile();
@@ -32,7 +32,7 @@ function getUserProfile(){
 function updateProfile(){
     $("#profileUpdateButton").addClass('disabled');
     $("#savedAlert,#passwordsAlert").addClass('d-none');
-    var user_data = jsonize_form("#profileUpdateForm");
+    var user_data = CMUtils.jsonize_form("#profileUpdateForm");
     if($('#updpass1').val() != $('#updpass2').val()){
         alert("huiova");
         $('#passwordsAlert').removeClass('d-none').text("pizda");

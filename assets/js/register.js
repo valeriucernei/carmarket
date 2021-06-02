@@ -11,7 +11,7 @@ function doRegister() {
        return 0;
     }
 
-    $.post("api/register/", jsonize_form("#registerForm")).done(function( data ) {
+    $.post("api/register/", CMUtils.jsonize_form("#registerForm")).done(function( data ) {
         $('#regConfirmModal').modal('show');
     }).fail(function(error){
         $("#regalert").show().text( error.responseJSON.message );

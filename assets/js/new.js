@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    if(isLogged()) {
+    if(CMUtils.isLogged()) {
         loadBrands();
         loadRest();
         $("#newad-description").keyup(function(){
@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 
 function addNewListing(){
-    var carInfo = jsonize_form("#newListingForm");
+    var carInfo = CMUtils.jsonize_form("#newListingForm");
     console.log(carInfo);
     $(".form-select,.form-control,#newAdButton").prop("disabled", true);
 

@@ -6,8 +6,8 @@ function updateListings(page){
   $("#searchButton").addClass('disabled');
   $("#listings-content,.mypagination").html("");
   $('#listings-content').append('<div id="loader" style="text-align: center;"></div>');
-  var searchData = jsonize_form("#searchForm");
-  freezeSearch();
+  var searchData = CMUtils.jsonize_form("#searchForm");
+  CMUtils.freezeSearch();
   searchData.limit = 12;
   searchData.offset = (page-1) * searchData.limit;
   searchData.order = $(".js-sort").val();
@@ -17,9 +17,9 @@ function updateListings(page){
       console.log(data);
       $("#listings-content").html("");
       for(var i = 0; i < data.length; i++){
-          $('#listings-content').append(createCard(data[i]));
+          $('#listings-content').append(CMUtils.createCard(data[i]));
       }
-      unfreezeSearch();
+      CMUtils.unfreezeSearch();
 
       var total = 0;
       searchData.limit = 1000; searchData.offset = 0;
@@ -36,7 +36,7 @@ function updateListings(page){
       });
   }).fail(function(error){
       $("#searchButton").removeClass('disabled');
-      unfreezeSearch();
+      CMUtils.unfreezeSearch();
       console.log(error);
   });
 }

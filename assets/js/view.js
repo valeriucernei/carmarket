@@ -62,7 +62,7 @@ $(function() {
                 console.log(error);
             });
             $.get("api/account/" + data.user_id).done(function(user_data){
-                $(".car-seller-name").html('<a onclick="goToProfile('+data.user_id+')" style="color:black; text-decoration: none; cursor: pointer;">'+user_data.fname+" "+user_data.lname+'</a>');
+                $(".car-seller-name").html('<a onclick="CMUtils.goToProfile('+data.user_id+')" style="color:black; text-decoration: none; cursor: pointer;">'+user_data.fname+" "+user_data.lname+'</a>');
                 $(".car-seller-info,.car-seller-info-small").html('<li style="color: rgb(145,145,145);">Registered on '+user_data.reg_date.substring(0, 10)+'</li>'
                                                                     +'<li style="color: rgb(145,145,145);">Publications '+123+'</li>'
                                                                     +'<li style="color: rgb(204,0,0);font-size: 22px;">+'+user_data.phone+'</li>');
@@ -82,7 +82,7 @@ $(function() {
                 beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
                 success: function (data) {
                     $('.ad-owner').show();
-                    //$('#editAdButton').attr('href', getUrl()+"/?id="+urlParams.get('id')+"#edit");
+                    //$('#editAdButton').attr('href', CMUtils.getUrl()+"/?id="+urlParams.get('id')+"#edit");
                 }
             });
         }

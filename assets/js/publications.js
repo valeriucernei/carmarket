@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    if(isLogged()) {
+    if(CMUtils.isLogged()) {
         getProfileCard();
         getPublications();
     }
@@ -16,7 +16,7 @@ function getPublications(){
             searchData['offset'] = 0;
             searchData['limit'] = 1000;
             searchData['order'] = "+updated";
-            showPublications(searchData, "#publicationsList");
+            CMUtils.ShowPublications(searchData, "#publicationsList");
         },
         error: function(error){ console.log(error); }
     });

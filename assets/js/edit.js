@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    if(isLogged()) {
+    if(CMUtils.isLogged()) {
         loadEditForm();
         $("#editad-description").keyup(function(){
             $("#newad-count").text($(this).val().length + " / 1000");
@@ -13,7 +13,7 @@ function loadEditForm(){
     if(urlParams.has('id')){
         $.get("api/ads/" + urlParams.get('id')).done(function(data){
             console.log(data);
-            insertData("#editListingForm",data);
+            CMUtils.insertData("#editListingForm",data);
             $('#newad-car-body').val(data.car_body).trigger('change');
             $('#newad-brand').val(data.brand).trigger('change');
             $('#editad-description').val(data.description);
@@ -31,7 +31,7 @@ function loadEditForm(){
 
 function updateListing(){
     var urlParams = new URLSearchParams(window.location.search);
-    var updated_data = jsonize_form("#editListingForm");
+    var updated_data = CMUtils.jsonize_form("#editListingForm");
     console.log(updated_data);
 
     $(".form-select,.form-control,#newEditButton").prop("disabled", true);
