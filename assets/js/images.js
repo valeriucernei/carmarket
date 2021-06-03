@@ -27,53 +27,26 @@ function uploadImages(ad_id){
       return 0;
     }
     console.log(files);
-    var x = 0;
     for(var i = 0; i < files.length; i++){
         var upload = {
             id: ad_id,
             content: files[i].currentSrc.split(',')[1]
         };
-        $.ajax({
-            url: "api/user/photos/add",
-            type: "POST",
-            data: JSON.stringify(upload),
-            contentType: "application/json",
-            beforeSend: function(xhr){
-                xhr.setRequestHeader('Authentication', localStorage.getItem("token"));
-            },
-            success: function (data) {
-                x++;
-                if(x == parseInt(files.length)){
-                  $(".form-select,.form-control,#newEditButton").prop("disabled", false);
-                  location.replace("?id=" + ad_id +"#view");
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
+
+        RestClient.post("api/user/photos/add", upload, function(data){
+            if(i == files.length){
+                $(".form-select,.form-control,#newEditButton").prop("disabled", false);
+                location.replace("?id=" + ad_id +"#view");
             }
         });
     }
 }
 
 function deleteImage(filename, current, max) {
-    $.ajax({
-        url: "api/user/photos/remove",
-        type: "POST",
-        data: JSON.stringify({filename: filename}),
-        contentType: "application/json",
-        beforeSend: function(xhr){
-            xhr.setRequestHeader('Authentication', localStorage.getItem("token"));
-        },
-        success: function (data) {
-            console.log(data);
-            if(current == (max-1)) {
-                console.log("Photos deleted all");
-                var urlParams = new URLSearchParams(window.location.search);
-                uploadImages(parseInt(urlParams.get('id')));
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
+    RestClient.post("api/user/photos/remove", {filename: filename}, function(data){
+        if(current == (max-1)) {
+            var urlParams = new URLSearchParams(window.location.search);
+            uploadImages(parseInt(urlParams.get('id')));
         }
     });
 }

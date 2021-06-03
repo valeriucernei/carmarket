@@ -6,18 +6,13 @@ $(document).ready(function() {
 });
 
 function getPublications(){
-    var searchData = {};
-    $.ajax({
-        url: "api/user/account",
-        type: "GET",
-        beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-        success: function(data){
-            searchData['user_id'] = data.id;
-            searchData['offset'] = 0;
-            searchData['limit'] = 1000;
-            searchData['order'] = "+updated";
-            CMUtils.ShowPublications(searchData, "#publicationsList");
-        },
-        error: function(error){ console.log(error); }
+    RestClient.get("api/user/account", function(data) {
+        var searchData = {
+            'user_id': data.id,
+            'offset': 0,
+            'limit': 1000,
+            'order': "+updated"};
+
+        CMUtils.showPublications(searchData, "#publicationsList");
     });
 }

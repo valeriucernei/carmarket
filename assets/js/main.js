@@ -57,18 +57,17 @@ $(document).ready(function() {
     app.run();
 
     if(window.localStorage.getItem("token")){
-        $.ajax({
-             url: "api/user/account",
-             type: "GET",
-             beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-             success: function(data) {
-                 $("#profileButton.login-user").show().html(data.fname+" "+data.lname);
-             }
+
+        RestClient.get("api/user/account", function(data){
+            $("#profileButton.login-user").show().html(data.fname+" "+data.lname);
         });
+
         $(".login-guest").hide();
-    }else{
+
+    } else {
       $(".login-user").hide();
       $(".login-guest").show();
+
     }
 
     $("#logout").click(function (){
@@ -77,19 +76,23 @@ $(document).ready(function() {
     });
 
     $('#loginModal').on('shown.bs.modal', function () {
-      $('#loginInput').trigger('focus');
-    })
+        $('#loginInput').trigger('focus');
+    });
 });
 
 function doLogin() {
     $("#loginButton").addClass('disabled');
-    $.post("api/login/", CMUtils.jsonize_form("#loginForm")).done(function( data ) {
+
+    RestClient.post("api/login/", CMUtils.jsonize_form("#loginForm"), function(data){
         $('#loginModal').modal('hide');
         $("#loginButton").removeClass('disabled');
+
         window.localStorage.setItem("token", data.token);
         location.reload();
-    }).fail(function(error){
+
+    }, function(error){
         $("#wrongPass").show().text( error.responseJSON.message );
         $("#loginButton").removeClass('disabled');
+
     });
 }

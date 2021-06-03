@@ -13,10 +13,10 @@ function doForgot(){
         "email" : $("#forgotinput").val()
     };
 
-    $.post("api/forgot/", forgot_info).done(function( data ) {
+    RestClient.post("api/forgot/", forgot_info, function(data){
         $('#forgotSuccess').show();
         $("#resetButton").removeClass('disabled');
-    }).fail(function(error){
+    }, function(error){
         $("#forgotAlert").show().text( error.responseJSON.message );
         $("#resetButton").removeClass('disabled');
     });

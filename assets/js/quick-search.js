@@ -1,66 +1,8 @@
 $(document).ready(function() {
-    loadBrands();
+    CMUtils.loadBrands();
     loadRest();
     loadSearchData();
 });
-
-function loadBrands() {
-    $.ajax({
-        url: "api/cars/brands",
-        type: "GET",
-        success: function(data, textStatus, jqXHR){
-            var xdata = $.map(data, function (obj) {
-                obj.text = obj.text || obj.name;
-                return obj;
-            });
-            $(".js-brand").select2({
-                placeholder: "BMW, Audi, Mercedes...",
-                theme:"bootstrap-5",
-                width: '100%',
-                allowClear: true,
-                minimumResultsForSearch: Infinity,
-                data:xdata,
-            }).on('select2:select', function (e) {
-                $(".js-model").prop("disabled", true);
-                $(".js-model").empty();
-                loadModels($(".js-brand").val());
-            }).on('select2:clear', function (e) {
-                $(".js-model").prop("disabled", true).val(null).trigger("change");
-            }).on("select2:unselecting", function(e) {
-                $(this).data('state', 'unselected');
-            }).on("select2:open", function(e) {
-                if ($(this).data('state') === 'unselected') {
-                    $(this).removeData('state');
-                    var self = $(this);
-                    setTimeout(function() {
-                        self.select2('close');
-                    }, 1);
-                }
-            });
-        }
-    });
-}
-
-function loadModels(id) {
-  $.ajax({
-      url: "api/cars/models/"+ id,
-      type: "GET",
-      success: function(data, textStatus, jqXHR){
-          var xdata = $.map(data, function (obj) {
-              obj.text = obj.text || obj.name;
-              return obj;
-          });
-          $(".js-model").select2({
-              placeholder: "Golf, S-Class, A8, X5...",
-              theme:"bootstrap-5",
-              width: '100%',
-              allowClear: true,
-              minimumResultsForSearch: Infinity,
-              data:xdata
-          }).val(null).trigger("change").prop("disabled", false);
-      }
-  });
-}
 
 function loadRest(){
   var notags = [
@@ -68,6 +10,7 @@ function loadRest(){
       {name: ".js-model", placeholder: "Golf, S-Class, A8, X5..."},
       {name: ".js-gear", placeholder: "Manual, Automatic, Semi.."},
       {name: ".js-fuel", placeholder: "Gas, Diesel, Gasoline..."}];
+
   var tags = [
       {name: ".js-year-min", placeholder: "Min"},
       {name: ".js-year-max", placeholder: "Max"},
@@ -142,4 +85,4 @@ $(".js-select2-settings").on("select2:unselecting", function(e) {
             self.select2('close');
         }, 1);
     }
-})
+});

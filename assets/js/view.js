@@ -1,122 +1,182 @@
 $(function() {
     var urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.has('id')){
-        $.get("api/ads/" + urlParams.get('id')).done(function(data){
-            $(".car-attributes-short,.car-attributes").html("");
-            $(".js-ad-view").show();
-            $(".car-title").html(data.title);
-            $(".car-info").html("Created at "+data.date.substring(0, 10)+" | Updated at "+data.updated.substring(0, 10)+" | ID: "+data.id);
-            $(".car-brand-model").html(data.brand_name+" "+data.model_name);
-            $(".car-price").html(parseInt(data.price).toLocaleString()+'<i class="fa fa-euro"></i>');
-            $(".car-price2").html('Price: '+parseInt(data.price).toLocaleString()+'&nbsp;<i class="fa fa-euro"></i>');
-            if(data.fabricated > 0) {
-                $(".car-attributes-short").append('<li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-calendar3">'
-                      +  '<path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path>'
-                      +  '<path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>'
-                      +  '</svg>&nbsp;'+data.fabricated+'</li>');
-                $(".car-attributes").append('<tr><td>Year of production</td><td>'+data.fabricated+'</td></tr>');
-            }
-            if(data.km > 0){
-                $(".car-attributes-short").append('<li class="list-inline-item"><i class="fas fa-angle-double-up"></i>&nbsp;'+parseInt(data.km).toLocaleString()+' km</li>');
-                $(".car-attributes").append('<tr><td>Vehicle mileage</td><td>'+parseInt(data.km).toLocaleString()+' km</td></tr>');
-            }
-            if(data.fuel_type > 0){
-                var fuel;
-                switch(parseInt(data.fuel_type)){
-                    case 1: fuel = "Gasoline"; break;
-                    case 2: fuel = "Diesel"; break;
-                    case 3: fuel = "Gas"; break;
-                    case 4: fuel = "Hybrid"; break;
-                    case 5: fuel = "Electric"; break;
-                }
-                $(".car-attributes-short").append('<li class="list-inline-item"><i class="la la-cogs"></i>&nbsp;'+fuel+'</li>');
-                $(".car-attributes").append('<tr><td>Fuel type</td><td>'+fuel+'</td></tr>');
-            }
-            if(data.gearbox > 0){
-                var gearbox;
-                switch(parseInt(data.gearbox)){
-                    case 1: gearbox = "Manual"; break;
-                    case 2: gearbox = "Automatic"; break;
-                }
-                $(".car-attributes-short").append('<li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-manual-gearbox">'
-                        + '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="5" cy="6" r="2"></circle><circle cx="12" cy="6" r="2"></circle><circle cx="19" cy="6" r="2"></circle><circle cx="5" cy="18" r="2"></circle><circle cx="12" cy="18" r="2"></circle>'
-                        + '<line x1="5" y1="8" x2="5" y2="16"></line><line x1="12" y1="8" x2="12" y2="16"></line><path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>'
-                        + '</svg>&nbsp;'+gearbox+'</li>');
-                $(".car-attributes").append('<tr><td>Gearbox</td><td>'+gearbox+'</td></tr>');
-            }
-            if(data.motor_size > 0){
-                $(".car-attributes-short").append('<li class="list-inline-item"><i class="icon ion-speedometer"></i>&nbsp;'+parseInt(data.motor_size).toLocaleString()+' cm<sup>3</sup></li>');
-                $(".car-attributes").append('<tr><td>Engine size</td><td>'+parseInt(data.motor_size).toLocaleString()+' cm<sup>3</sup></td></tr>');
-            }
-            $(".car-description").html(data.description);
 
-            $.get("api/photos/ad/" + urlParams.get('id')).done(function(photos){
-                console.log(photos);
-                if(!photos.length) $(".slider-for").html('<div><img data-u="image" src="https://cdn.car-market.live.fra1.cdn.digitaloceanspaces.com/default.png" /></div>');
-                for(var i = 0; i < photos.length; i++){
-                    $(".slider-for").append('<div><img data-u="image" src="https://cdn.car-market.live.fra1.cdn.digitaloceanspaces.com/'+photos[i].name+'" />'
-                                          + '<img data-u="thumb" src="https://cdn.car-market.live.fra1.cdn.digitaloceanspaces.com/'+photos[i].name+'" /></div>');
-                }
-                loadViewSlider();
-            }).fail(function(error){
-                console.log(error);
-            });
-            $.get("api/account/" + data.user_id).done(function(user_data){
-                $(".car-seller-name").html('<a onclick="CMUtils.goToProfile('+data.user_id+')" style="color:black; text-decoration: none; cursor: pointer;">'+user_data.fname+" "+user_data.lname+'</a>');
-                $(".car-seller-info,.car-seller-info-small").html('<li style="color: rgb(145,145,145);">Registered on '+user_data.reg_date.substring(0, 10)+'</li>'
-                                                                    +'<li style="color: rgb(145,145,145);">Publications '+123+'</li>'
-                                                                    +'<li style="color: rgb(204,0,0);font-size: 22px;">+'+user_data.phone+'</li>');
-            }).fail(function(error){
-                console.log(error);
-            });
-            //window.localStorage.setItem("token", data.token);
-        }).fail(function(error){
-            $('.confirmedAlertError').show().text( error.responseJSON.message );
-        });
+    if(urlParams.has('id')){
+        loadListingInfo();
 
         if(localStorage.getItem("token")) {
-            $.ajax({
-                url: 'api/user/ads/verify/' + urlParams.get('id'),
-                type: 'get',
-                contentType: "application/json",
-                beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-                success: function (data) {
-                    $('.ad-owner').show();
-                    //$('#editAdButton').attr('href', CMUtils.getUrl()+"/?id="+urlParams.get('id')+"#edit");
-                }
-            });
+          RestClient.get('api/user/ads/verify/' + urlParams.get('id'), function(data) {
+              $('.ad-owner').show();
+          });
         }
+
     } else {
         $('.confirmedAlertError').show().text("No token found!");
     }
 })
 
-function goAdEditPage(){
-    location.replace("#edit");
+function loadListingInfo(){
+    var urlParams = new URLSearchParams(window.location.search);
+
+    RestClient.get("api/ads/" + urlParams.get('id'), function(data) {
+        $(".car-attributes-short,.car-attributes").html("");
+        $(".js-ad-view").show();
+        $(".car-title").html(data.title);
+
+        $(".car-info").html("Created at " + data.date.substring(0, 10)
+                           + " | Updated at " + data.updated.substring(0, 10)
+                           + " | ID: "+data.id);
+
+        $(".car-brand-model").html(data.brand_name + " " + data.model_name);
+
+        $(".car-price").html(parseInt(data.price).toLocaleString()
+                           + '<i class="fa fa-euro"></i>');
+
+        $(".car-price2").html('Price: '+parseInt(data.price).toLocaleString()
+                           + '&nbsp;<i class="fa fa-euro"></i>');
+
+        if(data.fabricated > 0)
+            showYear(data);
+
+        if(data.km > 0)
+            showMileage(data);
+
+        if(data.fuel_type > 0)
+            showFuel(data);
+
+        if(data.gearbox > 0)
+            showGearbox(data);
+
+        if(data.motor_size > 0)
+            showMotorSize(data);
+
+        showSellerInfo(data);
+        showListingPhotos(data);
+
+        $(".car-description").html(data.description);
+
+    }, function(error) {
+        $('.confirmedAlertError').show().text( error.responseJSON.message );
+    });
 }
 
-function doDeleteAd(){
+function showYear(data) {
+    $(".car-attributes-short").append('<li class="list-inline-item">'
+                                + '<i class="far fa-calendar-alt"></i>&nbsp;'
+                                + data.fabricated + '</li>');
+
+    $(".car-attributes").append('<tr><td>Year of production</td><td>'
+                                + data.fabricated + '</td></tr>');
+}
+
+function showMileage(data) {
+    $(".car-attributes-short").append('<li class="list-inline-item">'
+      + '<i class="fas fa-angle-double-up"></i>&nbsp;'
+      + parseInt(data.km).toLocaleString()+' km</li>');
+
+    $(".car-attributes").append('<tr><td>Vehicle mileage</td><td>'
+      + parseInt(data.km).toLocaleString()+' km</td></tr>');
+}
+
+function showFuel(data) {
+    var text;
+
+    switch(parseInt(data.fuel_type)){
+        case 1: text = "Gasoline"; break;
+        case 2: text = "Diesel"; break;
+        case 3: text = "Gas"; break;
+        case 4: text = "Hybrid"; break;
+        case 5: text = "Electric"; break;
+    }
+
+    $(".car-attributes-short").append('<li class="list-inline-item">'
+                                      + '<i class="la la-cogs"></i>&nbsp;'
+                                      + text + '</li>');
+
+    $(".car-attributes").append('<tr><td>Fuel type</td><td>' + text + '</td></tr>');
+}
+
+function showGearbox(data) {
+    var text;
+
+    switch(parseInt(data.gearbox)){
+        case 1: text = "Manual"; break;
+        case 2: text = "Automatic"; break;
+    }
+
+    $(".car-attributes-short").append('<li class="list-inline-item">'
+                                      + '<i class="fas fa-life-ring"></i>&nbsp;'
+                                      + text + '</li>');
+
+    $(".car-attributes").append('<tr><td>Gearbox</td><td>' + text + '</td></tr>');
+}
+
+function showMotorSize(data) {
+    $(".car-attributes-short").append('<li class="list-inline-item">'
+                                      + '<i class="icon ion-speedometer"></i>&nbsp;'
+                                      + parseInt(data.motor_size).toLocaleString()
+                                      + ' cm<sup>3</sup></li>');
+
+    $(".car-attributes").append('<tr><td>Engine size</td><td>'
+                                + parseInt(data.motor_size).toLocaleString()
+                                + ' cm<sup>3</sup></td></tr>');
+}
+
+function showSellerInfo(data) {
+    RestClient.get("api/account/" + data.user_id, function(user_data) {
+
+        var html = '<a onclick="CMUtils.goToProfile(' + data.user_id + ')"'
+                 + 'style="color:black; text-decoration: none; cursor: pointer;">'
+                 + user_data.fname + " " + user_data.lname + '</a>';
+
+        $(".car-seller-name").html(html);
+
+        html = '<li style="color: rgb(145,145,145);">Registered on '
+             + user_data.reg_date.substring(0, 10) + '</li>'
+             + '<li style="color: rgb(145,145,145);">Publications 11</li>'
+             + '<li style="color: rgb(204,0,0);font-size: 22px;">+'
+             + user_data.phone + '</li>';
+
+        $(".car-seller-info,.car-seller-info-small").html(html);
+    });
+}
+
+function showListingPhotos(data){
     var urlParams = new URLSearchParams(window.location.search);
+    RestClient.get("api/photos/ad/" + urlParams.get('id'), function(photos) {
+        console.log(photos);
+
+        if(!photos.length)
+            $(".slider-for").html('<div><img data-u="image" src="'
+                                  + CMUtils.CDN_path
+                                  + 'default.png" /></div>');
+
+        for(var i = 0; i < photos.length; i++){
+            $(".slider-for").append('<div><img data-u="image" src="'
+                                    + CMUtils.CDN_path + photos[i].name
+                                    + '"/><img data-u="thumb" src="'
+                                    + CMUtils.CDN_path + photos[i].name
+                                    + '" /></div>');
+        }
+        loadViewSlider();
+    });
+}
+
+function doDeleteAd() {
+    var urlParams = new URLSearchParams(window.location.search);
+
     if(urlParams.has('id')){
-        $.ajax({
-            url: "api/user/ads/delete/" + urlParams.get('id'),
-            type: "GET",
-            beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem("token"));},
-            success: function(data) {
-                console.log(data.message);
-                location.replace("?#main");
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-            }
+        RestClient.get("api/user/ads/delete/" + urlParams.get('id'), function(data) {
+            console.log(data.message);
+            location.replace("?#main");
         });
+
     } else {
-        console.log("No token found!");
+        console.log("Error. No AD ID found.");
     }
 }
 
 function loadViewSlider(){
-
     var jssor_1_SlideshowTransitions = [
       {$Duration:800,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
       {$Duration:800,x:-0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
