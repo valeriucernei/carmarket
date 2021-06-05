@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-10 col-xl-8 col-xxl-8 offset-lg-1 offset-xl-2 offset-xxl-2 mb-3">
             <div class="card">
                 <div class="card-body" style="padding: 8px 16px;">
-                    <form id="editListingForm" method="post" onsubmit="updateListing(); return false;">
+                    <form id="editListingForm" method="post" onsubmit="Edit.update(); return false;">
                         <div class="row">
                             <div class="col-xxl-12">
                                 <h4 style="text-align: center;">Edit your offer</h4>
@@ -37,12 +37,12 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4"><label class="form-label" for="newad-year">Year of fabrication<span style="color: red;">*</span></label><input class="form-control" type="number" name="fabricated" id="newad-year" min="1900" max="2038" placeholder="2018" required=""></div>
                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4"><label class="form-label" for="newad-motor">Motor size (cm<sup>3</sup>)</label><input class="form-control" type="number" name="motor_size" id="newad-motor" max="10000" placeholder="2200"></div>
-                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4"><label class="form-label" for="newad-gearbox">Gearbox</label><select class="form-select js-gear js-change" name="gearbox" id="newad-gearbox">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4"><label class="form-label" for="newad-gearbox">Gearbox</label><select class="form-select js-gear js-change" name="gearbox" id="newad-gearbox" required="">
                                     <option value="" selected=""></option>
                                     <option value="1">Manual</option>
                                     <option value="2">Automatic</option>
                                 </select></div>
-                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4"><label class="form-label" for="newad-year">Fuel</label><select class="form-select js-fuel js-change" name="fuel_type" id="newad-fuel">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mb-4"><label class="form-label" for="newad-year">Fuel</label><select class="form-select js-fuel js-change" name="fuel_type" id="newad-fuel" required="">
                                     <option value="" selected=""></option>
                                     <option value="1">Diesel</option>
                                     <option value="2">Gasoline</option>
