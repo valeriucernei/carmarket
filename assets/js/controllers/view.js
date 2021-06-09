@@ -3,13 +3,13 @@ class View {
     static init() {
         var urlParams = new URLSearchParams(window.location.search);
 
-        if(urlParams.has('id')){
+        if(urlParams.has('id')) {
             View.load_listing();
 
             if(localStorage.getItem("token")) {
-              RestClient.get('api/user/ads/verify/' + urlParams.get('id'), function(data) {
-                  $('.ad-owner').show();
-              });
+                RestClient.get('api/user/ads/verify/' + urlParams.get('id'), function(data) {
+                    $('.ad-owner').show();
+                });
             }
 
         } else {
@@ -27,14 +27,14 @@ class View {
 
             $(".car-info").html("Created at " + data.date.substring(0, 10)
                                + " | Updated at " + data.updated.substring(0, 10)
-                               + " | ID: "+data.id);
+                               + " | ID: " + data.id);
 
             $(".car-brand-model").html(data.brand_name + " " + data.model_name);
 
             $(".car-price").html(parseInt(data.price).toLocaleString()
                                + '<i class="fa fa-euro"></i>');
 
-            $(".car-price2").html('Price: '+parseInt(data.price).toLocaleString()
+            $(".car-price2").html('Price: ' + parseInt(data.price).toLocaleString()
                                + '&nbsp;<i class="fa fa-euro"></i>');
 
             if(data.fabricated > 0)
