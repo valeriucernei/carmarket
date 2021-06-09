@@ -24,7 +24,7 @@
 *     @OA\Response(response="200", description="Lists ads from database")
 * )
 */
-Flight::route('GET /ads', function(){
+Flight::route('GET /ads', function() {
     $offset = Flight::query('offset', 0);
     $limit = Flight::query('limit', 10);
     $search = Flight::query('search');
@@ -54,7 +54,7 @@ Flight::route('GET /ads', function(){
 *     @OA\Response(response="200", description="Fetched ad info")
 * )
 */
-Flight::route('GET /ads/@id', function($id){
+Flight::route('GET /ads/@id', function($id) {
     flight::json(Flight::adsservice()->get_ad_by_id($id));
 });
 
@@ -79,7 +79,7 @@ Flight::route('GET /ads/@id', function($id){
 *  @OA\Response(response="200", description="Ad that has been added into database with ID assigned.")
 * )
 */
-Flight::route('POST /user/ads/add', function(){
+Flight::route('POST /user/ads/add', function() {
     Flight::json(Flight::adsservice()->add_ad(Flight::get('user'), Flight::request()->data->getData()));
 });
 
@@ -105,7 +105,7 @@ Flight::route('POST /user/ads/add', function(){
  *     @OA\Response(response="200", description="Update account based on id")
  * )
  */
-Flight::route('PUT /user/ads/@id', function($id){
+Flight::route('PUT /user/ads/@id', function($id) {
     Flight::json(Flight::adsservice()->update_user_ad(Flight::get('user')['id'], $id, Flight::request()->data->getData()));
 });
 
@@ -131,7 +131,7 @@ Flight::route('PUT /user/ads/@id', function($id){
  *     @OA\Response(response="200", description="Update account based on id")
  * )
  */
-Flight::route('PUT /admin/ads/@id', function($id){
+Flight::route('PUT /admin/ads/@id', function($id) {
     Flight::json(Flight::adsservice()->update_ad($id, Flight::request()->data->getData()));
 });
 
@@ -141,7 +141,7 @@ Flight::route('PUT /admin/ads/@id', function($id){
 *     @OA\Response(response="200", deion="Fetch individual advertisement")
 * )
 */
-Flight::route('GET /user/ads/verify/@ad_id', function($ad_id){
+Flight::route('GET /user/ads/verify/@ad_id', function($ad_id) {
     Flight::json(Flight::adsservice()->verify_ad_user(Flight::get('user')['id'], $ad_id));
 });
 
@@ -151,6 +151,6 @@ Flight::route('GET /user/ads/verify/@ad_id', function($ad_id){
 *     @OA\Response(response="200", deion="Success! Ad deleted.")
 * )
 */
-Flight::route('GET /user/ads/delete/@ad_id', function($ad_id){
+Flight::route('GET /user/ads/delete/@ad_id', function($ad_id) {
     Flight::json(Flight::adsservice()->delete_ad(Flight::get('user')['id'], $ad_id));
 });

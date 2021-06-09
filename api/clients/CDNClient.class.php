@@ -4,11 +4,18 @@ require_once dirname(__FILE__).'/../../vendor/autoload.php';
 
 use Aws\S3\S3Client;
 
-class CDNClient{
+/**
+ * The client class to interact with Digital Ocean Spaces CDN
+ *
+ */
+class CDNClient {
 
     private $client;
 
-    public function __construct(){
+    /**
+     * Estabilish connection from CDN Server with specific settings
+     */
+    public function __construct() {
         $this->client = new Aws\S3\S3Client([
             'version' => 'latest',
             'region' => Config::CDN_REGION(),
@@ -22,10 +29,10 @@ class CDNClient{
 
     /**
     *  Upload file to CDN and return the public URL back.
-    *  @param $filename - name of file on CDN
-    *  @param $content - base64 encode file content
+    *  @param string $filename - name of file on CDN
+    *  @param string $content - base64 encode file content
      */
-    public function upload($filename, $content){
+    public function upload($filename, $content) {
         $response = $this->client->putObject([
             'Bucket' => Config::CDN_SPACE(),
             'Key' => $filename,
@@ -36,7 +43,11 @@ class CDNClient{
         return $response->get("ObjectURL");
     }
 
-    public function delete($filename){
+    /**
+     * Delete file from CDN
+     * @param  string $filename filename to delete, ending with .png
+     */
+    public function delete($filename) {
         $response = $this->client->deleteObject([
             'Bucket' => Config::CDN_SPACE(),
             'Key' => $filename

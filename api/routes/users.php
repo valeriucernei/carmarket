@@ -1,7 +1,7 @@
 <?php
 /* SWAGGER documentation */
 /**
-* @OA\Info(title="CarMarket API", version="0.1")
+* @OA\Info(title="CarMarket API", version="2.0")
 * @OA\OpenApi(
 *   @OA\Server(url="http://localhost/carmarket/api/", description="Development Environment"),
 *   @OA\Server(url="https://car-market.live/api/", description="Production Environment")
@@ -31,13 +31,11 @@
 *  @OA\Response(response="200", description="Account that has been added into database with ID assigned.")
 * )
 */
-Flight::route('POST /register', function(){
+Flight::route('POST /register', function() {
     $data = Flight::request()->data->getData();
     Flight::userservice()->register($data);
     Flight::json(['message' => "Confirmation email has been sent."]);
 });
-
-
 
 /**
 * @OA\Post(path="/login", tags={"login"}, description="Query for user login",
@@ -52,11 +50,9 @@ Flight::route('POST /register', function(){
 *  @OA\Response(response="200", description="You have been successfully logged.")
 * )
 */
-Flight::route('POST /login', function(){
+Flight::route('POST /login', function() {
     Flight::json(Flight::jwt(Flight::userservice()->login(Flight::request()->data->getData())));
 });
-
-
 
 /**
 * @OA\Post(path="/forgot", tags={"login"}, description="Query to request a password recovery token",
@@ -70,13 +66,11 @@ Flight::route('POST /login', function(){
 *  @OA\Response(response="200", description="Recovery link has been sent to your email address")
 * )
 */
-Flight::route('POST /forgot', function(){
+Flight::route('POST /forgot', function() {
     $data = Flight::request()->data->getData();
     Flight::userservice()->forgot($data);
     Flight::json(["message" => "Recovery link has been sent to your email address."]);
 });
-
-
 
 /**
 * @OA\Post(path="/reset", tags={"login"}, description="Query to update user password, using recovery token",
@@ -91,11 +85,9 @@ Flight::route('POST /forgot', function(){
 *  @OA\Response(response="200", description="Password has been changed.")
 * )
 */
-Flight::route('POST /reset', function(){
+Flight::route('POST /reset', function() {
     Flight::json(Flight::jwt(Flight::userservice()->reset(Flight::request()->data->getData())));
 });
-
-
 
 /**
 * @OA\Get(path="/confirm/{token}", tags={"login"},  description="Query for confirming user's accont with token",
@@ -103,11 +95,9 @@ Flight::route('POST /reset', function(){
 *     @OA\Response(response="200", description="Message upon successfull activation.")
 * )
 */
-Flight::route('GET /confirm/@token', function($token){
+Flight::route('GET /confirm/@token', function($token) {
     Flight::json(Flight::jwt(Flight::userservice()->confirm($token)));
 });
-
-
 
 /**
 * @OA\Get(path="/admin/accounts", tags={"x-admin", "accounts"}, description="Lists all users from database", security={{"ApiKeyAuth":{}}},
@@ -118,7 +108,7 @@ Flight::route('GET /confirm/@token', function($token){
 *     @OA\Response(response="200", description="List accounts from database")
 * )
 */
-Flight::route('GET /admin/accounts', function(){
+Flight::route('GET /admin/accounts', function() {
      $offset = Flight::query('offset', 0);
      $limit = Flight::query('limit', 10);
      $search = Flight::query('search');
@@ -126,19 +116,15 @@ Flight::route('GET /admin/accounts', function(){
      Flight::json(Flight::userservice()->get_users($search, $offset, $limit, $order));
 });
 
-
-
 /**
 * @OA\Get(path="/admin/account/{id}", tags={"x-admin", "accounts"}, description="Fetches all information about a user by ID", security={{"ApiKeyAuth":{}}},
 *     @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", example=1, description="ID of the user"),
 *     @OA\Response(response="200", description="Fetch individual account")
 * )
 */
-Flight::route('GET /admin/account/@id', function($id){
+Flight::route('GET /admin/account/@id', function($id) {
     flight::json(Flight::userservice()->get_by_id($id));
 });
-
-
 
 /**
 * @OA\Put(path="/admin/account/{id}", tags={"x-admin", "accounts"}, description="Edit user's information by ID", security={{"ApiKeyAuth": {}}},
@@ -158,12 +144,10 @@ Flight::route('GET /admin/account/@id', function($id){
 *     @OA\Response(response="200", description="Update account based on id")
 * )
 */
-Flight::route('PUT /admin/account/@id', function($id){
+Flight::route('PUT /admin/account/@id', function($id) {
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userservice()->update($id, $data));
 });
-
-
 
 /**
 * @OA\Put(path="/user/account", tags={"x-user", "accounts"}, description="User edit it's personal information", security={{"ApiKeyAuth": {}}},
@@ -182,19 +166,17 @@ Flight::route('PUT /admin/account/@id', function($id){
 *     @OA\Response(response="200", description="Update account based on id")
 * )
 */
-Flight::route('PUT /user/account', function(){
+Flight::route('PUT /user/account', function() {
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userservice()->update_info(Flight::get('user')['id'], $data));
 });
-
-
 
 /**
 * @OA\Get(path="/user/account", tags={"x-user", "accounts"}, description="Query to get user's personal infrmation", security={{"ApiKeyAuth": {}}},
 *     @OA\Response(response="200", description="Fetch user account")
 * )
 */
-Flight::route('GET /user/account', function(){
+Flight::route('GET /user/account', function() {
     Flight::json(Flight::userservice()->get_by_id(Flight::get('user')['id']));
 });
 

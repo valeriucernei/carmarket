@@ -7,7 +7,7 @@
 *     @OA\Response(response="200", description="Photo ID")
 * )
 */
-Flight::route('GET /photos/ad/@id', function($id){
+Flight::route('GET /photos/ad/@id', function($id) {
     Flight::json(Flight::photosservice()->get_ads_photos($id));
 });
 
@@ -24,8 +24,9 @@ Flight::route('GET /photos/ad/@id', function($id){
 *  @OA\Response(response="200", description="File uploaded to CDN.")
 * )
 */
-Flight::route('POST /user/photos/add', function(){
-    Flight::json(["url" => Flight::photosservice()->upload(Flight::get('user')['id'], Flight::request()->data->getData())]);
+Flight::route('POST /user/photos/add', function() {
+    Flight::json(["url" => Flight::photosservice()->upload(Flight::get('user')['id'],
+                                            Flight::request()->data->getData())]);
 });
 
 /**
@@ -40,6 +41,6 @@ Flight::route('POST /user/photos/add', function(){
 *  @OA\Response(response="200", description="File deleted from CDN.")
 * )
 */
-Flight::route('POST /user/photos/remove', function(){
+Flight::route('POST /user/photos/remove', function() {
     Flight::json(Flight::photosservice()->delete_photo(Flight::request()->data->getData()));
 });
