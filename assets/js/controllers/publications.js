@@ -9,13 +9,17 @@ class Publications {
 
     static show() {
         var urlParams = new URLSearchParams(window.location.search);
-        var searchData = {
-            'user_id': urlParams.get('id'),
-            'offset': 0,
-            'limit': 1000,
-            'order': "+updated"};
+        var searchData = {};
 
-        Listings.show_publications(searchData, "#publicationsList");
+        RestClient.get("api/user/account", function(data) {
+            searchData = {
+                'user_id': data.id,
+                'offset': 0,
+                'limit': 100,
+                'order': "+updated"};
+
+            Listings.show_publications(searchData, "#publicationsList");
+        });
     }
 
 }
