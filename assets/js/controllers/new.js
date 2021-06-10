@@ -3,6 +3,8 @@ class New {
     static init() {
         if(CMUtils.isLogged()) {
             Search.loadBrands();
+            document.getElementById('pro-image').addEventListener('change', New.readImage, false);
+            $( ".preview-images-zone" ).sortable();
             New.load_components();
 
             $("#newad-description").keyup(function() {
@@ -59,8 +61,7 @@ class New {
             });
         }
 
-        document.getElementById('pro-image').addEventListener('change', New.readImage, false);
-        $( ".preview-images-zone" ).sortable();
+
 
         $(document).on('click', '.image-cancel', function() {
             let no = $(this).data('no');
