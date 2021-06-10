@@ -104,32 +104,41 @@ class New {
 
     static readImage() {
         var num=0;
+
         $("#imagesAlert").hide();
         $(".preview-images-zone").show();
         $("#imagesInputNumber").addClass('border-bottom-0');
         $("#imagesInputNumber,#ImagesInputLabel").removeClass('rounded-bottom');
+
         if (window.File && window.FileList && window.FileReader) {
             var files = event.target.files;
             var output = $(".preview-images-zone");
             var filesQuantity = files.length;
+
             if(filesQuantity > 10) {
                 filesQuantity = 10;
                 $("#imagesAlert").show();
             }
+
             $('#imagesInputNumber').val("Selected: " + filesQuantity);
+
             for (let i = 0; i < filesQuantity; i++) {
                 var file = files[i];
                 if (!file.type.match('image')) continue;
                 var picReader = new FileReader();
+
                 picReader.addEventListener('load', function (event) {
                     var picFile = event.target;
+
                     var html =  '<div class="preview-image preview-show-' + num
                                 + '"><div class="image-cancel" data-no="' + num
                                 + '">x</div><div class="image-zone"><img class="'
                                 + 'pro-img" src="' + picFile.result + '"></div></div>';
+
                     output.append(html);
                     num += 1;
                 });
+
                 picReader.readAsDataURL(file);
             }
             $("#pro-image").val('');
