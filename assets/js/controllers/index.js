@@ -12,6 +12,10 @@ class Index {
             New.init();
         }});
 
+        app.route({ view : "confirm", load : "confirm.html", onReady: function() {
+            Confirm.init();
+        }});
+
         app.route({ view : "edit", load : "edit.html", onReady: function() {
             Edit.init();
         }});

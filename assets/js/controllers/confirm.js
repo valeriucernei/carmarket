@@ -5,6 +5,7 @@ class Confirm {
 
         if(urlParams.has('confirmation')) {
             RestClient.get("api/confirm/" + urlParams.get('confirmation'), function(data) {
+                console.log(data);
                 $("#confirmedAlert").show();
                 window.localStorage.setItem("token", data.token);
 
