@@ -69,4 +69,4 @@ require_once dirname(__FILE__)."/routes/ads.php";
 require_once dirname(__FILE__)."/routes/cars.php";
 require_once dirname(__FILE__)."/routes/photos.php";
 
-Flight::start();
+Flight::start();//lol
